@@ -1,0 +1,10 @@
+---
+- name: Include Configure Sysctl task
+  ansible.builtin.import_tasks: configure_sysctl.yml
+
+- name: Include Add Monad APT Repository task
+  ansible.builtin.import_tasks: add_monad_apt_repository.yml
+
+- name: Include Prepare Triedb Disk task
+  ansible.builtin.import_tasks: prepare_triedb_disk.yml
+  when: setup_triedb | default(false) | bool

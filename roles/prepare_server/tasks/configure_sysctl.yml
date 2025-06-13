@@ -1,0 +1,19 @@
+---
+- name: Configure sysctl settings for node
+  ansible.builtin.copy:
+    dest: "/etc/sysctl.d/90-{{ service_identifier }}-network-buffer.conf"
+    content: |
+      # Network buffer settings
+      net.core.rmem_default=62500000
+      net.core.rmem_max=62500000
+      net.core.wmem_default=62500000
+      net.core.wmem_max=62500000
+      net.ipv4.tcp_rmem=4096 62500000 62500000
+      net.ipv4.tcp_wmem=4096 62500000 62500000
+
+      # Hugepages setting
+      vm.nr_hugepages=128
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Apply sysctl settings
