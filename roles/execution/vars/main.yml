@@ -1,0 +1,11 @@
+---
+# maintains file name, binary names, and anything which is not a directory or path
+
+# binary names
+execution_binaries:
+  monad_default:
+    default_binary_name: "monad"
+    dest_binary_name: "{{ service_identifier }}"
+
+# environment file names
+execution_general_environment_file_name: "{{ service_identifier }}.env"
