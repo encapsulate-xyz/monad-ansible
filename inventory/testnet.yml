@@ -4,11 +4,14 @@ all:
   vars:
     env: testnet
   children:
-    sui:
+    monad:
       hosts:
-        bridge.sui.testnet.encapsulate.xyz:
-          type: bridge
-        validator.sui.testnet.encapsulate.xyz:
-          type: validator
-        fullnode.sui.testnet.encapsulate.xyz:
-          type: fullnode
+        consensus.monad.testnet.encapsulate.xyz:
+          type: consensus
+        execution.monad.testnet.encapsulate.xyz:
+          type: execution
+          ledger_dir: /opt/monad-consensus/data
+          socket_dir: /opt/monad-consensus/socket
+        rpc.monad.testnet.encapsulate.xyz5:
+          type: rpc
+          socket_dir: /opt/monad-consensus/socket
