@@ -1,0 +1,46 @@
+---
+# maintains directories and paths
+consensus_home_dir: /opt/{{ service_identifier }}
+
+consensus_bin_dir: "{{ consensus_home_dir }}/bin"
+consensus_config_dir: "{{ consensus_home_dir }}/config"
+consensus_data_dir: "{{ consensus_home_dir }}/data"
+consensus_env_dir: "{{ consensus_home_dir }}/environment"
+consensus_key_dir: "{{ consensus_home_dir }}/key"
+consensus_lib_dir: "{{ consensus_home_dir }}/lib"
+consensus_socket_dir: "{{ consensus_home_dir }}/socket"
+consensus_wal_dir: "{{ consensus_home_dir }}/wal"
+consensus_log_dir: "{{ consensus_home_dir }}/log"
+
+consensus_directories:
+  - "{{ consensus_home_dir }}"
+  - "{{ consensus_bin_dir }}"
+  - "{{ consensus_config_dir }}"
+  - "{{ consensus_data_dir }}"
+  - "{{ consensus_env_dir }}"
+  - "{{ consensus_key_dir }}"
+  - "{{ consensus_socket_dir }}"
+  - "{{ consensus_lib_dir }}"
+  - "{{ consensus_wal_dir }}"
+  - "{{ consensus_log_dir }}"
+
+consensus_log_file_path: "{{ consensus_log_dir }}/{{ service_identifier }}.log"
+
+# config file paths
+consensus_node_config_file_path: "{{ consensus_config_dir }}/{{ consensus_node_config_file_name }}"
+consensus_validators_config_file_path: "{{ consensus_config_dir }}/{{ consensus_validators_config_file_name }}"
+consensus_forkpoint_file_path: "{{ consensus_config_dir }}/{{ consensus_forkpoint_file_name }}"
+consensus_genesis_file_path: "{{ consensus_config_dir }}/{{ consensus_genesis_file_name }}"
+
+# key file paths
+consensus_secp_identity_key_file_path: "{{ consensus_key_dir }}/{{ consensus_secp_identity_key_file_name }}"
+consensus_bls_identity_key_file_path: "{{ consensus_key_dir }}/{{ consensus_bls_identity_key_file_name }}"
+
+# environment file paths
+consensus_general_environment_file_path: "{{ consensus_env_dir }}/{{ consensus_general_environment_file_name }}"
+consensus_secrets_environment_file_path: "{{ consensus_env_dir }}/{{ consensus_secrets_environment_file_name }}"
+
+# socket file paths
+consensus_mempool_socket_file_path: "{{ consensus_env_dir }}/{{ consensus_mempool_socket_file_name }}"
+consensus_control_panel_socket_file_path: "{{ consensus_env_dir }}/{{ consensus_control_panel_socket_file_name }}"
+consensus_state_sync_file_path: "{{ consensus_env_dir }}/{{ consensus_state_sync_file_name }}"

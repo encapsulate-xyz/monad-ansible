@@ -1,0 +1,25 @@
+---
+consensus_ufw_rules:
+  - port: "{{ monad.consensus.ports.p2p_port }}"
+    proto: tcp
+    rule: allow
+    from: any
+    comment: p2p
+
+  - port: "{{ monad.consensus.ports.p2p_port }}"
+    proto: udp
+    rule: allow
+    from: any
+    comment: p2p
+
+  - port: "{{ monad.consensus.ports.metrics_port }}"
+    proto: tcp
+    rule: allow
+    from: "{{ monitor_server_dns }}"
+    comment: metrics
+
+  - port: "{{ monad.consensus.ports.metrics_port }}"
+    proto: tcp
+    rule: allow
+    from: 84.32.32.227
+    comment: metrics
