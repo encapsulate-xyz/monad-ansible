@@ -19,3 +19,15 @@
   ansible.builtin.systemd:
     name: "{{ service_identifier }}"
     state: stopped
+
+- name: Apply sysctl settings
+  ansible.builtin.command: sysctl --system
+  changed_when: true
+
+- name: Trigger udev rules
+  ansible.builtin.command: udevadm trigger
+  changed_when: true
+
+- name: Reload udev rules
+  ansible.builtin.command: udevadm control --reload
+  changed_when: true
