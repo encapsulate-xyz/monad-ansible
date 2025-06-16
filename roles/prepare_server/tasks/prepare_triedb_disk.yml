@@ -45,17 +45,6 @@
     - Trigger udev rules
     - Reload udev rules
 
-- name: Wait for /dev/triedb to become available
-  ansible.builtin.wait_for:
-    path: /dev/triedb
-    state: present
-    timeout: 120
-
-- name: Set permissions on /dev/triedb
-  ansible.builtin.file:
-    path: /dev/triedb
-    mode: "0666"
-
 - name: Verify final LBA configuration
   ansible.builtin.shell: |
     set -o pipefail
