@@ -11,7 +11,7 @@ EnvironmentFile={{ rpc_secrets_environment_file_path }}
 ExecStart={{ rpc_bin_dir }}/{{ service_identifier }} \
     --ipc-path {{ socket_dir }}/{{ rpc_mempool_socket_file_name }} \
     --triedb-path {{ triedb_config.path }} \
-    --otel-endpoint "{{ otel_endpoint }}" \
+    --otel-endpoint "{{ monad.rpc.otel_endpoint }}" \
     --allow-unprotected-txs \
     --node-config {{ rpc_node_config_file_path }}
 Restart=always

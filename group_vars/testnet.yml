@@ -4,8 +4,10 @@ monad:
   consensus:
     version: 0.1.0-testnet-2-genesis
     forkpoint_url: ""
+    otel_endpoint: "{{ monitor_server_dns }}:4323"
   execution:
     version: 0.1.0-testnet-2-genesis
     chain_id: monad_testnet2
   rpc:
     version: 0.1.0-testnet-2-genesis
+    otel_endpoint: "{{ monitor_server_dns }}:4323"
