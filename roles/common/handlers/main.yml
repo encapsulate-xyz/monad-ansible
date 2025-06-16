@@ -19,17 +19,3 @@
   ansible.builtin.systemd:
     name: "{{ service_identifier }}"
     state: stopped
-
-- name: Apply sysctl settings
-  ansible.posix.sysctl:
-    reload: yes
-    sysctl_file: "/etc/sysctl.d/90-{{ service_identifier }}-network-buffer.conf"
-
-- name: Trigger udev rules
-  ans2dev.general.udevadm_trigger:
-    quiet: true
-    type: all
-
-- name: Reload udev rules
-  ans2dev.general.udevadm_control:
-    log_level: debug

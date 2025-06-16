@@ -7,9 +7,11 @@
   args:
     executable: /bin/bash
   register: mpt_partition_creation
-  changed_when: monad_mpt_output.rc == 0
-  failed_when: monad_mpt_output.rc != 0
+  changed_when: mpt_partition_creation.rc == 0
+  failed_when: mpt_partition_creation.rc != 0
+  environment:
+    LD_LIBRARY_PATH: "{{ consensus_lib_dir }}"
 
 - name: Display monad-mpt storage status
   ansible.builtin.debug:
-    msg: "{{ monad_mpt_output.stdout }}"
+    msg: "{{ mpt_partition_creation.stdout }}"

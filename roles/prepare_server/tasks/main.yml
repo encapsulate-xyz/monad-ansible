@@ -1,4 +1,15 @@
 ---
+- name: Install apt packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  loop:
+    - nvme-cli
+    - libboost-stacktrace-dev
+    - liburing2
+
 - name: Include Configure Sysctl task
   ansible.builtin.import_tasks: configure_sysctl.yml
 

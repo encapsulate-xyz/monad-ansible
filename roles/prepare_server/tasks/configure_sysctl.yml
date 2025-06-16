@@ -16,4 +16,8 @@
     owner: root
     group: root
     mode: "0644"
-  notify: Apply sysctl settings
+  register: sysctl_settings
+
+- name: Apply sysctl settings
+  ansible.builtin.command: sysctl --system
+  when: sysctl_settings.changed

@@ -1,11 +1,4 @@
 ---
-- name: Install apt packages
-  ansible.builtin.apt:
-    name: nvme-cli
-    state: present
-    update_cache: true
-    cache_valid_time: 3600
-
 - name: Create single GPT partition
   community.general.parted:
     device: "{{ triedb_config.drive }}"
@@ -41,16 +34,26 @@
     owner: root
     group: root
     mode: "0644"
-  notify:
-    - Trigger udev rules
-    - Reload udev rules
+  register: triedb_settings
+
+- name: Trigger udev rules
+  ans2dev.general.udevadm_trigger:
+    quiet: true
+    type: all
+  when: triedb_settings.changed
+
+- name: Reload udev rules
+  ans2dev.general.udevadm_control:
+    log_level: debug
+  when: triedb_settings.changed
 
 - name: Verify final LBA configuration
   ansible.builtin.shell: |
     set -o pipefail
-    nvme id-ns -H {{ triedb_drive }} | grep 'LBA Format' | grep 'in use'
+    nvme id-ns -H {{ triedb_config.drive }} | grep 'LBA Format' | grep 'in use'
   args:
       executable: /bin/bash
+  register: final_lba_check
   changed_when: false
 
 - name: Display final LBA configuration
