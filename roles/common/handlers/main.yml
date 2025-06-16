@@ -19,3 +19,12 @@
   ansible.builtin.systemd:
     name: "{{ service_identifier }}"
     state: stopped
+
+- name: Trigger udev rules
+  ans2dev.general.udevadm_trigger:
+    quiet: true
+    type: all
+
+- name: Reload udev rules
+  ans2dev.general.udevadm_control:
+    log_level: debug
