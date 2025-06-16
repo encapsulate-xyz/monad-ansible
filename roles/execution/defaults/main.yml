@@ -1,0 +1,19 @@
+---
+# maintains directories and paths
+execution_home_dir: /opt/{{ service_identifier }}
+
+execution_bin_dir: "{{ execution_home_dir }}/bin"
+execution_env_dir: "{{ execution_home_dir }}/environment"
+execution_lib_dir: "{{ execution_home_dir }}/lib"
+execution_log_dir: "{{ execution_home_dir }}/log"
+
+execution_directories:
+  - "{{ execution_home_dir }}"
+  - "{{ execution_bin_dir }}"
+  - "{{ execution_env_dir }}"
+  - "{{ execution_lib_dir }}"
+  - "{{ execution_log_dir }}"
+
+execution_log_file_path: "{{ execution_log_dir }}/{{ service_identifier }}.log"
+
+execution_general_environment_file_path: "{{ execution_env_dir }}/{{ execution_general_environment_file_name }}"

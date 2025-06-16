@@ -1,0 +1,44 @@
+---
+- name: Include ufw rules vars file
+  ansible.builtin.include_vars:
+    file: vars/ufw_rules.yml
+
+- name: Apply UFW rules
+  ansible.builtin.include_tasks: tasks/apply_ufw_rules.yml
+  loop: "{{ execution_ufw_rules }}"
+
+- name: Include user creation task
+  ansible.builtin.include_tasks: tasks/create_user_and_directories.yml
+  vars:
+    home: "{{ execution_home_dir }}"
+    directories: "{{ execution_directories }}"
+    log_file_path: "{{ execution_log_file_path }}"
+
+- name: Include Extract Binaries task
+  ansible.builtin.include_tasks: extract_binaries.yml
+  vars:
+    extracted_dir: "{{ tmp_dir }}/{{ service_identifier }}/usr/local/bin"
+    path_mapping:
+      - extracted_path: "{{ extracted_dir }}/{{ execution_binaries.monad_default.default_binary_name }}"
+        dest_path: "{{ execution_bin_dir }}/{{ service_identifier }}"
+
+- name: Copy general environment file
+  ansible.builtin.template:
+    src: "{{ env }}/general.env.j2"
+    dest: "{{ execution_general_environment_file_path }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
+  notify:
+    - Restart service
+
+- name: Copy systemd service file
+  ansible.builtin.template:
+    src: "{{ env }}/systemd.service.j2"
+    dest: /etc/systemd/system/{{ service_identifier }}.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload service
+    - Restart service

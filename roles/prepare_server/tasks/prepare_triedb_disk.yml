@@ -1,0 +1,55 @@
+---
+- name: Create single GPT partition
+  community.general.parted:
+    device: "{{ triedb_config.drive }}"
+    label: gpt
+    number: "{{ triedb_config.partition_number }}"
+    name: "{{ triedb_config.partition_name }}"
+    part_start: 0%
+    part_end: 100%
+    state: present
+
+- name: Get partition UUID
+  ansible.builtin.shell: |
+    set -o pipefail
+    lsblk -o PARTUUID {{ triedb_config.drive }} | tail -n 1
+  args:
+    executable: /bin/bash
+  register: partuuid_result
+  changed_when: false
+
+- name: Set partition UUID fact
+  ansible.builtin.set_fact:
+    partition_uuid: "{{ partuuid_result.stdout.strip() }}"
+
+- name: Display partition_uuid
+  ansible.builtin.debug:
+    msg: "partition_uuid: {{ partition_uuid }}"
+
+- name: Copy udev rule for TrieDB partition
+  ansible.builtin.copy:
+    dest: /etc/udev/rules.d/99-triedb.rules
+    content: |
+      ENV{ID_PART_ENTRY_UUID}=="{{ partition_uuid }}", MODE="0666", SYMLINK+="triedb"
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Trigger udev rules
+    - Reload udev rules
+
+- name: Trigger handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Verify final LBA configuration
+  ansible.builtin.shell: |
+    set -o pipefail
+    nvme id-ns -H {{ triedb_config.drive }} | grep 'LBA Format' | grep 'in use'
+  args:
+      executable: /bin/bash
+  register: final_lba_check
+  changed_when: false
+
+- name: Display final LBA configuration
+  ansible.builtin.debug:
+    msg: "Final LBA configuration: {{ final_lba_check.stdout }}"

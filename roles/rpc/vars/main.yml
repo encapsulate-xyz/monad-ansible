@@ -1,0 +1,17 @@
+---
+# maintains file name, binary names, and anything which is not a directory or path
+
+# config file names
+rpc_node_config_file_name: node.toml
+
+# binary names
+rpc_binaries:
+  monad_default:
+    default_binary_name: "monad-rpc"
+    dest_binary_name: "{{ service_identifier }}"
+
+# environment file names
+rpc_general_environment_file_name: "{{ service_identifier }}.env"
+
+# socket file name
+rpc_mempool_socket_file_name: mempool.sock

@@ -1,0 +1,104 @@
+---
+- name: Include ufw rules vars file
+  ansible.builtin.include_vars:
+    file: vars/ufw_rules.yml
+
+- name: Apply UFW rules
+  ansible.builtin.include_tasks: tasks/apply_ufw_rules.yml
+  loop: "{{ consensus_ufw_rules }}"
+
+- name: Include user creation task
+  ansible.builtin.include_tasks: tasks/create_user_and_directories.yml
+  vars:
+    home: "{{ consensus_home_dir }}"
+    directories: "{{ consensus_directories }}"
+    log_file_path: "{{ consensus_log_file_path }}"
+
+- name: Include Extract Binaries task
+  ansible.builtin.include_tasks: extract_binaries.yml
+  vars:
+    extracted_dir: "{{ tmp_dir }}/{{ service_identifier }}/usr/local/bin"
+    path_mapping:
+      - extracted_path: "{{ extracted_dir }}/{{ consensus_binaries.monad_default.default_binary_name }}"
+        dest_path: "{{ consensus_bin_dir }}/{{ service_identifier }}"
+      - extracted_path: "{{ extracted_dir }}/{{ consensus_binaries.monad_keystore.default_binary_name }}"
+        dest_path: "{{ consensus_bin_dir }}/{{ consensus_binaries.monad_keystore.dest_binary_name }}"
+      - extracted_path: "{{ extracted_dir }}/{{ consensus_binaries.monad_mpt.default_binary_name }}"
+        dest_path: "{{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }}"
+      - extracted_path: "{{ extracted_dir }}/{{ consensus_binaries.monad_cli.default_binary_name }}"
+        dest_path: "{{ consensus_bin_dir }}/{{ consensus_binaries.monad_cli.dest_binary_name }}"
+
+- name: Include Provision Triedb task
+  ansible.builtin.include_tasks: provision_triedb.yml
+  when: setup_triedb | default(false) | bool
+
+- name: Copy genesis and validators configuration files
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
+  loop:
+    - { src: "{{ env }}/genesis.json", dest: "{{ consensus_genesis_file_path }}" }
+    - { src: "{{ env }}/validators.toml", dest: "{{ consensus_validators_config_file_path }}" }
+  notify:
+    - Restart service
+
+- name: Copy node configuration and general environment files
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
+  loop:
+    - { src: "{{ env }}/node.toml.j2", dest: "{{ consensus_node_config_file_path }}" }
+    - { src: "{{ env }}/general.env.j2", dest: "{{ consensus_general_environment_file_path }}" }
+  notify:
+    - Restart service
+
+- name: Download forkpoint from URL
+  ansible.builtin.get_url:
+    url: "{{ monad.consensus.forkpoint_url }}"
+    dest: "{{ consensus_forkpoint_file_path }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
+  notify:
+    - Restart service
+
+- name: Fetch secrets from HCP Vault and save to files
+  when: fetch_validator_keys | default(false) | bool
+  block:
+    - name: Fetch secp key and save
+      ansible.builtin.include_tasks: tasks/get_and_save_vault_secret.yml
+      vars:
+        vault_secret_source_path: "{{ project }}/{{ org }}/{{ type }}/{{ consensus_secp_identity_key_file_name }}"
+        secret_destination_path: "{{ consensus_secp_identity_key_file_path }}"
+        secret_type: json
+
+    - name: Fetch bls key and save
+      ansible.builtin.include_tasks: tasks/get_and_save_vault_secret.yml
+      vars:
+        vault_secret_source_path: "{{ project }}/{{ org }}/{{ type }}/{{ consensus_bls_identity_key_file_name }}"
+        secret_destination_path: "{{ consensus_bls_identity_key_file_path }}"
+        secret_type: json
+
+    - name: Fetch secrets environment file and save
+      ansible.builtin.include_tasks: tasks/get_and_save_vault_secret.yml
+      vars:
+        vault_secret_source_path: "{{ project }}/{{ org }}/{{ type }}/{{ consensus_secrets_environment_file_name }}"
+        secret_destination_path: "{{ consensus_secrets_environment_file_path }}"
+        secret_type: environment
+
+- name: Copy systemd service file
+  ansible.builtin.template:
+    src: "{{ env }}/systemd.service.j2"
+    dest: /etc/systemd/system/{{ service_identifier }}.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload service
+    - Restart service

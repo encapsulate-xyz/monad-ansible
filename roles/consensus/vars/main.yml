@@ -1,0 +1,36 @@
+---
+# maintains file name, binary names, and anything which is not a directory or path
+
+# config file names
+consensus_node_config_file_name: node.toml
+consensus_validators_config_file_name: validators.toml
+consensus_forkpoint_file_name: forkpoint.toml
+consensus_genesis_file_name: genesis.json
+
+# key names
+consensus_bls_identity_key_file_name: id-bls
+consensus_secp_identity_key_file_name: id-secp
+
+# binary names
+consensus_binaries:
+  monad_default:
+    default_binary_name: "monad-node"
+    dest_binary_name: "{{ service_identifier }}"
+  monad_keystore:
+    default_binary_name: "monad-keystore"
+    dest_binary_name: "monad-keystore"
+  monad_mpt:
+    default_binary_name: "monad-mpt"
+    dest_binary_name: "monad-mpt"
+  monad_cli:
+    default_binary_name: "monad-cli"
+    dest_binary_name: "monad-cli"
+
+# environment file names
+consensus_general_environment_file_name: "{{ service_identifier }}.env"
+consensus_secrets_environment_file_name: "{{ service_identifier }}.secrets.env"
+
+# socket file names
+consensus_mempool_socket_file_name: mempool.sock
+consensus_control_panel_socket_file_name: controlpanel.sock
+consensus_state_sync_socket_file_name: statesync.sock

@@ -1,0 +1,43 @@
+[Unit]
+Description={{ service_identifier }}
+
+[Service]
+User={{ service_identifier }}
+Group={{ project }}
+UMask=002
+WorkingDirectory={{ consensus_home_dir }}
+EnvironmentFile={{ consensus_general_environment_file_path }}
+EnvironmentFile={{ consensus_secrets_environment_file_path }}
+ExecStart={{ consensus_bin_dir }}/{{ service_identifier }} \
+    --secp-identity {{ consensus_secp_identity_key_file_path }} \
+    --bls-identity {{ consensus_bls_identity_key_file_path }} \
+    --node-config {{ consensus_node_config_file_path }} \
+    --forkpoint-config {{ consensus_forkpoint_file_path }} \
+    --genesis-path {{ consensus_genesis_file_path }} \
+    --wal-path {{ consensus_wal_dir }} \
+    --mempool-ipc-path {{ consensus_mempool_socket_file_path }} \
+    --control-panel-ipc-path {{ consensus_control_panel_socket_file_path }} \
+    --statesync-ipc-path {{ consensus_state_sync_socket_file_path }} \
+    --ledger-path {{ consensus_data_dir }} \
+    --triedb-path {{ triedb_config.path }} \
+    --otel-endpoint "{{ monad.consensus.otel_endpoint }}" \
+    --statesync-sq-thread-cpu 1 \
+    --record-metrics-interval-seconds 1 \
+    --validators-path {{ consensus_validators_config_file_path }} \
+    --keystore-password "${KEYSTORE_PASSWORD}"
+Restart=always
+RestartSec=4
+LimitNOFILE=1048576
+DeviceAllow={{ triedb_config.path }} rw
+# Hugemem configs below
+LimitMEMLOCK=infinity
+MemoryDenyWriteExecute=false
+#SystemCallFilter=~@memlock
+ProtectKernelModules=no
+ProtectKernelLogs=no
+MemoryMax=64G
+StandardOutput=append:{{ consensus_log_file_path }}
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target

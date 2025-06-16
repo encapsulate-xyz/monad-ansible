@@ -1,0 +1,52 @@
+---
+- name: Create a tmp directory
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}/{{ service_identifier }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Download monad package
+  ansible.builtin.command:
+    cmd: apt download monad={{ monad[type].version }}
+    chdir: "{{ tmp_dir }}/{{ service_identifier }}"
+    creates: "{{ tmp_dir }}/{{ service_identifier }}/monad_{{ monad[type].version }}_{{ system_architecture }}.deb"
+
+- name: Extract monad package
+  ansible.builtin.command:
+    cmd: >-
+      dpkg-deb -x
+      "{{ tmp_dir }}/{{ service_identifier }}/monad_{{ monad[type].version }}_{{ system_architecture }}.deb"
+      {{ tmp_dir }}/{{ service_identifier }}
+    creates: "{{ tmp_dir }}/{{ service_identifier }}/DEBIAN"
+
+- name: Copy the binary files
+  ansible.builtin.copy:
+    src: "{{ item.extracted_path }}"
+    dest: "{{ item.dest_path }}"
+    remote_src: true
+    owner: root
+    group: root
+    force: true
+    mode: "0755"
+  with_items: "{{ path_mapping }}"
+  notify: 
+    - Restart service
+
+- name: Copy lib files
+  ansible.builtin.copy:
+    src: "{{ tmp_dir }}/{{ service_identifier }}/usr/local/lib/"
+    dest: "{{ execution_lib_dir }}"
+    remote_src: true
+    owner: root
+    group: root
+    force: true
+    mode: "0755"
+  notify: 
+    - Restart service
+
+- name: Clean up the temporary directory
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}/{{ service_identifier }}"
+    state: absent

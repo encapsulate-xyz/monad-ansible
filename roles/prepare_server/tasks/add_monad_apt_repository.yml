@@ -1,0 +1,22 @@
+---
+- name: Create APT auth configuration for Category Labs
+  ansible.builtin.copy:
+    content: |
+      machine {{ monad.source_url }}
+      login pkgs
+      password {{ vault.external.apt_repo_password }}
+    dest: /etc/apt/auth.conf.d/category-labs.conf
+    owner: root
+    group: root
+    mode: "0600"
+
+- name: Add Category Labs repository
+  ansible.builtin.deb822_repository:
+    name: category-labs
+    types: deb
+    uris: "{{ monad.source_url }}"
+    suites: noble
+    components: main
+    signed_by: https://pkg.category.xyz/keys/public-key.asc
+    state: present
+    enabled: true
