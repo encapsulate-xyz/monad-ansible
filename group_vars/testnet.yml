@@ -6,5 +6,6 @@ monad:
     forkpoint_url: ""
   execution:
     version: 0.1.0-testnet-2-genesis
+    chain_id: monad_testnet2
   rpc:
     version: 0.1.0-testnet-2-genesis

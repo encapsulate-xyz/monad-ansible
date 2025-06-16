@@ -17,8 +17,11 @@ default_node_types:
 
 tmp_dir: /tmp
 
-triedb_drive:
-triedb_path: /dev/triedb
+triedb_config:
+   drive: /dev/sda # Update with the drive you ae using
+   path: /dev/triedb
+   partition_name: triedb
+   partition_number: 1
 
 monad:
   source_url: https://pkg.category.xyz
