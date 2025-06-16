@@ -21,13 +21,15 @@
     state: stopped
 
 - name: Apply sysctl settings
-  ansible.builtin.command: sysctl --system
-  changed_when: true
+  ansible.posix.sysctl:
+    reload: yes
+    sysctl_file: "/etc/sysctl.d/90-{{ service_identifier }}-network-buffer.conf"
 
 - name: Trigger udev rules
-  ansible.builtin.command: udevadm trigger
-  changed_when: true
+  ans2dev.general.udevadm_trigger:
+    quiet: true
+    type: all
 
 - name: Reload udev rules
-  ansible.builtin.command: udevadm control --reload
-  changed_when: true
+  ans2dev.general.udevadm_control:
+    log_level: debug
