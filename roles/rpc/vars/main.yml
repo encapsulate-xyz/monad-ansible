@@ -12,3 +12,6 @@ rpc_binaries:
 
 # environment file names
 rpc_general_environment_file_name: "{{ service_identifier }}.env"
+
+# socket file name
+rpc_mempool_socket_file_name: mempool.sock

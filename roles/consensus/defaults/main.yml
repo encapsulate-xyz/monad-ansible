@@ -43,4 +43,4 @@ consensus_secrets_environment_file_path: "{{ consensus_env_dir }}/{{ consensus_s
 # socket file paths
 consensus_mempool_socket_file_path: "{{ consensus_env_dir }}/{{ consensus_mempool_socket_file_name }}"
 consensus_control_panel_socket_file_path: "{{ consensus_env_dir }}/{{ consensus_control_panel_socket_file_name }}"
-consensus_state_sync_file_path: "{{ consensus_env_dir }}/{{ consensus_state_sync_file_name }}"
+consensus_state_sync_socket_file_path: "{{ consensus_env_dir }}/{{ consensus_state_sync_socket_file_name }}"

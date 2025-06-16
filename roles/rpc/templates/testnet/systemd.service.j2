@@ -9,15 +9,15 @@ WorkingDirectory={{ rpc_home_dir }}
 EnvironmentFile={{ rpc_general_environment_file_path }}
 EnvironmentFile={{ rpc_secrets_environment_file_path }}
 ExecStart={{ rpc_bin_dir }}/{{ service_identifier }} \
-    --ipc-path {{ socket_dir }}/mempool.sock \
-    --triedb-path {{ triedb_path }} \
+    --ipc-path {{ socket_dir }}/{{ rpc_mempool_socket_file_name }} \
+    --triedb-path {{ triedb_config.path }} \
     --otel-endpoint "{{ otel_endpoint }}" \
     --allow-unprotected-txs \
     --node-config {{ rpc_node_config_file_path }}
 Restart=always
 RestartSec=4
 LimitNOFILE=1048576
-DeviceAllow={{ triedb_path }} rw
+DeviceAllow={{ triedb_config.path }} rw
 # Hugemem configs below
 LimitMEMLOCK=infinity
 MemoryDenyWriteExecute=false

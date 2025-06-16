@@ -33,4 +33,4 @@ consensus_secrets_environment_file_name: "{{ service_identifier }}.secrets.env"
 # socket file names
 consensus_mempool_socket_file_name: mempool.sock
 consensus_control_panel_socket_file_name: controlpanel.sock
-consensus_state_sync_file_name: statesync.sock
+consensus_state_sync_socket_file_name: statesync.sock

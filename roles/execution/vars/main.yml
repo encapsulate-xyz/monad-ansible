@@ -9,3 +9,6 @@ execution_binaries:
 
 # environment file names
 execution_general_environment_file_name: "{{ service_identifier }}.env"
+
+# socket file names
+execution_state_sync_socket_file_name: statesync.sock

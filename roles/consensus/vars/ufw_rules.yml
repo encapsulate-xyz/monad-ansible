@@ -21,5 +21,5 @@ consensus_ufw_rules:
   - port: "{{ monad.consensus.ports.metrics_port }}"
     proto: tcp
     rule: allow
-    from: 84.32.32.227
-    comment: metrics
+    from: 84.32.32.227 # Monad Foundation server
+    comment: "metrics (exposed to monad foundation)"

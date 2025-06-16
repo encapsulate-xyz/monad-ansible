@@ -17,9 +17,9 @@ ExecStart={{ consensus_bin_dir }}/{{ service_identifier }} \
     --wal-path {{ consensus_wal_dir }} \
     --mempool-ipc-path {{ consensus_mempool_socket_file_path }} \
     --control-panel-ipc-path {{ consensus_control_panel_socket_file_path }} \
-    --statesync-ipc-path {{ consensus_state_sync_file_path }} \
+    --statesync-ipc-path {{ consensus_state_sync_socket_file_path }} \
     --ledger-path {{ consensus_data_dir }} \
-    --triedb-path {{ triedb_path }} \
+    --triedb-path {{ triedb_config.path }} \
     --otel-endpoint "{{ otel_endpoint }}" \
     --statesync-sq-thread-cpu 1 \
     --record-metrics-interval-seconds 1 \
@@ -28,7 +28,7 @@ ExecStart={{ consensus_bin_dir }}/{{ service_identifier }} \
 Restart=always
 RestartSec=4
 LimitNOFILE=1048576
-DeviceAllow={{ triedb_path }} rw
+DeviceAllow={{ triedb_config.path }} rw
 # Hugemem configs below
 LimitMEMLOCK=infinity
 MemoryDenyWriteExecute=false

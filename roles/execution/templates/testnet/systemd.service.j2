@@ -8,17 +8,17 @@ UMask=002
 WorkingDirectory={{ execution_home_dir }}
 EnvironmentFile={{ execution_general_environment_file_path }}
 ExecStart={{ execution_bin_dir }}/{{ service_identifier }} \
-    --chain monad_testnet2 \
-    --db {{ triedb_path }} \
+    --chain {{ monad.execution.chain_id }} \
+    --db {{ triedb_config.path }} \
     --block_db {{ ledger_dir }} \
-    --statesync {{ socket_dir }}/statesync.sock \
+    --statesync {{ socket_dir }}/{{ execution_state_sync_socket_file_name }} \
     --ro_sq_thread_cpu 5 \
     --sq_thread_cpu 6 \
     --log_level INFO
 Restart=always
 RestartSec=4
 LimitNOFILE=1048576
-DeviceAllow={{ triedb_path }} rw
+DeviceAllow={{ triedb_config.path }} rw
 # Hugemem configs below
 LimitMEMLOCK=infinity
 MemoryDenyWriteExecute=false
