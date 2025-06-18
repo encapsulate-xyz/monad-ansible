@@ -26,17 +26,12 @@ processors:
     limit_mib: 1500
     spike_limit_mib: 512
     check_interval: 5s
-  resource/monad-testnet:
-    attributes:
-      - action: insert
-        key: env
-        value: testnet
 
 service:
   pipelines:
     metrics/monad-testnet:
       receivers: [otlp/monad-testnet]
-      processors: [resource/monad-testnet]
+      processors: [batch]
       exporters: [prometheus/monad]
     metrics:
       receivers: [otlp/monad-testnet]
