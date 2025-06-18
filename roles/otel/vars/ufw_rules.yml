@@ -5,3 +5,9 @@ otel_ufw_rules:
     rule: allow
     from: 84.32.32.227 # Monad Foundation server
     comment: "metrics (exposed to monad foundation)"
+
+  - port: "{{ otel.ports.prometheus_metrics_exporter_port }}"
+    proto: tcp
+    rule: allow
+    from: "{{ monitor_server_dns }}"
+    comment: "monitor_server"
