@@ -7,7 +7,6 @@ Group={{ project }}
 UMask=002
 WorkingDirectory={{ rpc_home_dir }}
 EnvironmentFile={{ rpc_general_environment_file_path }}
-EnvironmentFile={{ rpc_secrets_environment_file_path }}
 ExecStart={{ rpc_bin_dir }}/{{ service_identifier }} \
     --ipc-path {{ socket_dir }}/{{ rpc_mempool_socket_file_name }} \
     --triedb-path {{ triedb_config.path }} \
