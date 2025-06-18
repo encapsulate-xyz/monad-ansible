@@ -2,7 +2,7 @@
 - name: Create storage partition with monad-mpt
   ansible.builtin.shell: >
     {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }}
-    --storage /dev/triedb
+    --storage {{ triedb_config.path }}
     --create
   args:
     executable: /bin/bash

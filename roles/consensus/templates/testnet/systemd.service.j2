@@ -13,7 +13,6 @@ ExecStart={{ consensus_bin_dir }}/{{ service_identifier }} \
     --bls-identity {{ consensus_bls_identity_key_file_path }} \
     --node-config {{ consensus_node_config_file_path }} \
     --forkpoint-config {{ consensus_forkpoint_file_path }} \
-    --genesis-path {{ consensus_genesis_file_path }} \
     --wal-path {{ consensus_wal_dir }} \
     --mempool-ipc-path {{ consensus_mempool_socket_file_path }} \
     --control-panel-ipc-path {{ consensus_control_panel_socket_file_path }} \

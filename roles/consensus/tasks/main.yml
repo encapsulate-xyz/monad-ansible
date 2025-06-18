@@ -32,16 +32,16 @@
   ansible.builtin.include_tasks: provision_triedb.yml
   when: setup_triedb | default(false) | bool
 
-- name: Copy genesis and validators configuration files
+- name: Include Fetch Forkpoint task
+  ansible.builtin.include_tasks: fetch_forkpoint.yml
+
+- name: Copy validators configuration files
   ansible.builtin.copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: "{{ env }}/validators.toml"
+    dest: "{{ consensus_validators_config_file_path }}"
     owner: "{{ service_identifier }}"
     group: "{{ service_identifier }}"
     mode: "0644"
-  loop:
-    - { src: "{{ env }}/genesis.json", dest: "{{ consensus_genesis_file_path }}" }
-    - { src: "{{ env }}/validators.toml", dest: "{{ consensus_validators_config_file_path }}" }
   notify:
     - Restart service
 
@@ -55,16 +55,6 @@
   loop:
     - { src: "{{ env }}/node.toml.j2", dest: "{{ consensus_node_config_file_path }}" }
     - { src: "{{ env }}/general.env.j2", dest: "{{ consensus_general_environment_file_path }}" }
-  notify:
-    - Restart service
-
-- name: Download forkpoint from URL
-  ansible.builtin.get_url:
-    url: "{{ monad.consensus.forkpoint_url }}"
-    dest: "{{ consensus_forkpoint_file_path }}"
-    owner: "{{ service_identifier }}"
-    group: "{{ service_identifier }}"
-    mode: "0644"
   notify:
     - Restart service
 
@@ -95,7 +85,7 @@
 - name: Copy systemd service file
   ansible.builtin.template:
     src: "{{ env }}/systemd.service.j2"
-    dest: /etc/systemd/system/{{ service_identifier }}.service
+    dest: "/etc/systemd/system/{{ service_identifier }}.service"
     owner: root
     group: root
     mode: "0644"
