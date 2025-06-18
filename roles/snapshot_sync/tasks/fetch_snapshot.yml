@@ -1,0 +1,67 @@
+---
+- name: Create tmp folder
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}/{{ project }}"
+    state: directory
+    mode: "0755"
+
+- name: Get latest snapshot filename
+  ansible.builtin.uri:
+    url: "{{ monad.consensus.snapshot_url }}/latest.txt"
+    method: GET
+    return_content: true
+  register: latest_file_response
+  failed_when: latest_file_response.content | trim == ""
+
+- name: Set latest filename
+  ansible.builtin.set_fact:
+    latest_filename: "{{ latest_file_response.content | trim }}"
+
+- name: Extract block ID from filename
+  ansible.builtin.set_fact:
+    block_id: "{{ latest_filename.split('-')[1].split('.')[0] }}"
+
+- name: Display latest file and block ID
+  ansible.builtin.debug:
+    msg:
+      - "Latest file: {{ latest_filename }}"
+      - "Block ID: {{ block_id }}"
+
+- name: Download snapshot files (.tar.zst and .checksum)
+  ansible.builtin.command:
+    cmd: >-
+      aria2c -x 8 -s 8 --continue=true
+      "{{ monad.consensus.snapshot_url }}/{{ latest_filename }}.{{ item }}"
+    chdir: "{{ tmp_dir }}/{{ project }}"
+  loop:
+    - tar.zst
+    - checksum
+  register: download_result
+  failed_when: download_result.rc != 0
+
+- name: Extract snapshot archive
+  ansible.builtin.shell: |
+    set -o pipefail
+    unzstd -c {{ tmp_dir }}/{{ project }}/{{ latest_filename }}.tar.zst | tar -xf - -C {{ tmp_dir }}/{{ project }}
+  args:
+    creates: "{{ tmp_dir }}/{{ project }}/{{ block_id }}"
+    executable: /bin/bash
+
+- name: Load binary snapshot with monad-cli
+  ansible.builtin.command:
+    cmd: >-
+      {{ snapshot_sync_bin_dir }}/monad-cli
+      --db {{ triedb_config.path }}
+      --load_binary_snapshot {{ tmp_dir }}/{{ project }}
+      --version {{ block_id }}
+      --sq_thread_cpu 15
+  register: monad_cli_result
+  failed_when: monad_cli_result.rc != 0
+  changed_when: false
+  environment:
+    LD_LIBRARY_PATH: "{{ snapshot_sync_lib_dir }}"
+
+- name: Clean up the temporary repository directory
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}/{{ project }}"
+    state: absent

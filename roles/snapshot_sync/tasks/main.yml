@@ -1,0 +1,63 @@
+---
+- name: Stop Monad services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: stopped
+  loop:
+    - monad-consensus.service
+    - monad-execution.service
+    - monad-rpc.service
+
+- name: Delete directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ snapshot_sync_directories }}"
+
+- name: Delete all wal_* files
+  ansible.builtin.find:
+    paths: "{{ snapshot_sync_home_dir }}"
+    patterns: wal_*
+    file_type: file
+  register: wal_files
+
+- name: Remove wal_* files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ wal_files.files }}"
+
+- name: Recreate empty directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ service_identifier }}"
+    group: "{{ project }}"
+    mode: "0755"
+  loop: "{{ snapshot_sync_directories }}"
+
+- name: Include Truncate Triedb task
+  ansible.builtin.include_tasks: truncate_triedb.yml
+
+- name: Include Fetch Snapshot task
+  ansible.builtin.include_tasks: fetch_snapshot.yml
+
+- name: Set ownership of synced files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ project }}"
+    recurse: true
+  loop: "{{ snapshot_sync_directories }}"
+
+- name: Include Fetch Forkpoint task
+  ansible.builtin.include_tasks: fetch_forkpoint.yml
+
+- name: Restart Monad services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - monad-consensus.service
+    - monad-execution.service
+    - monad-rpc.service
