@@ -28,3 +28,9 @@
 - name: Reload udev rules
   ans2dev.general.udevadm_control:
     log_level: debug
+
+- name: Start Set Hugepages
+  ansible.builtin.systemd:
+    name: set-hugepages.service
+    state: started
+    enabled: true

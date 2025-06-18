@@ -46,7 +46,7 @@
     set -o pipefail
     nvme id-ns -H {{ triedb_config.drive }} | grep 'LBA Format' | grep 'in use'
   args:
-      executable: /bin/bash
+    executable: /bin/bash
   register: final_lba_check
   changed_when: false
 

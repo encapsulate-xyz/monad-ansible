@@ -1,0 +1,17 @@
+---
+otel_home_dir: /opt/{{ service_identifier }}
+
+otel_bin_dir: "{{ otel_home_dir }}/bin"
+otel_config_dir: "{{ otel_home_dir }}/config"
+otel_data_dir: "{{ otel_home_dir }}/data"
+otel_log_dir: "{{ otel_home_dir }}/log"
+
+otel_directories:
+  - "{{ otel_home_dir }}"
+  - "{{ otel_bin_dir }}"
+  - "{{ otel_data_dir }}"
+  - "{{ otel_config_dir }}"
+  - "{{ otel_log_dir }}"
+
+otel_log_file_path: "{{ otel_log_dir }}/{{ service_identifier }}.log"
+otel_config_file_path: "{{ otel_config_dir }}/{{ otel_config_file_name }}"

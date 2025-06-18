@@ -1,0 +1,10 @@
+---
+- name: Copy set hugepages systemd service file
+  ansible.builtin.copy:
+    src: set-hugepages.service
+    dest: "/etc/systemd/system/set-hugepages.service"
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Start Set Hugepages

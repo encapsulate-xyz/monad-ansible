@@ -14,7 +14,7 @@
     creates: "{{ tmp_dir }}/{{ service_identifier }}/monad_{{ monad[type].version }}_{{ system_architecture }}.deb"
 
 - name: Extract monad package
-  ansible.builtin.command:
+  ansible.builtin.command: 
     cmd: >-
       dpkg-deb -x
       "{{ tmp_dir }}/{{ service_identifier }}/monad_{{ monad[type].version }}_{{ system_architecture }}.deb"
@@ -31,7 +31,7 @@
     force: true
     mode: "0755"
   with_items: "{{ path_mapping }}"
-  notify: 
+  notify:
     - Restart service
 
 - name: Copy lib files
@@ -43,7 +43,7 @@
     group: root
     force: true
     mode: "0755"
-  notify: 
+  notify:
     - Restart service
 
 - name: Clean up the temporary directory
