@@ -20,3 +20,7 @@
     signed_by: https://pkg.category.xyz/keys/public-key.asc
     state: present
     enabled: true
+
+- name: Update APT package repositories
+  ansible.builtin.apt:
+    update_cache: true
