@@ -6,6 +6,11 @@ receivers:
       http:
         endpoint: '0.0.0.0:{{ otel.ports.monad_testnet.http_port }}'
 exporters:
+  otlp:
+    endpoint: peach10.devcore4.com:4317
+    tls:
+      insecure: true
+      insecure_skip_verify: true
   prometheus/monad:
     endpoint: '0.0.0.0:{{ otel.ports.prometheus_metrics_exporter_port }}'
     send_timestamps: true
@@ -16,6 +21,11 @@ exporters:
     const_labels:
       project: monad
 processors:
+  batch:
+  memory_limiter:
+    limit_mib: 1500
+    spike_limit_mib: 512
+    check_interval: 5s
   resource/monad-testnet:
     attributes:
       - action: insert
@@ -28,6 +38,18 @@ service:
       receivers: [otlp/monad-testnet]
       processors: [resource/monad-testnet]
       exporters: [prometheus/monad]
+    metrics:
+      receivers: [otlp/monad-testnet]
+      exporters: [prometheus/monad,otlp]
+      processors: [batch]
+    traces:
+      receivers: [otlp/monad-testnet]
+      processors: [batch]
+      exporters: [otlp]
+    logs:
+      receivers: [otlp/monad-testnet]
+      processors: [batch]
+      exporters: [otlp]
   telemetry:
     metrics:
       readers:
