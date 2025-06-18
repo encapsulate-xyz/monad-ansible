@@ -1,0 +1,45 @@
+---
+- name: Include the ufw rules vars file
+  ansible.builtin.include_vars:
+    file: vars/ufw_rules.yml
+
+- name: Apply UFW rules
+  ansible.builtin.include_tasks: tasks/apply_ufw_rules.yml
+  loop: "{{ otel_ufw_rules }}"
+
+- name: Include user creation task for Otel
+  ansible.builtin.include_tasks: tasks/create_user_and_directories.yml
+  vars:
+    home: "{{ otel_home_dir }}"
+    directories: "{{ otel_directories }}"
+    log_file_path: "{{ otel_log_file_path }}"
+
+- name: Include Download, Unarchive and Copy Binary task
+  ansible.builtin.include_tasks: tasks/extract_binary.yml
+  vars:
+    source_url: "{{ otel.source_url }}"
+    system_arch: "{{ ansible_system | lower }}_{{ system_architecture }}"
+    suffix_url: "v{{ otel.version }}/{{ otel_default_binary_name }}_{{ otel.version }}_{{ system_arch }}.{{ otel.file_extension }}"
+    binary_dest_path: "{{ otel_bin_dir }}/{{ service_identifier }}"
+    extracted_binary_path: "{{ otel_default_binary_name }}"
+
+- name: Copy otel config
+  ansible.builtin.template:
+    src: config.yml.j2
+    dest: "{{ otel_config_file_path }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
+  notify:
+    - Restart service
+
+- name: Copy otel systemd service file
+  ansible.builtin.template:
+    src: systemd.service.j2
+    dest: /etc/systemd/system/{{ service_identifier }}.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload service
+    - Restart service

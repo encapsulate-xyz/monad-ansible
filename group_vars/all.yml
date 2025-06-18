@@ -17,7 +17,7 @@ default_node_types:
 tmp_dir: /tmp
 
 triedb_config:
-  drive: /dev/nvme0n1 # Update with the drive you ae using
+  drive: /dev/nvme0n1 # Update with the drive you are using
   path: /dev/triedb
   partition_name: triedb
   partition_number: 1
@@ -27,3 +27,14 @@ monad:
   consensus:
     ports:
       p2p_port: 8000
+
+otel:
+  service_identifier_suffix: otel
+  source_url: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download
+  file_extension: tar.gz
+  ports:
+    monad_testnet:
+      grpc_port: 4317
+      http_port: 4318
+    prometheus_metrics_exporter_port: 8889
+    metrics_port: 8888

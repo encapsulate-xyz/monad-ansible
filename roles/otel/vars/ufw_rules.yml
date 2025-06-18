@@ -1,0 +1,7 @@
+---
+otel_ufw_rules:
+  - port: "{{ otel.ports.prometheus_metrics_exporter_port }}"
+    proto: tcp
+    rule: allow
+    from: 84.32.32.227 # Monad Foundation server
+    comment: "metrics (exposed to monad foundation)"

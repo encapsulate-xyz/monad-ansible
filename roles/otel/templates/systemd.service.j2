@@ -1,0 +1,18 @@
+[Unit]
+Description=Monad Otel Service
+
+[Service]
+User={{ service_identifier }}
+Group={{ service_identifier }}
+WorkingDirectory={{ otel_home_dir }}
+ExecStart={{ otel_bin_dir }}/{{ service_identifier }} \
+    --config {{ otel_config_file_path }}
+Restart=always
+RestartSec=4
+LimitNOFILE=65536
+MemoryMax=64G
+StandardOutput=append:{{ otel_log_file_path }}
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target
