@@ -3,11 +3,12 @@
 monad:
   consensus:
     version: 0.1.0-testnet-2-genesis
-    forkpoint_url: ""
-    otel_endpoint: "{{ monitor_server_dns }}:4323"
+    forkpoint_url: "https://bucket.monadinfra.com/forkpoint/testnet-2"
+    otel_endpoint: "http://{{ monitor_server_dns }}:4324"
+    snapshot_url: "https://d1xd6bwr0bhisu.cloudfront.net"
   execution:
     version: 0.1.0-testnet-2-genesis
     chain_id: monad_testnet2
   rpc:
     version: 0.1.0-testnet-2-genesis
-    otel_endpoint: "{{ monitor_server_dns }}:4323"
+    otel_endpoint: "http://{{ monitor_server_dns }}:4324"
