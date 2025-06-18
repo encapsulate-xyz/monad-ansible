@@ -12,6 +12,6 @@ all:
           type: execution
           ledger_dir: /opt/monad-consensus/data
           socket_dir: /opt/monad-consensus/socket
-        rpc.monad.testnet.encapsulate.xyz5:
+        rpc.monad.testnet.encapsulate.xyz:
           type: rpc
           socket_dir: /opt/monad-consensus/socket
