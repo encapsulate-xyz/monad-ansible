@@ -1,9 +1,14 @@
 #!/bin/bash
 
+log() {
+  echo "[$(date +"%Y-%m-%d %H:%M:%S")] $1"
+}
+
 # Set your Pushgateway endpoint
 PUSHGATEWAY_URL="https://{{ pushgateway_dns }}"
 JOB_NAME="chain_exporter"
 
+log "Fetching triedb usage data"
 # Run the monad-mpt command and extract used size
 USED=$( /opt/monad-consensus/bin/monad-mpt --storage {{ triedb_config.path }} 2>/dev/null \
   | grep -A 1 'Capacity' \
@@ -24,6 +29,7 @@ case "$UNIT" in
   *) BYTES=0 ;;
 esac
 
+log "Pushing metrics to Pushgateway"
 # Push to Prometheus Pushgateway
 cat <<EOF | curl --max-time 30 --data-binary @- "$PUSHGATEWAY_URL/metrics/job/$JOB_NAME/project/{{ project }}/env/{{ env }}"
 # TYPE monad_mpt_storage_used_bytes gauge
