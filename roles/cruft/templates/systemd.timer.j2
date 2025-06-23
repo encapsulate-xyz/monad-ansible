@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Monad cruft service every hour
+
+[Timer]
+OnCalendar=hourly
+Unit=monad-cruft.service
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target
