@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Set your Pushgateway endpoint
+PUSHGATEWAY_URL="https://{{ pushgateway_dns }}"
+JOB_NAME="chain_exporter"
+
+# Run the monad-mpt command and extract used size
+USED=$( /opt/monad-consensus/bin/monad-mpt --storage {{ triedb_config.path }} 2>/dev/null \
+  | grep -A 1 'Capacity' \
+  | tail -n 1 \
+  | awk '{print $3, $4}' \
+  | tr -d '\r' )
+
+# Separate number and unit
+VALUE=$(echo "$USED" | awk '{print $1}')
+UNIT=$(echo "$USED" | awk '{print $2}')
+
+# Convert to bytes
+case "$UNIT" in
+  Kb|KB) BYTES=$(echo "$VALUE * 1024" | bc) ;;
+  Mb|MB) BYTES=$(echo "$VALUE * 1024 * 1024" | bc) ;;
+  Gb|GB) BYTES=$(echo "$VALUE * 1024 * 1024 * 1024" | bc) ;;
+  Tb|TB) BYTES=$(echo "$VALUE * 1024 * 1024 * 1024 * 1024" | bc) ;;
+  *) BYTES=0 ;;
+esac
+
+# Push to Prometheus Pushgateway
+cat <<EOF | curl --max-time 30 --data-binary @- "$PUSHGATEWAY_URL/metrics/job/$JOB_NAME/project/{{ project }}/env/{{ env }}"
+# TYPE monad_mpt_storage_used_bytes gauge
+monad_mpt_storage_used_bytes $BYTES
+EOF

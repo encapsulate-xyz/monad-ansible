@@ -34,3 +34,9 @@
     name: set-hugepages.service
     state: started
     enabled: true
+
+- name: Restart timer
+  ansible.builtin.systemd:
+    name: "{{ service_identifier }}.timer"
+    state: restarted
+    enabled: true

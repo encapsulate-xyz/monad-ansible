@@ -6,6 +6,7 @@ all:
   children:
     monad:
       hosts:
+        validator.monad.testnet.encapsulate.xyz:
         consensus.monad.testnet.encapsulate.xyz:
           type: consensus
         execution.monad.testnet.encapsulate.xyz:
