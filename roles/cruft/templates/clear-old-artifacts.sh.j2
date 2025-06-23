@@ -1,5 +1,11 @@
 #!/bin/bash
 
+log() {
+  echo "[$(date +"%Y-%m-%d %H:%M:%S")] $1"
+}
+
+log "Starting cruft script"
+
 TARGET_DIR="/opt/monad-consensus/data/"
 
 NEW_FILES=$(find "$TARGET_DIR" -type f -name "*" -mmin -20)
@@ -11,4 +17,7 @@ if [ -n "$NEW_FILES" ]; then
 else
     echo "No new files detected. Skipping deletion of .header files."
 fi
+
+log "Cruft script completed"
+
 exit 0

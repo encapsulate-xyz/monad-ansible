@@ -3,8 +3,9 @@ Description=Monad cruft service
 
 [Service]
 Type=oneshot
-User={{ service_identifier }}
-Group={{ project }}
+# This service should be run with monad-consensus to delete data.
+User=monad-consensus
+Group={{ service_identifier }}
 ExecStart=/bin/bash -c '{{ cruft_script_file_path }} 2>/dev/null'
 LimitNOFILE=65536
 MemoryMax=64G
