@@ -27,6 +27,8 @@
         dest_path: "{{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }}"
       - extracted_path: "{{ extracted_dir }}/{{ consensus_binaries.monad_cli.default_binary_name }}"
         dest_path: "{{ consensus_bin_dir }}/{{ consensus_binaries.monad_cli.dest_binary_name }}"
+      - extracted_path: "{{ extracted_dir }}/{{ consensus_binaries.monad_debug_node.default_binary_name }}"
+        dest_path: "{{ consensus_bin_dir }}/{{ consensus_binaries.monad_debug_node.dest_binary_name }}"
 
 - name: Include Provision Triedb task
   ansible.builtin.include_tasks: provision_triedb.yml
