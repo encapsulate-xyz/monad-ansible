@@ -51,8 +51,11 @@ peers = []
 #########################################################
 # Peers configuration
 #########################################################
-[fullnode_dedicated]
-identities = []
+# [fullnode_dedicated]
+# identities = []
+
+[[fullnode_dedicated.identities]]
+secp256k1_pubkey = "02e7cca646948ec63ef06c3bea5d71c26d0db8ae5b4b7e49704845a9b4a071f307"
 
 #This section will be removed after most validators have joined the network
 [[blocksync_override.peers]]
@@ -81,6 +84,10 @@ secp256k1_pubkey = "028f4ee74e9fef46e59e5581d5d10bd025dc6f8a1164d84c6d3ea4404e7c
 #peers = []
 #[statesync]
 #peers = []
+
+[[bootstrap.peers]]
+address = "104.207.139.21:8000"
+secp256k1_pubkey = "02e7cca646948ec63ef06c3bea5d71c26d0db8ae5b4b7e49704845a9b4a071f307"
 
 [[bootstrap.peers]]
 address = "mf-testnet-2-val-tsw-pit-004.monadinfra.com:8000"
