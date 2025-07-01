@@ -36,6 +36,7 @@
 
 - name: Include Fetch Forkpoint task
   ansible.builtin.include_tasks: fetch_forkpoint.yml
+  when: fetch_forkpoint | default(false) | bool
 
 - name: Copy validators configuration files
   ansible.builtin.copy:
