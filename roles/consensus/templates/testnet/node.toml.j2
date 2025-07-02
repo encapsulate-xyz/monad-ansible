@@ -51,8 +51,14 @@ peers = []
 #########################################################
 # Peers configuration
 #########################################################
-[fullnode_dedicated]
-identities = []
+# [fullnode_dedicated]
+# identities = []
+
+[[bootstrap.peers]]
+address = "test.monad.testnet.kingsuper.services:8000"
+secp256k1_pubkey = "03e670853fb042834bc33f74be5b3e7fa47c17ef6d9ec4d48ac31f3d0a5c2d4c4b"
+[[fullnode_dedicated.identities]]
+secp256k1_pubkey = "03e670853fb042834bc33f74be5b3e7fa47c17ef6d9ec4d48ac31f3d0a5c2d4c4b"
 
 #This section will be removed after most validators have joined the network
 [[blocksync_override.peers]]
