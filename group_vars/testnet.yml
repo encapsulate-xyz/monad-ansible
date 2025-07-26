@@ -2,13 +2,13 @@
 # maintains versions and can overwrite all.yml
 monad:
   consensus:
-    version: 0.1.0-testnet-2-genesis
+    version: 0.9.4-tn2-pre-0.10
     forkpoint_url: "https://bucket.monadinfra.com/forkpoint/testnet-2"
     otel_endpoint: "http://0.0.0.0:4317"
     snapshot_url: "https://d1xd6bwr0bhisu.cloudfront.net"
   execution:
-    version: 0.1.0-testnet-2-genesis
+    version: 0.9.4-tn2-pre-0.10
     chain_id: monad_testnet2
   rpc:
-    version: 0.1.0-testnet-2-genesis
+    version: 0.9.4-tn2-pre-0.10
     otel_endpoint: "http://0.0.0.0:4317"
