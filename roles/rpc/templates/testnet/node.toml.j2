@@ -1,3 +1,4 @@
+maybe_fork_tip = "0x9c80e57456628d3cc922089ad65464131944cbee40d07815b845b286816f47a0"
 #########################################################
 #                                                       #
 #        WARNING: THIS FILE SHOULD NEVER BE USED        #
@@ -26,33 +27,48 @@ raptor10_validator_redundancy_factor = 3 #Mock peer discovery value
 
 chain_id = 30143
 
+[peer_discovery]
+self_address = "148.113.49.86:8000"
+self_record_seq_num = 0
+self_name_record_sig = "3bb67113503f698a1f43a0d935b0b8507a3ae5973d024934ee01717374afae4223826246e0d50208931958ac62bd15f23b117a045fc275a9806718ef3bcb309201"
+ping_period = 30
+refresh_period = 120
+request_timeout = 5
+unresponsive_prune_threshold = 3
+last_participation_prune_threshold = 2000
+min_num_peers = 160
+max_num_peers = 220
+
+[fullnode_raptorcast]
+mode = "Publisher"
+raptor10_fullnode_redundancy_factor = 3
+max_group_size = 10
+round_span = 240
+invite_lookahead = 120
+max_invite_wait = 10
+deadline_round_dist = 10
+init_empty_round_span = 23
+bandwidth_cost_per_group_member = 1000
+bandwidth_capacity = 50000
+invite_future_dist_min = 1
+invite_future_dist_max = 600
+invite_accept_heartbeat_ms = 10000
+
+[fullnode_raptorcast.full_nodes_prioritized]
+identities = []
+
+
 [network]
 bind_address_host = "0.0.0.0"
 bind_address_port = 8000
 max_rtt_ms = 300
 max_mbps = 1000
 
-[consensus]
-execution_delay = 3
-
-#DO NOT CHANGE - Mock peer discovery values
-[peer_discovery]
-self_address = "0.0.0.0:8000"
-self_record_seq_num = 0
-self_name_record_sig = "7911fbf0df1307723c51658349ed396dd6ee28fde925277bae53fcd77705c4313e003a12fb562e1c20cc616511f7a09f986a3f6af6849cdedff6f5684557b04f01"
-ping_period = 30
-refresh_period = 120
-request_timeout = 5
-prune_threshold = 5
-min_active_connections = 0
-max_active_connections = 200
-peers = []
-
-#########################################################
-# Peers configuration
-#########################################################
-[fullnode_dedicated]
-identities = []
+# [[bootstrap.peers]]
+# address = "test.monad.testnet.kingsuper.services:8000"
+# secp256k1_pubkey = "03e670853fb042834bc33f74be5b3e7fa47c17ef6d9ec4d48ac31f3d0a5c2d4c4b"
+[[fullnode_dedicated.identities]]
+secp256k1_pubkey = "03e670853fb042834bc33f74be5b3e7fa47c17ef6d9ec4d48ac31f3d0a5c2d4c4b"
 
 #This section will be removed after most validators have joined the network
 [[blocksync_override.peers]]
@@ -83,509 +99,1088 @@ secp256k1_pubkey = "028f4ee74e9fef46e59e5581d5d10bd025dc6f8a1164d84c6d3ea4404e7c
 #peers = []
 
 [[bootstrap.peers]]
-address = "mf-testnet-2-val-tsw-pit-004.monadinfra.com:8000"
+# mf-testnet-2-val-tsw-pit-004.monadinfra.com:8000
+address = "64.130.56.50:8000"
+record_seq_num = 0
+name_record_sig = "f2f1384e122c4ff9caa3df63d9c5826a930a4abecec6709841e4b9acf41201fc2fa6f691e25f5e4a5d5ffd19f479700ea695be36b3754ba4f92ab0ce9533519501"
 secp256k1_pubkey = "03afd66a0822428268bf9bdf06e4038ca240b29051683bedf61aa6f80ac1a9ba7a"
 [[bootstrap.peers]]
-address = "mf-testnet-2-val-tsw-fra-002.monadinfra.com:8000"
+# mf-testnet-2-val-tsw-fra-002.monadinfra.com:8000
+address = "64.130.40.48:8000"
+record_seq_num = 0
+name_record_sig = "e8c29c3879709149c68be95283b1fc49ccd496f3f31d11eeb3755d3faab8600c170fa035520fd8181ede029dfc52973cb04890d705dc7faa4922eee6849b05da01"
 secp256k1_pubkey = "023238f0ed4e62da46d69aa6da49a7a5ca9299d74e1deb80d13c2d2087d2d0086e"
 [[bootstrap.peers]]
-address = "mf-testnet-2-val-tsw-sgp-004.monadinfra.com:8000"
+# mf-testnet-2-val-tsw-sgp-004.monadinfra.com:8000
+address = "202.8.11.132:8000"
+record_seq_num = 0
+name_record_sig = "1768867b727cb2777137a9fb8f29a2686478f3c1f75f27723737da96acf5dea97a65ae581a7fa7e2d1f48c72956a2592b19ad045a5bd486e227186b20bf148bc01"
 secp256k1_pubkey = "03d24fc82da1a1ad844c507d43b1cf62a697efeb7d6c983a182932abbe1033e72b"
 [[bootstrap.peers]]
-address = "mf-testnet-2-val-lsn-jfk-013.monadinfra.com:8000"
+# mf-testnet-2-val-lsn-jfk-013.monadinfra.com:8000
+address = "64.31.53.173:8000"
+record_seq_num = 0
+name_record_sig = "d62544fce0967f3249e6a11134911cb0117793d58f0e75a8fc988f274182f2b97735e0ab64169b0133af09490ad9e8d225a48e0d728b8f188528e91eb0ca76a101"
 secp256k1_pubkey = "03aa8176c7d2451678ccf8e81f416ce8a41f2ba62a1d5217885585177ac4d1b6cc"
 [[bootstrap.peers]]
-address = "mf-testnet-2-val-lsn-cdg-003.monadinfra.com:8000"
+# mf-testnet-2-val-lsn-cdg-003.monadinfra.com:8000
+address = "64.31.27.203:8000"
+record_seq_num = 0
+name_record_sig = "7c20d28c6bf9705eaa2a5cab08f5a91cd7f10108813ebb80a6d7ef9f4e553b1a31e88023b85c6f7afb7fa3522029076f0ff8d412b1fac8786a68c483bd4e041c01"
 secp256k1_pubkey = "028f4ee74e9fef46e59e5581d5d10bd025dc6f8a1164d84c6d3ea4404e7ca40f43"
 [[bootstrap.peers]]
-address = "bue-004.devcore4.com:8000"
+# bue-004.devcore4.com:8000
+address = "103.106.58.129:8000"
+record_seq_num = 0
+name_record_sig = "359dea72e85b253fe7695298c6625fc102715f06d8b26a6b6ecc849779ae34550804c1c96cad7145adc79bfd15e3c7ef42c3cc24f7f28269ca54c3426886973c01"
 secp256k1_pubkey = "028bcac2c1e57b60ae93b47de912a5a48f5ec7675e7c608baeffb2fd33ff7baaef"
 [[bootstrap.peers]]
-address = "monad.testnet.lux8.net:8000"
+# monad.testnet.lux8.net:8000
+address = "91.211.83.208:8000"
+record_seq_num = 0
+name_record_sig = "3ddd3eb7628f2eb022335455f1ac11db054d1176e730394e81537f7458efde815523428fcbb64b9ae45115c4f5b6b40cd4dbdec18f2a162ab88d5642ec74315100"
 secp256k1_pubkey = "0337ca1bada8d6b42ae50e42e5967161cc9b610673a0737363486531ebb21f958c"
 [[bootstrap.peers]]
-address = "monad.testnet.natsai.xyz:8000"
+# monad.testnet.natsai.xyz:8000
+address = "65.108.3.14:8000"
+record_seq_num = 0
+name_record_sig = "10d5c3f78f061c4794140b11ea6cfa8a1fea04e9a20cc0d5da7be1552d98d76b2e846ad39ad035cd236436f646d3f440fc2be9f59ac5f0f92f178a33111744a200"
 secp256k1_pubkey = "02fead1f74824c74b9f28b102d1ec9bb8325425c3d6176b305a41e7f49fb28ea14"
 [[bootstrap.peers]]
-address = "monad-testnet2-val01.01no.de:8000"
+# monad-testnet2-val01.01no.de:8000
+address = "193.222.57.44:8000"
+record_seq_num = 0
+name_record_sig = "fe776dc41e99206365c837bb41906803bef1d41760e40017e9d254c82a0c59a275d8934ce943009ecc914129e05999234fe6f2590396c9f6e2670d47b6bae7b900"
 secp256k1_pubkey = "033d747f648922932aaef65067d733a56022439d08357ad18cf68b8ffd354db2eb"
 [[bootstrap.peers]]
-address = "monad.0xhub.xyz:8000"
+# monad.0xhub.xyz:8000
+address = "195.3.221.192:8000"
+record_seq_num = 0
+name_record_sig = "32ab78a34fc8753774c01fb5b4f31e4497599faf32ca50a2e339f61599876fb704fc787db492394ccfc1f5571bccf6fd484b42d28d8bef8da0a685a61d3c938d00"
 secp256k1_pubkey = "03ef75eb13268aa8bdd828db1e6e599f82daa798d75d0eddbd2d0e2e8e5a72a827"
 [[bootstrap.peers]]
-address = "monad-testnet.stakecraft.com:8000"
+# monad-testnet.stakecraft.com:8000
+address = "103.106.58.135:8000"
+record_seq_num = 0
+name_record_sig = "2cfd137bbb84d8ae9648c73e9923e97cc58e71d7c826e274cf66075824ccad5c667e53a38d14a96e40dbf11273ce898fa441270265799fb29d3926a89dc91de201"
 secp256k1_pubkey = "02f5be95c23da4690bcdc60338b0213a51174b892592026a70377eb9d36dd4125f"
 [[bootstrap.peers]]
-address = "tn.monad.stakingcabin.com:8000"
+# tn.monad.stakingcabin.com:8000
+address = "57.128.216.112:8000"
+record_seq_num = 0
+name_record_sig = "43b369aa9a63990254a0fbb7c913f5f317ffdd7071aa60d34fa88253ef9373963ef20495278f065f007781d4d8ae16e6f7d5b74cf20ec4a253e5847efaa6728400"
 secp256k1_pubkey = "032f53a922914884e6ea36e66ceb3d29360f4e344cf1392b4774a8cfbdb73d583d"
 [[bootstrap.peers]]
-address = "monad-testnet-validator.stakesquid.com:8000"
+# monad-testnet-validator.stakesquid.com:8000
+address = "181.214.48.17:8000"
+record_seq_num = 0
+name_record_sig = "3baca181866a32ad22456f0d5d914b82f0d61c306397c314d716f183ca421d98063a3d04d6bd16660526c918af8fe7a9db4112bfb23fd932a30f787e251badde00"
 secp256k1_pubkey = "028890a9064c34f58b1ddfdb1ef5e7bac7a303ca0d6d4388af1c3f8b1b062aadac"
 [[bootstrap.peers]]
-address = "monad-tn.lakestake.io:8000"
+# monad-tn.lakestake.io:8000
+address = "185.189.45.218:8000"
+record_seq_num = 0
+name_record_sig = "726f22e184ebf9c535e45d072b4f8e20b6e1ff9a13b91ad28ae0045d54e07bd57372bbc54b3ea5904bd2edcf3d9a7086785fcc8632d69b7d8e38809c2b5f0bdd00"
 secp256k1_pubkey = "029f324664222e59b8f52bd31da650548ed123511065c23a083924aab3db3f14df"
 [[bootstrap.peers]]
-address = "monad-test-val1.artifact.systems:8000"
-secp256k1_pubkey = "0272c3113cdf229cc9d554ec26c383ac3c4f636e1e89a90649da51bc1764181d51"
-[[bootstrap.peers]]
-address = "monadval.staker.space:8000"
+# monadval.staker.space:8000
+address = "185.52.237.100:8000"
+record_seq_num = 0
+name_record_sig = "68d9e31ec64307589cba4779e61528ef3ce4e7c2c440a48dea6cd185f025548a103ea472d1250abfaeab27b11d28e3de71cc2a294133178128b7891a17f09adb00"
 secp256k1_pubkey = "0314d835a20132081eb9fff0c5c9da5c17883134408dfae8404ae4d22041453540"
 [[bootstrap.peers]]
-address = "testnet2-monad.rhinostake.com:8000"
+# testnet2-monad.rhinostake.com:8000
+address = "148.113.49.107:8000"
+record_seq_num = 0
+name_record_sig = "e09d584adb6391592178b805b552aa4196936163cca8c4d52168234d516e2ba81f16072e4562205b252651512231ea31917881a4b9daf75aebb9073eb8d8c12601"
 secp256k1_pubkey = "02a004d1ba5693c97d7b60224ed691524c30b1a984c9afcbf0a51b950bcbe1f25c"
+# [[bootstrap.peers]]
+# address = "monad-testnet-2-validator.blockvision.org:8000"
+# secp256k1_pubkey = "036f31f704142302a3f2a0e03b52d3ae7de39ca414f9671a470639e53f7fee2072"
 [[bootstrap.peers]]
-address = "monad-testnet-2-validator.blockvision.org:8000"
-secp256k1_pubkey = "036f31f704142302a3f2a0e03b52d3ae7de39ca414f9671a470639e53f7fee2072"
-[[bootstrap.peers]]
-address = "monad.openbuild.xyz:8000"
+# monad.openbuild.xyz:8000
+address = "148.113.218.126:8000"
+record_seq_num = 0
+name_record_sig = "767ae3291fe99dca76e5091f2392a8533f4bb2b8698ef7e18c731d3a34e9d639645090c89e86e189a81faecd1c0a84389943a5535eddbb20f00218b58a14151101"
 secp256k1_pubkey = "036e512c40fbf5b6adbd3a072adac2b75b811650f40f60643da25f37d82c98f007"
 [[bootstrap.peers]]
-address = "monad.testnet.stakeware.xyz:8000"
+# monad.testnet.stakeware.xyz:8000
+address = "38.97.60.242:8000"
+record_seq_num = 0
+name_record_sig = "021bd5e6c1dfad3f7da9d0d0971fd5fa51bb05a949516de888f2f1b08e0681942de182056ffa5658cead6f7a19cf9f96736954cee4e47eed3b7ec6f6651b02e400"
 secp256k1_pubkey = "03704bf1cb1614f624c2c36af8efbfffa3524aadf89b59e0099c37a34f3a9c9566"
 [[bootstrap.peers]]
-address = "monad.testnet.cryptomind.group:8000"
+# monad.testnet.cryptomind.group:8000
+address = "188.212.159.149:8000"
+record_seq_num = 0
+name_record_sig = "f6434161741ee45feaed559d891cf852e1c142ef1a5d6bc3a3bc2933e13652457bf011f82af8c8ff4976cc16423f4949441937312ec7994a80d19f6a2ad362e401"
 secp256k1_pubkey = "02b7d38749f27d659e6311ecec475a40bd7f13339eb309da15c4f12eb46215b71b"
 [[bootstrap.peers]]
-address = "testnet-2-val.gmonads.com:8000"
+# testnet-2-val.gmonads.com:8000
+address = "141.98.218.83:8000"
+record_seq_num = 0
+name_record_sig = "45773ec76607e633b857ebc2d499bc792eecafc48ae4c464cfa03b1a4becbf836d288401f79d265268d32fd85e29895ef00e8711f947ff76725318dec0ab239301"
 secp256k1_pubkey = "03a826d27a87d6fa87b2cab582214d660e623406323dbc7d0145d77ec6cdf6f94e"
 [[bootstrap.peers]]
-address = "monad.testnet-2.pops.one:8000"
+# monad.testnet-2.pops.one:8000
+address = "84.32.103.144:8000"
+record_seq_num = 0
+name_record_sig = "23262d6159621ecada4950b30429b9f8177ad0364c6487d2ebdfba27f29e1dec2b5fea4697dec86b29d2c4f7e4aa1529833160edda7c2ece3d83197a8223fe2900"
 secp256k1_pubkey = "02d1e8a85c90d37799387cbfe7c53b45f24d4dca5674553bd442f36e45fdbb5b91"
 [[bootstrap.peers]]
-address = "monad-testnet.hashkey.cloud:8000"
+# monad-testnet.hashkey.cloud:8000
+address = "51.68.103.62:8000"
+record_seq_num = 0
+name_record_sig = "06287e6d3b4bd162ee6ee260755e28bdae6ea3ef371c421e04998482a4b39a4f55280e71381eb73a0651f9a2a2df88999627d12120a4db4568ac2cacbf36640401"
 secp256k1_pubkey = "0350c65b72c4281d9b5dc78a5ea1eeb1661a357ac23ecb8d723daebcf8bbd0b494"
 [[bootstrap.peers]]
-address = "monad-testnet-2.bharvest.io:8000"
+# monad-testnet-2.bharvest.io:8000
+address = "180.189.55.20:8000"
+record_seq_num = 0
+name_record_sig = "13aede51a80209a331c3fab3a71cfb2fd9a83264db19db0409f13c75644d43c72cf1fc9339d5327a2e3b3999282b481a8313a4ebce7760e615911de30fb87aa501"
 secp256k1_pubkey = "022ff0a612658e89c845633550ee82dc2ea6b74a5d387c9021283e704dcadce990"
 [[bootstrap.peers]]
-address = "monad.testnet.starduststaking.com:8000"
+# monad.testnet.starduststaking.com:8000
+address = "51.161.172.128:8000"
+record_seq_num = 0
+name_record_sig = "6810870355533720af89a9a1bc11763327ca621cb1bcb67eecdbd80460c0d6a34719b6301ce4f694d52dc43832a730296a32cfd51d9f016d4bce2184934637b400"
 secp256k1_pubkey = "02222c7daf30f79cef03aa365ffad717209f03cea12ce5eb46e6e7bb04653964af"
 [[bootstrap.peers]]
-address = "v.monad.testnet.republiccrypto-runtime.com:8000"
+# v.monad.testnet.republiccrypto-runtime.com:8000
+address = "51.161.174.106:8000"
+record_seq_num = 0
+name_record_sig = "7a4186684895939eb205b68ecd32e18f3f3518664d56ab72c77d0e1eaedfe3f411d32789570f0e1d91747c3652770eeeeebe14a97cbac1a28f26dff6040bc12601"
 secp256k1_pubkey = "03d353ea28764f5e60c93bcb1ff0b5dee142c0170a7b1f776ed0236560ebe49db5"
 [[bootstrap.peers]]
-address = "monad-testnet2.qubelabs.io:8000"
+# monad-testnet2.qubelabs.io:8000
+address = "148.251.81.206:8000"
+record_seq_num = 0
+name_record_sig = "e891ecc401699462dd997028968f9911d542cf5a86b1e35f6e07920508a747da0daaca57755fb7ce838c761dc8a1f40f512f608413a7e8645b05117d7358153600"
 secp256k1_pubkey = "033e4d89e8d7eb8efd2599cdb40f97af02a03fe357b6894f80e005c754707ca26f"
 [[bootstrap.peers]]
-address = "monad-testnet2.staking4all.org:8000"
+# monad-testnet2.staking4all.org:8000
+address = "134.119.214.211:8000"
+record_seq_num = 0
+name_record_sig = "fa56967cb0217e92b0b0b8e7ab0b87aa39469ee25c3fca37bae315e7b529b3cc6734d571f5d33a5fb937ab94da8080dd8a28fcd4b65ecd5960768690a9fb796f00"
 secp256k1_pubkey = "027154787cc362d528e04c6d3c2055e59ffd6d8fa87e7b5792d090d157df68a8a3"
 [[bootstrap.peers]]
-address = "monad-testnet-2.liquify.com:8000"
+# monad-testnet-2.liquify.com:8000
+address = "23.83.186.216:8000"
+record_seq_num = 0
+name_record_sig = "fdf458c94e9a9b8507997717415f5b4c5644f00ad6671b9d228f4544de4d943d4e2acc294b3a4079dc2ac97c6e9aa45754bced374508ac266378b22ce7848c7c01"
 secp256k1_pubkey = "0268adc7c666e36a7deb4581ac401079e921f774b64d67918fdc2e03c50319fbea"
 [[bootstrap.peers]]
-address = "tsw-sgp2-monad-testnet-val2.nodes.asymmetric.re:8000"
+# tsw-sgp2-monad-testnet-val2.nodes.asymmetric.re:8000
+address = "202.8.11.182:8000"
+record_seq_num = 0
+name_record_sig = "fc16e909acac22687ec433aae1723050725b117941d37f3447b783a4b1fd1c552da7a51db17990a9ed58b6fe6423140c74984394e34633c51b7643048eb029f100"
 secp256k1_pubkey = "025005c888d9a58d0e65bc7e0c69652a7c89a27aa4aeb159040ecae17ee516e4dc"
 [[bootstrap.peers]]
-address = "pronad-tn2.prostaking.com:8000"
+# pronad-tn2.prostaking.com:8000
+address = "69.2.39.168:8000"
+record_seq_num = 0
+name_record_sig = "a2c6db370d615546bd067a4bc8c93c5785d29335ad909ee822ac9149813c75140d5f6a4b265d5e60b91b7b157b999ba92d919bdbd25b004008fa1772c38f37ee01"
 secp256k1_pubkey = "02fd8f3eba7e264af524fedfc6dc88a8db00fcd088e0b45719d760eaf13dc1db46"
 [[bootstrap.peers]]
-address = "monad.huginn.tech:8000"
+# monad.huginn.tech:8000
+address = "38.46.222.106:8000"
+record_seq_num = 0
+name_record_sig = "61f63fbd6feb9f07b86e3f4123620a6dad47e4c9003db2aed57d9b1fb7610c8d1dae05de91df9cc8eca91c4f1f24d0ab8d05dec080fcd1caf3745c228b07476501"
 secp256k1_pubkey = "03f06b48c64660f17c13cd8b9ef08bcfcd92994b945878a0e077803b46b10d9354"
 [[bootstrap.peers]]
-address = "monad-testnet2.polkachu.com:8000"
+# monad-testnet2.polkachu.com:8000
+address = "136.243.36.60:8000"
+record_seq_num = 0
+name_record_sig = "ea6b1fe2eb4d4a7be0ea1cf1a9cb0535d1730ab9f587831eac04f2ff450443f002f63ac2bcb8a75e5c058936e9a3c1cee15441b08db59358351465b0ffa9111200"
 secp256k1_pubkey = "0315c73ec88d73e89c1c05f56cb901643a504b39e4641c58942da8c8663f7eb6fd"
 [[bootstrap.peers]]
-address = "testnet.monad.spectrumstaking.net:8000"
+# testnet.monad.spectrumstaking.net:8000
+address = "46.229.233.175:8000"
+record_seq_num = 0
+name_record_sig = "25d7eff7edfea75ea419ec7b242c1ae042f21601fd116b384ba09861350c1e9d42b54af62a8054b5296d36438d56d3ebc36a8be2857f6c21cb38c2bc3e0c3d9500"
 secp256k1_pubkey = "03b6188b8f36867add957012df06fee355a08bb827b4360970fba759f4c2908fbc"
 [[bootstrap.peers]]
-address = "testnet.monad.hoodrun.io:8000"
+# testnet.monad.hoodrun.io:8000
+address = "38.97.61.149:8000"
+record_seq_num = 0
+name_record_sig = "52322f27ddf43120afe60ac59ee4519beb001a82a11d3d56cafb1d873ced66261b0e8259e68e474503d8c9281df7c7127388468f94bce8c1be32e5c264a0e25000"
 secp256k1_pubkey = "026a956a6e71f8fa0f87c5b479072229fe8b2c03d5cb2391a607d905e085aab646"
 [[bootstrap.peers]]
-address = "monad.testnet.nodes.guru:8000"
+# monad.testnet.nodes.guru:8000
+address = "67.213.118.173:8000"
+record_seq_num = 0
+name_record_sig = "3e6278279891dab91267d2bc3dec12e8e25918f7816bb248100d8c03b90eb31c0da3f394b3fdd8b26e63aa8dd0112d9d562c16987b9a0db093e010a04695642700"
 secp256k1_pubkey = "0272a4220a736434ce989dc5f8e77647644297c6c084d61c482970f9ae1adb673b"
 [[bootstrap.peers]]
-address = "monad-testnet.redundex.com:8000"
+# monad-testnet.redundex.com:8000
+address = "103.106.58.141:8000"
+record_seq_num = 0
+name_record_sig = "ed21041f2b4cebaed980c912207e60b2b97caab41455ec8472127f8101852ec8071d7e7bbc6a926c0b4ce04c1fe92d630d90d6c199bc9f61ba80cf8ae78bbf4000"
 secp256k1_pubkey = "02fa39b02c56cc4503c0ebd8b58bcaa8eec7519bfdd554273436fc2094c9bde4a2"
 [[bootstrap.peers]]
-address = "monad-testnet-2.tienthuattoan.com:8000"
+# monad-testnet-2.tienthuattoan.com:8000
+address = "194.48.168.4:8000"
+record_seq_num = 0
+name_record_sig = "e8f31d06dbd2231e1fe61fa83565c61cc0048d24793116234c2ec929c9d6c48c50e5a8f106d6e1a65b1a62d49af952147a6a31c088bb971d78d777aa1adb569700"
 secp256k1_pubkey = "0343c17773eb0dfe497d3a137e395c645c97270c36e42241e2c463fc63691102ad"
 [[bootstrap.peers]]
-address = "monad.testnet.nodestake.org:8000"
+# monad.testnet.nodestake.org:8000
+address = "195.3.221.60:8000"
+record_seq_num = 0
+name_record_sig = "3cb9ba17e6f1eaab4d1de0002089d545c7884c392fccf4db5895b407ae9f33000dc90466a2e7ce0418ffd3ca0aed5b299b72ea1a421c066e1356ce3e8e72491401"
 secp256k1_pubkey = "03028d2c03fe514d12fe23e830f01ecfb739ab90980c7b3ef3eee983f49f238c3c"
 [[bootstrap.peers]]
-address = "monad.pathrocknetwork.org:8000"
+# monad.pathrocknetwork.org:8000
+address = "103.66.180.63:8000"
+record_seq_num = 0
+name_record_sig = "20a8433eff1cf5156bc16123e6954bcae59a63dc595e294aea62c95ac4b44a2c5284d32ca7d773d5b885af723adf8a98e73cedb655f4782b87e14eadef0d55e400"
 secp256k1_pubkey = "02d1cfdd9907c6820a470bad35e4d3b73abb33976357734f9e77ae6e712bfa72d6"
 [[bootstrap.peers]]
-address = "monad-testnet.f5nodes.com:8000"
+# monad-testnet.f5nodes.com:8000
+address = "103.106.58.139:8000"
+record_seq_num = 0
+name_record_sig = "25339a32d453ec0665639f73e9086335fcc05695aad739ed69137e0446f8cf807a65e3d5d15eddc931928c350d3ac65a9a14aad50fec272f9822732c39f1291601"
 secp256k1_pubkey = "031135e00695028f5ee04d157cb9569c53b43ea2109933c780b8923afbc342df2c"
 [[bootstrap.peers]]
-address = "monad-testnet.kgdrpc.com:8000"
+# monad-testnet.kgdrpc.com:8000
+address = "95.217.139.60:8000"
+record_seq_num = 0
+name_record_sig = "5a9fa141cc6ff743e8a0fc613a55585c1020ded89879db2b6e082556acc46b3403968fc5771a9ce58cd3fd05ccc16d08dca1b1af166c3f2d777d4832442ef75d00"
 secp256k1_pubkey = "02d5c7c8c48a9b430ff739fcfd0674128ad6520d1139e4709d5d5e7d6bf402cc2f"
 [[bootstrap.peers]]
-address = "monad.testnet.syncnode.ro:8000"
+# monad.testnet.syncnode.ro:8000
+address = "89.42.231.201:8000"
+record_seq_num = 0
+name_record_sig = "e1b02b14ae0fe848001c885f254fd7cc8028b170a435acbb6401e93dc338c68a623f85bb98103095d4f091ed1c48c2fede3a2212217d64d7326c8f29c9a3b9f601"
 secp256k1_pubkey = "021e11037ac116a922946d55372b75f4bc27a21f2271fd13ebe72c91c60749e847"
 [[bootstrap.peers]]
-address = "monad-testnet-2.contributiondao.com:8000"
+# monad-testnet-2.contributiondao.com:8000
+address = "103.66.181.254:8000"
+record_seq_num = 0
+name_record_sig = "81c08e59740209183b99eac870fff73f3342ac72e1733cc77a2b05cae0c6e1824c2246c964f21078aed656dfff403c07871afa99f3e6f371429ac8510a8c1aa501"
 secp256k1_pubkey = "0357811bf4c4f37274feb969077df3d3c4a550bc3363d0acaf0f1dbffbc334a106"
 [[bootstrap.peers]]
-address = "monad-testnet-2.envoys.cloud:8000"
+# monad-testnet-2.envoys.cloud:8000
+address = "185.189.45.220:8000"
+record_seq_num = 0
+name_record_sig = "e9a9378775f595c4641f77d66ae36a838333eefe38961244fd71b956f5c6c07b7c86998242810f06d597bd661d4d1c2a1a5fb42fd961e160563e9099b2807c2800"
 secp256k1_pubkey = "0358a4a0a6580afcf6acac164d23ea10aeb57f5cff6f29b79cec859a2cdc003a5b"
 [[bootstrap.peers]]
-address = "monad-testnet.validatrium.club:8000"
+# monad-testnet.validatrium.club:8000
+address = "77.244.252.229:8000"
+record_seq_num = 0
+name_record_sig = "5b689ba567b957754809a2b6e7973fda7526d0aa7c655352cc30627ab2b0db502d471c5f236afc784e6b2c9a827b1caea40d9fdf2abcca4110f467bbb88d164801"
 secp256k1_pubkey = "023832733e58e4254b9be31874e24e291b50abb5e0faa7840938deb93575bd15b0"
 [[bootstrap.peers]]
-address = "monad-testnet2.everstake.one:8000"
+# monad-testnet2.everstake.one:8000
+address = "51.68.25.46:8000"
+record_seq_num = 0
+name_record_sig = "9a3bbd715e70a9c1bf5c1c0f89d782c17b995ebeae36a37e6ec22de11c9ea8595ee9ebe0126f582ede7a7acac4b420103b98f233eba717ff8ac8e112b188617001"
 secp256k1_pubkey = "029a31685d1cfb6325d21e988a3a6ed353f1ea733b47f9ba2979ef472dcf102862"
 [[bootstrap.peers]]
-address = "monad.pn.test.fcstech.de:8000"
+# monad.pn.test.fcstech.de:8000
+address = "51.68.54.226:8000"
+record_seq_num = 0
+name_record_sig = "2d3fa9a3211e26dc4150ba3bc8fecc449ba3fbe0c79a7d299cf8f3cc60cffcac435a3cd232b34dce164d3ea91a9b7969af06027a8b059b0e3885d773385e960600"
 secp256k1_pubkey = "022ae622d05921e8a707420848d580902b37441f561a600fedde8b91c0d2e9d9e8"
 [[bootstrap.peers]]
-address = "monad-testnet.nocturnallabs.org:8000"
+# monad-testnet.nocturnallabs.org:8000
+address = "84.32.103.149:8000"
+record_seq_num = 0
+name_record_sig = "4ffb172518a708d4f8e20b089c4b962c5c4a4c0256a9f332fe34fa888e2b309d47629ce363e390ffedc7eea7d03fa8bedda09f3ed173687d6e91b08db134279400"
 secp256k1_pubkey = "02f9e8e1e6d162c59b61cce7636f73a892d3305dbaaacb33e94ea8b51dde7dedef"
 [[bootstrap.peers]]
-address = "swyke-monad-test-00-0.machine.restake.tech:8000"
+# swyke-monad-test-00-0.machine.restake.tech:8000
+address = "109.94.99.109:8000"
+record_seq_num = 0
+name_record_sig = "c709756f6979c54469ccb9082c810f6adb279b8bfa52496a28d9a0f8a4e05613079358d0e57b570a69361832bf09ca126bc08857cdf6bea9beb538c1e714e33d00"
 secp256k1_pubkey = "039c29326c5334b1e903ac72c00704a7039438b8ae9cb97f869a6ca41b935f87fd"
 [[bootstrap.peers]]
-address = "monad-testnet.twinstake.io:8000"
+# monad-testnet.twinstake.io:8000
+address = "64.130.52.219:8000"
+record_seq_num = 0
+name_record_sig = "b8bf22c2253a3aaaa37ed0c3066325b2420e4c4fc3086a9a91a2f3c3f0493db14ddb544e0b19d07449d3d7a62135494fe59f5b280cfb9b3cc62c6c0ac819e94800"
 secp256k1_pubkey = "034128a922a420205beb75034f408cb73d79c1eb405573ababdad8835eb2f86ccd"
 [[bootstrap.peers]]
-address = "monad-testnet.stakecito.com:8000"
+# monad-testnet.stakecito.com:8000
+address = "91.227.33.163:8000"
+record_seq_num = 0
+name_record_sig = "4e4c6870306626978e9eda079aa9cf880c4884fe56cba9eafdb603516737a0d15e7d437c922b7fb5b089d0324040704f42260a052158d3b5c7037738b8962b8e00"
 secp256k1_pubkey = "02075687acef593a5d780c174ec3391391767992e0ea9b0849653572720ceef75e"
 [[bootstrap.peers]]
-address = "monad-t.noders.services:8000"
+# monad-t.noders.services:8000
+address = "64.176.19.235:8000"
+record_seq_num = 0
+name_record_sig = "db37a4a90b733adfa0cfcf23c0e37f9fb2b8868f8e3198da1db7a4cb4137807442de50671f2dc6ad7b35d8987acec4a6b35cf1ee796cd098f3137f79d353206a01"
 secp256k1_pubkey = "02ca2e3ba30d6afca3863e07da26da83627704d21c1ae0cbd3e66442ca6390055b"
 [[bootstrap.peers]]
-address = "vn.testnet2.monad.despreadlabs.io:8000"
+# vn.testnet2.monad.despreadlabs.io:8000
+address = "57.128.230.25:8000"
+record_seq_num = 0
+name_record_sig = "feba850d3d5e216cd7e9299def347ddaa6ad49b18b6cbf38b64a9611e1476eda5c8bf86b5c60db0c54e7beae97f96e898628bf2a8ad85db0d721584089356a0001"
 secp256k1_pubkey = "0254dbed1b5751d0ccf2bfeeb4b7f6993c90fd1b8fdafee9a6a7557187dacdad92"
 [[bootstrap.peers]]
-address = "t2v.monad.blockhunters.services:8000"
+# t2v.monad.blockhunters.services:8000
+address = "185.235.78.218:8000"
+record_seq_num = 0
+name_record_sig = "a8c114fdfe8ad65a018210ae4f65b489a4ea0fb235776d98f373cf53206a2ba81469b98a6d622e1ad48cb4a8e7fdbc20d31a977507c3a32a005bcb40ea818a1200"
 secp256k1_pubkey = "023b7c9ffc0807adac9ae13004c0e8a07dd9d3fc69d9dfb31eb6458722ce1744f3"
 [[bootstrap.peers]]
-address = "monad-testnet-2.informalsystems.io:8000"
+# monad-testnet-2.informalsystems.io:8000
+address = "103.106.58.145:8000"
+record_seq_num = 0
+name_record_sig = "7e989d352e4ac43b67281404706f36502827dab02c65c4968a3bb15a9743933a046eedde4bdf8b9766af4e6fbab4fce2ec04c8d2dfac50ea1add0780739c84d900"
 secp256k1_pubkey = "034a8642d45a0efa8eff75fec0b7b31c92049a140cc3b36ca74af19c114c54bd38"
 [[bootstrap.peers]]
-address = "monad-testnet.watercoolerstudios.io:8000"
+# monad-testnet.watercoolerstudios.io:8000
+address = "67.213.118.27:8000"
+record_seq_num = 0
+name_record_sig = "444e04044342143e26becfa88265c8d860cbd73180da3b8312a76fee422a7419495154a871b1348a8e6169acaa2e0e06cff96dfc1b556eb82a29df5ae004ca2100"
 secp256k1_pubkey = "0216da22291d45581deac9eb01cea94eefe570f14b97d13105fbbf674ac336e394"
 [[bootstrap.peers]]
-address = "monad-testnet.mcf.rocks:8000"
+# monad-testnet.mcf.rocks:8000
+address = "148.251.236.15:8000"
+record_seq_num = 0
+name_record_sig = "658012ec5ac5027ea0d44ed73a1449f07534cdf3cbe60d96c06804a1c18ce8b6731d68f879e2ad24325b173fcf8e1b4bebf025a55a1554996403e35b48836cd800"
 secp256k1_pubkey = "02acf0b145102e64e93939b3ee904f8df50d87acc2252d8d49c24285b49b42c33b"
 [[bootstrap.peers]]
-address = "monad-testnet.itrocket.net:8000"
+# monad-testnet.itrocket.net:8000
+address = "65.108.4.146:8000"
+record_seq_num = 0
+name_record_sig = "31114680ccda335692205e5c15f9811d8d0a2f595111f5521c2d9fe7279986fe25e76e48453f68365f56b0871161a1fdeab20fd1043978f6ef499f3788fb962000"
 secp256k1_pubkey = "02d6c98d32d0a1846661f904b0747245993b9fb7d338de9b6ec27fbf8bb74a9fe0"
 [[bootstrap.peers]]
-address = "monad-testnet2-validator.nodeinfra.com:8000"
+# monad-testnet2-validator.nodeinfra.com:8000
+address = "103.106.58.143:8000"
+record_seq_num = 0
+name_record_sig = "15ed5e0ba00efa155946e24b9c4f1087ff0c992e4833f296c1d98104e8dab45f1c8db3e8bf4110ac21ad8858410a6680e1be78784c108e6c8247b1d41f425c3f01"
 secp256k1_pubkey = "036d75ac08e11b7ed37ddc78fc0217158c75a68c43dc3b772e6fd8ef1195d75b41"
 [[bootstrap.peers]]
-address = "monad.staking.banansen.dev:8000"
+# monad.staking.banansen.dev:8000
+address = "51.161.174.109:8000"
+record_seq_num = 0
+name_record_sig = "5cad330f83e8ae0891f1faf8364c5bfa98430748d685d28891c5c6e8f835f8a270b70040f2caa4387c9efeaa12f1dbd2eea6d8b0a05a41bef2f65784863e3b5301"
 secp256k1_pubkey = "032e8b5fa3202080faebe96b19ad681e226976301f7c78b980b400537e67211c54"
 [[bootstrap.peers]]
-address = "validator.monad.testnet-v2.cosmostation.io:8000"
+# validator.monad.testnet-v2.cosmostation.io:8000
+address = "84.32.103.143:8000"
+record_seq_num = 0
+name_record_sig = "5416a090f622399fc7f6b1387d8065e44ce70bf3521e80458b5e878153170ea41bd3269bdf3323ab0bcebfee02895cdf57282c045e618437cd8d815408098e3501"
 secp256k1_pubkey = "020fccf0e7a46a4b05c39f5b1340ce45ba95623f4a717de138724c31ae71c4a569"
 [[bootstrap.peers]]
-address = "t-vl-monad-syd-1.piertwo.io:8000"
+# t-vl-monad-syd-1.piertwo.io:8000
+address = "15.204.107.142:8000"
+record_seq_num = 0
+name_record_sig = "75329459e55c7c87f44a093de18a1e96407ea5ef4d822fd566b5d5e8e004df523590fa99b546ee9901704488bac9f71575926de5aead6cef12adac18fe93e78b00"
 secp256k1_pubkey = "03983a2422dec6a82f8e24bdad9dbffac3b0f2efab0ec53b96323754c258412c03"
 [[bootstrap.peers]]
-address = "monad.eks-us-west-2-utility.staging.staked.cloud:8000"
+# monad.eks-us-west-2-utility.staging.staked.cloud:8000
+address = "139.178.72.17:8000"
+record_seq_num = 0
+name_record_sig = "e0b4f867b6f3a1720891eebc9d0ed3f2444c3448031cebc5db88fe41eb34417a222d780b432e1c5da128e7b7390dd5af3ebc1af408b73724aa8899e230a15b4301"
 secp256k1_pubkey = "03ada8fc230477bf07a88a8defb3c36c0f640fe3c5018d3bc55113292e0f9cba63"
 [[bootstrap.peers]]
-address = "monad-testnet-2.alt.technology:8000"
+# monad-testnet-2.alt.technology:8000
+address = "37.27.123.171:8000"
+record_seq_num = 0
+name_record_sig = "ce5a2de051b39c64df70260815fd10550660cb0e5c42c668d30791fe730f2eaf775e8793e7a6cc8b95676f63158aaf32e6d68887a8c8d3a81f7cc104503c1b2100"
 secp256k1_pubkey = "03c52a39e091aaa6b46286a1574d81034d80fa5cb90a10acac9cf4c5b394a42b1a"
 [[bootstrap.peers]]
-address = "testnet-monad.1xp.vc:8000"
+# testnet-monad.1xp.vc:8000
+address = "45.139.133.136:8000"
+record_seq_num = 0
+name_record_sig = "fa94179ee169af7345f9e668fba03d1c52666e344a3a779f10f2b3e48719fa91261a3c1ac636fad3d5d65de86d95993ef0c8ce6dff57d4f023cef8f54249e19001"
 secp256k1_pubkey = "03cde76a3f03afca6bb1869386078883ede0f4ef6c3e3cde9610864b0ea47c08e1"
 [[bootstrap.peers]]
-address = "monad-testnet2.rockx.com:8000"
+# monad-testnet2.rockx.com:8000
+address = "15.235.117.252:8000"
+record_seq_num = 0
+name_record_sig = "9fb85bdcd4669f2b46d39ee6f8b741fbe3cbdedcd2b8ca3158fde91b36a0f8bb5d4fdd62ca76162be1abd33e4fe422dfae39f1a3e71e25f528f7702036c745cf00"
 secp256k1_pubkey = "0386679534ca32cd23bb6da88fdaa95b0da16a82273c8e067e1e39bf9310427fc9"
 [[bootstrap.peers]]
-address = "monad-testnet.originstake.com:8000"
+# monad-testnet.originstake.com:8000
+address = "109.94.99.127:8000"
+record_seq_num = 0
+name_record_sig = "52df7a5178b7e5b2bf6a6562fa9f7bcb959e72dea385ad8d9b94e05acb598c8a6b99935d8bbe57da9932c493303fd0d9e0a7ac6d2d5baf7a9d987ab628b1d72800"
 secp256k1_pubkey = "02475f6b0f29e0a440a22fac4c82adbbd101eca81dfeba45aff40fda6b8455930b"
 [[bootstrap.peers]]
-address = "monad-testnet-2.chainup.net:8000"
+# monad-testnet-2.chainup.net:8000
+address = "51.161.218.103:8000"
+record_seq_num = 0
+name_record_sig = "1b37de9d339261c6a72a7f5e05c5a94128b941dbc08994830ef3e01e0467c2600a83cbea873be348f7474d207f6863c908b273b4781674b589dc861a72fd717601"
 secp256k1_pubkey = "027929d33a6e7bc170adc7b35740423399cb293e98b7ee26a7af714d1da205fa9e"
 [[bootstrap.peers]]
-address = "monad-testnet-2.chorus.one:8000"
+# monad-testnet-2.chorus.one:8000
+address = "84.32.103.171:8000"
+record_seq_num = 0
+name_record_sig = "dc77bfd836d898a8b8082661f4955f8baecc8ae484f7a85ee3b0406abb3be6774feb8d1133a33abbba7f79a6563fe13f0739a8081ec7edb2e06caeeb0d3802a700"
 secp256k1_pubkey = "034bb34d2bb4c08fbd7f715b3e80bd41fb270dbc0f84ce929353dc99cc6c1bc594"
 [[bootstrap.peers]]
-address = "monad.vldtr.xyz:8000"
+# monad.vldtr.xyz:8000
+address = "185.86.105.90:8000"
+record_seq_num = 0
+name_record_sig = "6444eecb8fa0e49fd5056310243157f83671676d925188515488dcd5bdbee6807fa4111ea3b884e58843ef72197fafb764954380f17d2e7bd706c3dc3aa81f5400"
 secp256k1_pubkey = "03fa1a87672f5c303b637592b81d5a9cb0900403c17228698839b093f0b8713e92"
+# [[bootstrap.peers]]
+# address = "monad.testnet.gattaca.com:8000"
+# secp256k1_pubkey = "0359b04841730630b9f9a9f473ca67ce046cdb01c2feb15017cb8be9ad4d448e04"
 [[bootstrap.peers]]
-address = "monad.testnet.gattaca.com:8000"
-secp256k1_pubkey = "0359b04841730630b9f9a9f473ca67ce046cdb01c2feb15017cb8be9ad4d448e04"
-[[bootstrap.peers]]
-address = "monad-testnet-kairos.firstset.xyz:8000"
+# monad-testnet-kairos.firstset.xyz:8000
+address = "51.161.174.97:8000"
+record_seq_num = 0
+name_record_sig = "9b9ab7cd29facdd9c3eb9085dcf6827780a18df4dd85950e25cce248ae73e98d775178870f832c8b30f354ed84d1fe3f416705a6ca21a71d7c0c16a61bfc891a01"
 secp256k1_pubkey = "038b71ef866be06ec268a49def4f46546ca9a00d369cb0951cce7a4c9003afefaf"
 [[bootstrap.peers]]
-address = "monad-testnet-parsec.firstset.xyz:8000"
+# monad-testnet-parsec.firstset.xyz:8000
+address = "173.201.36.91:8000"
+record_seq_num = 0
+name_record_sig = "d31260869cb301a2e4d632d6c2d6cefa688d2f20be0409fdf10ffb23e1ccaf8b0edabf8c51c9797ba1f7673ff222146f3e97d816eb7053cc12c1a6ce88ece88001"
 secp256k1_pubkey = "022bd883feea64dc37b709127340f447d82a45da3b5135b959c7f0ff4d03dddc5e"
 [[bootstrap.peers]]
-address = "testnet2-monad.stakingfacilities.com:18000"
+# testnet2-monad.stakingfacilities.com:18000
+address = "94.158.242.140:18000"
+record_seq_num = 0
+name_record_sig = "744368c29712059d26463585f76c0d149d2570b4de6993d8e924900015c3ba5f0ff33a42773c620aed25e1c19fec0159de9d7786771854ad7ee6baa1a66fd76f01"
 secp256k1_pubkey = "03d2703527d54c778e203f44c3ddb3aa81a161bd6316a75306a63cdc16b70ccf65"
 [[bootstrap.peers]]
-address = "monad.testnet.grassets.tech:8000"
+# monad.testnet.grassets.tech:8000
+address = "134.119.187.253:8000"
+record_seq_num = 0
+name_record_sig = "345446e696cf2b083acca7bb528d72b557d59357694d25cf0b88d2244e318b927940abfeb85d03b37201037835e8ebf425d0f617f4f7aa17f3ff245f005b3f8100"
 secp256k1_pubkey = "0347eed30d544b688caa2983831d8ea8a1d563693bc09a775155196040ba392005"
 [[bootstrap.peers]]
-address = "validator.monad.testnet.encapsulate.xyz:8000"
+# validator.monad.testnet.encapsulate.xyz:8000
+address = "148.113.49.86:8000"
+record_seq_num = 0
+name_record_sig = "3bb67113503f698a1f43a0d935b0b8507a3ae5973d024934ee01717374afae4223826246e0d50208931958ac62bd15f23b117a045fc275a9806718ef3bcb309201"
 secp256k1_pubkey = "026795b9d2e300a87e5e36c00933ea20274eaab2575b361018bc38084a348b2e8b"
 [[bootstrap.peers]]
-address = "monad-testnet.blockcat.tech:8000"
+# monad-testnet.blockcat.tech:8000
+address = "91.134.41.20:8000"
+record_seq_num = 0
+name_record_sig = "8e410db896e1f5ba77568bf16290cdecedef878294b78ddc2e8febd8ef0bf2da3b34f5da70c37a3b8ef208b708c1115abd077b0b9f7810c642d83b262639288001"
 secp256k1_pubkey = "026d1ca45da1f5b3391da77a61ceadae3de52e2c405565a9744ad3abb8245c8967"
 [[bootstrap.peers]]
-address = "monad-testnet2.tryghost.xyz:8000"
+# monad-testnet2.tryghost.xyz:8000
+address = "148.251.40.232:8000"
+record_seq_num = 0
+name_record_sig = "0da565cf614b5f28170f58abae312ef624a1d1ebcc732bbb9493954fa78be9093e9af450ada9d53e9eb841be0828cdf33865ca7cc63ae8f02cccbbfd553592ff00"
 secp256k1_pubkey = "023780d7010a70d0b86d47d0f5e0134ea7517b8959ea228efc280fccbceba4e45e"
 [[bootstrap.peers]]
-address = "monad-testnet2.moonlet.cloud:8000"
+# monad-testnet2.moonlet.cloud:8000
+address = "103.50.32.93:8000"
+record_seq_num = 0
+name_record_sig = "797cbdacc7dd76ecc874cf2bf86b436d87a5c62cef6c717ccdd1a914c29ec0b665060646887f976fe4ddcc01fec2e81662d78dea61e0c79d96d99636315cbfa900"
 secp256k1_pubkey = "0209eb0273f38dd7c50f87c230b796d8c3c7e3f4253fe5f13ec3a4ad8b28fea006"
 [[bootstrap.peers]]
-address = "monad-testnet.chainlayer.network:8000"
+# monad-testnet.chainlayer.network:8000
+address = "86.111.48.31:8000"
+record_seq_num = 0
+name_record_sig = "3cb99a513715e71803d09d685ee6ca4d896ce51b6240bef933aed67e4edb998418b39c0f717862ca461dc142d1297a5a0c9d0e694de6e2675c9da51cfa33312501"
 secp256k1_pubkey = "0263f7a6ad4e9454d9cd15740a449ed747da2a8f2ff78e6a85a7daecb1ea520e0d"
 [[bootstrap.peers]]
-address = "minotaur.node.monster:8000"
+# minotaur.node.monster:8000
+address = "57.129.97.32:8000"
+record_seq_num = 0
+name_record_sig = "1b18d613b0c66f10ceb72803debae05026e2c16f0c88c02bd6ec62fe78ed092f35b9e061cc00cb6f57d76909d109b4c64607e8949b5ca3c1c4cc3e20073f580800"
 secp256k1_pubkey = "02168632a935f2d0a201f71f4276fd06eab3d821ae59c909251f864dd6bff2656a"
 [[bootstrap.peers]]
-address = "monad-testnet.senseinode.com:8000"
+# monad-testnet.senseinode.com:8000
+address = "162.19.232.227:8000"
+record_seq_num = 0
+name_record_sig = "3f1b919c81e9f84df48799f6ede945b049e2fdca404894d31f8cc447fcc98eab1199210d7e2e2b2cb4b8865e54a39a09097216d7057af4a9d49d5d81f9c34dc700"
 secp256k1_pubkey = "038d6f48a936f20a2458f135f54323bcf7a94baf2a7b3b44afed51b3dce1d9f45e"
 [[bootstrap.peers]]
-address = "monad.testnet.blockscape.network:8000"
+# monad.testnet.blockscape.network:8000
+address = "51.161.174.99:8000"
+record_seq_num = 0
+name_record_sig = "f3924867bcec88d53d466874e09ba492d4db7944dc344acc6925a35ed3ce4c6e1b63ad856b69682d8c0b1e3aec7083b7f6e8b7dfc0687c5b27995248f2657c2d01"
 secp256k1_pubkey = "02d2975fc87513f46aa85e92b2a4643bc3581bd9839b2c4ac1d8b797a44619a003"
 [[bootstrap.peers]]
-address = "monad.testnet.dteam.tech:8000"
+# monad.testnet.dteam.tech:8000
+address = "103.106.58.137:8000"
+record_seq_num = 0
+name_record_sig = "264668e040b92b7108b3e42ea2be2805610d417ebf95f32a9c970693446ce72f4bf664ca68ada95689854bcd9d644889abbec806d9046470821a06cd73cc8f4d00"
 secp256k1_pubkey = "02ba7d03b0fc23f4db9b9d173980e327d65ea1a1391e1ee5513196a64ce5bc7eef"
 [[bootstrap.peers]]
-address = "monad.testnet.go2pro.xyz:8000"
+# monad.testnet.go2pro.xyz:8000
+address = "85.10.194.60:8000"
+record_seq_num = 0
+name_record_sig = "915cf9724a9b926fa56874fa12c2b37a15d5552b25230661083840be7c466c7e7b3f1a570cfaf61e35410044f4dd82eaf13efd6b66204cac8e3324c92150d3d201"
 secp256k1_pubkey = "0333238933576cbe37e9d51d9424468c63bc150bdf182a555ab5dd3aab6bd7c855"
 [[bootstrap.peers]]
-address = "monad-testnet.l0vd.com:8000"
+# monad-testnet.l0vd.com:8000
+address = "91.189.178.22:8000"
+record_seq_num = 0
+name_record_sig = "bd9fc6799f71e097d23ed8f86a75659ed043003f7993d6de23eba1d74e3b6eed132db320b8c2c87d864514742e0c6beb9ccce14dbb128cda51b869a1ed38da0001"
 secp256k1_pubkey = "02ff5e66c23920a3d1cabed25c2ae213276ecd756edb92c465070657fc04a634cf"
 [[bootstrap.peers]]
-address = "monad-testnet.fountainhead.land:8000"
+# monad-testnet.fountainhead.land:8000
+address = "46.203.222.3:8000"
+record_seq_num = 0
+name_record_sig = "d1c9f28165939583f657558a4b464c2b1e807a284fcd5ea0186c0aa931dc03992e22b88f403e431164d60477ea236151ef58e8fe604ce2c9937c77ddbdb53cd700"
 secp256k1_pubkey = "02c9915d397e9bc3f1d3d880b76a60e17a1e50d907ab66bd46b324cd8a7e0b0779"
 [[bootstrap.peers]]
-address = "monad.testnet.stakeme.pro:8000"
+# monad.testnet.stakeme.pro:8000
+address = "37.9.15.79:8000"
+record_seq_num = 0
+name_record_sig = "36cb31fe3a3ca0daa5df55046efaf58eb1813de7b696a91d1e34674bc5321bdf15c1c812822da4a7ea5908705bb26bc3505090617b7baa0765c8f120f77f21a400"
 secp256k1_pubkey = "02c99fd296486c8937ae25af0a91eb9b241d05473858e9c67f59af4faafed0c128"
+# [[bootstrap.peers]]
+# address = "monad.testnetv2.infstones.io:8000"
+# secp256k1_pubkey = "037c8f905181bfc7b21afdaa9cd4799b5ae15ba89fcbd37cb312196918fdea41ce"
 [[bootstrap.peers]]
-address = "monad.testnetv2.infstones.io:8000"
-secp256k1_pubkey = "037c8f905181bfc7b21afdaa9cd4799b5ae15ba89fcbd37cb312196918fdea41ce"
-[[bootstrap.peers]]
-address = "monad.testnet.crouton.digital:8000"
+# monad.testnet.crouton.digital:8000
+address = "77.244.252.227:8000"
+record_seq_num = 0
+name_record_sig = "1419980cef1277eaa7d974f582734a7e6d4053c685c0ff398cc61f1bfc3822c277fe0b73d36e4630ccb22edec4f6d83e75c47910490e7c9609aa28e21fd92f2000"
 secp256k1_pubkey = "0286ccf714034347c057d59da42e1b7aa05f89b615065a9219914180ae49af4249"
 [[bootstrap.peers]]
-address = "monad-testnet-2.stakeus.xyz:8000"
+# monad-testnet-2.stakeus.xyz:8000
+address = "197.85.190.15:8000"
+record_seq_num = 0
+name_record_sig = "4abc2408d71d5fd58c3975607eb1c43b7c6cd7cc70251a03555d8f5f00a38b8d5c1c1d7bc78fa5a87ddaba54ab973e114c8761355b67087d85fa5601f70a8c9f01"
 secp256k1_pubkey = "035e38610c9be564f7711b54d9d74635c1af2fc088f95a157502886ac2926bbede"
 [[bootstrap.peers]]
-address = "monad-testnet.val.kjnodes.com:8000"
+# monad-testnet.val.kjnodes.com:8000
+address = "51.161.218.62:8000"
+record_seq_num = 0
+name_record_sig = "de93763ab28ac06248fe348134e56152bfcb7aad84906a7c0548cba2114e3a8e29b3d5aeb53948ac538bf54263c3534c85c041826e06a22af5a66868d115609101"
 secp256k1_pubkey = "02bee916ef03eedd9d11321bfa5a8548eba96b04a66849b9c09ee883d84fa6f558"
 [[bootstrap.peers]]
-address = "monad-testnet-validator.staketab.com:8000"
+# monad-testnet-validator.staketab.com:8000
+address = "148.113.220.216:8000"
+record_seq_num = 0
+name_record_sig = "f645301769c7f35f9d9743360279575d64928c8811cd34305d9db786d2b78d017167c57823cde252718818c81968d5adc57d5d44bfc8b026e5895af1cc1b9c3201"
 secp256k1_pubkey = "0358c3e816ffd01a98f708a49d0d51770464dbd2a4d56886d4a099d712dd0adb14"
 [[bootstrap.peers]]
-address = "testnet-monad-2.lavenderfive.com:8000"
+# testnet-monad-2.lavenderfive.com:8000
+address = "135.181.229.113:8000"
+record_seq_num = 0
+name_record_sig = "22a9d4537498513758f6ec4a36e5f1a998043bc6e0de5aa6b84eec1e92b13e244a86411d0f247d0de8cd9b966868b329fbf3eece9238e5d5b614b8977789848b01"
 secp256k1_pubkey = "036bb6fa1e60c4f701f1d435c6ec8d3227f59c8985c765dd1eea58ef6fb4098832"
 [[bootstrap.peers]]
-address = "val.tn2.monad.flipside.services:8000"
+# val.tn2.monad.flipside.services:8000
+address = "46.105.222.171:8000"
+record_seq_num = 0
+name_record_sig = "cd5e06e201336349c339e5ebeed7c48e5d42f66ac610bc8114135a0327b493ae4c6873c0d0bb7e38a2bd7f4526d9eea8aa8ef13d6dd832fdc16f5e2f64044c9c01"
 secp256k1_pubkey = "03e47f4ec67fa9d612924e36baf92c9ac73f44765d157a8ec7ed2f50791d96a623"
 [[bootstrap.peers]]
-address = "monad.testnet.0xmakase.co.jp:8000"
+# monad.testnet.0xmakase.co.jp:8000
+address = "103.66.180.175:8000"
+record_seq_num = 0
+name_record_sig = "e177081548c126239c4afb909cc8742a582854e662385c2161501c46b30cc14341343ca016b0afd9e6ef76b218bd6ed2f23e8dbb462c0918651b6fa3983a8f2f00"
 secp256k1_pubkey = "039ea7e9beefe5045e285c01544fc00c6b7dcf91ec35a447cd2682aeb6a61c5284"
 [[bootstrap.peers]]
-address = "monad-testnet.cosmosspaces.zone:8000"
+# monad-testnet.cosmosspaces.zone:8000
+address = "23.88.1.42:8000"
+record_seq_num = 0
+name_record_sig = "bd64018220ed2739c74a6d7f0bf805cc1fc2d176687aeeea1e8e738f8d86d43b62a99f20c94fdc50131fca219a6920755ef9e12fe0787cb9a886231bec1bdc3401"
 secp256k1_pubkey = "028ae084e493a752c26e8f10d5e337252eae72ae21103817bea2ce3d65f7c02d65"
 [[bootstrap.peers]]
-address = "monad-testnet-validator.zellic.net:8000"
+# monad-testnet-validator.zellic.net:8000
+address = "37.27.57.208:8000"
+record_seq_num = 0
+name_record_sig = "5a38ccfdd417a32b38e0afcbf4c06620e4c77104efd6bdc63dd7dfa54f1f2d044ec4ad65ae3d40186fa088041fa9e762d041446afe9949cb9c41a9ec03c489aa01"
 secp256k1_pubkey = "03ebd5d066676546cb515d5311da96831b2aaa19d7c39ea575908f492abbc75c26"
+# [[bootstrap.peers]]
+# address = "monad-testnet.unityfarms.cloud:8000"
+# secp256k1_pubkey = "02965541bcf8ff7cd811d0410719ba4948ec6bf32db62087791eaf5dc79a7ee8b9"
 [[bootstrap.peers]]
-address = "monad-testnet.unityfarms.cloud:8000"
-secp256k1_pubkey = "02965541bcf8ff7cd811d0410719ba4948ec6bf32db62087791eaf5dc79a7ee8b9"
-[[bootstrap.peers]]
-address = "monad-0.monad.blocknodehub.com:8000"
+# monad-0.monad.blocknodehub.com:8000
+address = "109.94.99.139:8000"
+record_seq_num = 0
+name_record_sig = "17f5b559b4d5c72a280b0bb412c546fb043dd3cf18d24a089fb70550075a409d261ee3844bf9f9ec9d2a42aa074761d6e286093b26555e308c72af38d243a3f300"
 secp256k1_pubkey = "02c5da3c5ba03eb54cdaafb8ceba7b94e7c594b04959042a0b86a37828d5484de7"
 [[bootstrap.peers]]
-address = "monad.testnet.izumi.finance:8000"
-secp256k1_pubkey = "036c170e2e538a2e3ada260bf99687a992180492a768242f30ad73e1f97e75b17e"
-[[bootstrap.peers]]
-address = "monad.testnet.zan.top:8000"
-secp256k1_pubkey = "035e4e701a148719be0efad7a049acee436922397635108228fdae20d737e99ee0"
-[[bootstrap.peers]]
-address = "monad-test.tane.network:8000"
+# monad-test.tane.network:8000
+address = "202.182.124.189:8000"
+record_seq_num = 0
+name_record_sig = "f134a14fb3d454fc175ac30bea30930fc2d9d9ab950dc06e7347e71e54068f3f769d881a8dedda4df75aa252f5ce2577227f29e21789b60f8b34850523fd94ab00"
 secp256k1_pubkey = "027f13eb2629c289a4e76d72b6a5fb870753bc5d6f09548be74f42b27b0e0841c4"
 [[bootstrap.peers]]
-address = "monad.testnet.node3tech.io:8000"
+# monad.testnet.node3tech.io:8000
+address = "65.21.97.59:8000"
+record_seq_num = 0
+name_record_sig = "bf302625b5dc732d509b53d8a562376e6d074399a1d0c7ea860ce8c52913fba54fabd94c8b7075f302c712d6c56bfcfc827c381d6bf57417081c19071fe2567201"
 secp256k1_pubkey = "0286eb2baddd9717c326a069cb76aeee38d16b4a5ab6f1f38c99af2e7e97cffc31"
 [[bootstrap.peers]]
-address = "monad.testnet.stakr.space:8000"
+# monad.testnet.stakr.space:8000
+address = "2.57.215.213:8000"
+record_seq_num = 0
+name_record_sig = "d7f69b1cc52551c0ead12d4031853797793a3c8e45ca65eb39e011970744fb4f2a24cc5d3aed343a0db89fe87c006b2b41fdc570808d9d1a518adb27bf80d2ab00"
 secp256k1_pubkey = "0301234e6cb806a158d234c1e28de88f9d7b0ab6edb6f3f8b50a0c3db1b7152273"
 [[bootstrap.peers]]
-address = "monad-testnet.stakely.io:8000"
+# monad-testnet.stakely.io:8000
+address = "185.189.45.207:8000"
+record_seq_num = 0
+name_record_sig = "cb49d8a3fd113c0434b53e3769ee401176d50162a02e2e87200e381059c07eae4e4131fd08b8b34c8084315d4c9c70359090cf611f5314c716f47c05d12e203f01"
 secp256k1_pubkey = "02f5eb88f40ef1faac3fb1fff11d26a2b0396d9c89000a576962dce9cbd14a7e0a"
 [[bootstrap.peers]]
-address = "monadtestnet.simplystaking.xyz:8000"
+# monadtestnet.simplystaking.xyz:8000
+address = "80.64.208.106:8000"
+record_seq_num = 0
+name_record_sig = "f8214c6b299ba3778e6d1368f80b05034d77ae84b6620cd25fbe92a45804de3a38d41d4c364a13dc7797b7b43347d2af7ad061d5e69d088738ae006c437b27ed01"
 secp256k1_pubkey = "0343fb644ffc308e0bc788a0a3d1e0816d8e5cdfa66fdcc589649f805099e41f14"
 [[bootstrap.peers]]
-address = "monad-validator-testnet2.chainode.tech:8000"
+# monad-validator-testnet2.chainode.tech:8000
+address = "185.189.45.28:8000"
+record_seq_num = 0
+name_record_sig = "646385ab8bf2e54dde4e85827dcf174b9700334f637f72f026b62f015efb382569c8a17d8f0014f6d48d151f18dd520281775b15200895bb9a588bc69cc42d6501"
 secp256k1_pubkey = "0264d9c2aa1ef4160a631a28780b0fa047a55f56ecd78d858a9965be5e5e1c0b30"
 [[bootstrap.peers]]
-address = "monad.testnet-2.validatus.com:8000"
+# monad.testnet-2.validatus.com:8000
+address = "65.21.112.220:8000"
+record_seq_num = 0
+name_record_sig = "aa8cf8953c0327412702a9efeaef05aac3546032acc6c8c067e1efbc54b45bf65b4637beaa724bc07f69df5dfa3dc0c0cd06efc3e99ddf4bc9fe50728a1f2d0e00"
 secp256k1_pubkey = "03239c407f1e70d100f2a6c686918bdab3b9b3980b352406ac2216a3eae57e6f20"
 [[bootstrap.peers]]
-address = "gmonad.spidernode.net:8000"
+# gmonad.spidernode.net:8000
+address = "173.201.36.80:8000"
+record_seq_num = 0
+name_record_sig = "54548927ecf734714519a0449861931e76277686ddb51fa479090e50be3012ff1f84a7f7c3d44959cf2e331b9ddc306f253f477e7aa3d8c2ac27f260cc054ad401"
 secp256k1_pubkey = "03e73488dd110eba45a30d8ad1fb3fcee3ef76cd743be8971a94ea1fa412f5cee1"
 [[bootstrap.peers]]
-address = "validator.monad-testnet2.ccvalidators.com:8000"
+# validator.monad-testnet2.ccvalidators.com:8000
+address = "37.252.186.107:8000"
+record_seq_num = 0
+name_record_sig = "62e2983b89e66b90a663e4cb363d97f0f2939e2a473435a55aa06977147eb36e01c320a1cdcd27a38715e8dac68993b4caf8fd27bb283b837a27f4b350c627df01"
 secp256k1_pubkey = "02d6a0c3e9d1fb6950ce1046f8ed08ec6d371617241fa7975a459eface74873c9e"
 [[bootstrap.peers]]
-address = "monad-testnet-validator.trusted-point.com:8000"
+# monad-testnet-validator.trusted-point.com:8000
+address = "79.127.173.80:8000"
+record_seq_num = 0
+name_record_sig = "3a92a3d7895e1f30f9c29232f7ea9202932eb8d90d27a44bc0fbdcee9f0acead4c4cc232fbf92fa8e4b31b009e473425d9121e18badfa415f58a68277f736c6d01"
 secp256k1_pubkey = "03c8f771f991a807ef3657e921cbc9ed0f3c5daa2a14575a637e2fa4bcfe7ee0cb"
 [[bootstrap.peers]]
-address = "monad.t2.nodeshub.online:8000"
+# monad.t2.nodeshub.online:8000
+address = "183.83.177.56:8000"
+record_seq_num = 0
+name_record_sig = "810953da977608d32f7a0c43d7a3aa63638e80a8f98b5044985bb9422d9658826eea9098e976f331a9ad1d79dcf7402adbbdd511b8cd9fcc027604fde3f172ba01"
 secp256k1_pubkey = "02e8f52d37c70f155cf74611bba838ae8df12cccebc5aba0564bc69cef23b6ea67"
 [[bootstrap.peers]]
-address = "validator-testnet-02.monad.p2p.org:8000"
+# validator-testnet-02.monad.p2p.org:8000
+address = "202.8.11.181:8000"
+record_seq_num = 0
+name_record_sig = "ea7528d972c71e0027bc0466971098f45cedac0a6863d6cef55a26408a26b41008b9d7a242d2ef62d95f8149b7df056dce1033c93daf0dda38d42e3aa6f1364801"
 secp256k1_pubkey = "02df41093fc50c3e19f0bfc7afc6ac5cc044f600ced10cda475da0a4609bb3ff98"
 [[bootstrap.peers]]
-address = "monad-testnet.stakeshark.io:8000"
+# monad-testnet.stakeshark.io:8000
+address = "148.113.220.242:8000"
+record_seq_num = 0
+name_record_sig = "839fb0836680cfcc78a4c4d2cfbb3145ac5b563cb37e74d3b004ac2c05cb2eac4eabb67208f869d2b7a64f8d6d8eb37afd2b3f955f916b08b05d8fe65679337300"
 secp256k1_pubkey = "0360faf519f55fed70bf1e651529f86009dc5ca10cd50ae83097de6fa49ab16da6"
 [[bootstrap.peers]]
-address = "monad-testnet2.dzdaic.com:8000"
+# monad-testnet2.dzdaic.com:8000
+address = "93.189.31.67:8000"
+record_seq_num = 0
+name_record_sig = "d8b14b76809ad228303bd844fbbc99d5cb1a6b318d353eb427467133c8a66e8e6d003284358b550b020970bcd860519a70b8a6036b899e910b07ae9e147a597c00"
 secp256k1_pubkey = "028886784b7bd73124558eb7299663d4bc61166ea4853014b3fd5c42a4a76a0980"
 [[bootstrap.peers]]
-address = "testnet.monad.temporal.xyz:8000"
+# testnet.monad.temporal.xyz:8000
+address = "64.130.53.79:8000"
+record_seq_num = 0
+name_record_sig = "3cf8ffad09506e229b750cf88bb3ea887de0b3f19fef318474b27cf971721df8021927598ee0e5d09f413c4a4ca3016d1deeb7a99aec9cb858cb3917408ba01701"
 secp256k1_pubkey = "0357fb8dd692cb7ff52c3e0f5d59adbf1f96aaa9d4c8a99641bb4056e4d3722715"
 [[bootstrap.peers]]
-address = "monad-testnet-validator.validao.systems:8000"
+# monad-testnet-validator.validao.systems:8000
+address = "109.94.99.103:8000"
+record_seq_num = 0
+name_record_sig = "b0b4d7b3fa0cbd02144620287f28d8e22a9eabe8b24b6da41d01742fb9912ebd02150474e4b051f2274b7ba02c7f56aa2d672a2ca0c608fb27a1e8b3c5a3fc6400"
 secp256k1_pubkey = "02430e22fe6abbf042c53898840ba0980a1490074ef55568d2596b49a3986e3435"
 [[bootstrap.peers]]
-address = "monad-testnet-2.bpinfra.xyz:8000"
+# monad-testnet-2.bpinfra.xyz:8000
+address = "64.130.43.22:8000"
+record_seq_num = 0
+name_record_sig = "dde26fe28c0d16276fc399ef20000b00480dead02662efd6ff796b5f74a1737858f0e78d9e6fa3fd56e8f71da4b89af7ffbc342c31db9d4c31293af3b297d94201"
 secp256k1_pubkey = "03de1f49f8a52a2f62196a6f88c436a37e5d3cd88b37588f4cab8f1dcdbf18148e"
 [[bootstrap.peers]]
-address = "t-lat-monadval-01.latitude.testnet.xlabs.xyz:8000"
+# t-lat-monadval-01.latitude.testnet.xlabs.xyz:8000
+address = "103.106.58.1:8000"
+record_seq_num = 0
+name_record_sig = "b68fe35e1ecb61f84c9af1326b3cbb6d1367ee779c49e36282d9c92ad4b4d5f92fb63ade55707f77bb0711c9490d1a3686cb70f36db040aa4d862810c239c79301"
 secp256k1_pubkey = "0283d0b783c3aa4af7213c06d539dd3ddc2bea4dfc3cae3ab99ff414113023cb7e"
 [[bootstrap.peers]]
-address = "monad-testnet.talentum.id:8000"
+# monad-testnet.talentum.id:8000
+address = "51.161.218.95:8000"
+record_seq_num = 0
+name_record_sig = "191399a6098ca12d78d503feb0912659355595bca04ede6ffaf3a427455594726c7dee3fdefff18c461898c91a4177fe53f11707031b6f9dccf7fd9f4f9c84f700"
 secp256k1_pubkey = "03e5de4367e8f1efc65227ce2c970b28eabccfa4c2da74ba37c77e901c685265bc"
 [[bootstrap.peers]]
-address = "monad-testnet.bci.glxy.com:8000"
+# monad-testnet.bci.glxy.com:8000
+address = "94.31.53.48:8000"
+record_seq_num = 0
+name_record_sig = "9c1615eb507c2aa95af63866853f29139ff4b11aa9a8fb12ace034c1ac0a44bc7ab58a1e06ca8c50a7a4e3e88a9470e3bb5d70419d055a6eaa25afb1533db31701"
 secp256k1_pubkey = "0240c847e8b90b435ead011b9746e4e8f269fbb2707c5a36624836fac768b2211a"
 [[bootstrap.peers]]
-address = "testnet.monad.coinblitz.pro:8000"
+# testnet.monad.coinblitz.pro:8000
+address = "135.181.228.159:8000"
+record_seq_num = 0
+name_record_sig = "73eada0b16318f0b7441525eb61913c3d59caf5302bf1b06714029237e56589348d7751ce844a2b815762eabbc8deccb34f6ffa024ab2772c66f30b79d60c0f900"
 secp256k1_pubkey = "0241d0cf1d844bd066a926975ed8e52b91afc46c46a17bdb621b25b9675cc96339"
 [[bootstrap.peers]]
-address = "monad.testnet.asxn.xyz:8000"
+# monad.testnet.asxn.xyz:8000
+address = "109.94.99.141:8000"
+record_seq_num = 0
+name_record_sig = "d4bbe5be4e0aeb3bf915eefc0e82d9e4b1ff4a60964a9f8d88978629f11adea4288bb9bbcd39bab92601a51f26f9d2102c84af639e566f86f689bee3c2b20c6c00"
 secp256k1_pubkey = "02a56ca2ae0ea319781ea7dcfe2af394eb6180533b566f0ae83d7ad87f8a8216fa"
 [[bootstrap.peers]]
-address = "monad-testnet.enigma-validator.com:8000"
+# monad-testnet.enigma-validator.com:8000
+address = "148.113.49.2:8000"
+record_seq_num = 0
+name_record_sig = "85863880b9faece91e5cad4fbc2a7e259fa71008c077f0825cceba8840ffa870151c3937c00dbc772dda593203badeddb83d1d9f8ed08f10e3ec098f9b8d9a6900"
 secp256k1_pubkey = "028c125934368e6f574b3db02e604f841b5d534b6a20a6f7c4074344463605d8a9"
 [[bootstrap.peers]]
-address = "monad.testnet.cmsholdings.co:8000"
+# monad.testnet.cmsholdings.co:8000
+address = "185.172.191.9:8000"
+record_seq_num = 0
+name_record_sig = "43b7edd192e8dd2981d30c58fe8be21ec68c7ef00445b3a0ae4ed9c767f028584c693236b796ff0188bc235ba98a4c722b5bd41c9780704a1c43d8a7cdb59f5101"
 secp256k1_pubkey = "0271204c6b4275c80ea13ce0428ab0fdfffb8ca39c885ba7535487f9f473add956"
 [[bootstrap.peers]]
-address = "monad-testnet.imperator.co:8000"
+# monad-testnet.imperator.co:8000
+address = "51.161.172.236:8000"
+record_seq_num = 0
+name_record_sig = "07e56f987ad686517c5dc442c9c271da8cdac204aa94abded01c609b5f9a0a885a41cd40904202da92cc6cb7a19d49764bee286cbd7c6b6b59073f78630bb78400"
 secp256k1_pubkey = "026bbcdd063136158ed5ece1954a75724728f0facfe696181c2a734bf8b6d79193"
 [[bootstrap.peers]]
-address = "monad.testnet.auri0x.io:8000"
+# monad.testnet.auri0x.io:8000
+address = "139.84.231.207:8000"
+record_seq_num = 0
+name_record_sig = "58c230b8e094ec1e95c0d0d5f39e12ecdf91f4faa32c372afc65a2dc70f3773732ae507c647f64d46831fbeefab3da8c6ba72084de258308a5b7ddc451dd9fc100"
 secp256k1_pubkey = "027a80635f2d7b3db98447ff6d937b1f5a903d7411e75e56446e961e6e6f949d4e"
 [[bootstrap.peers]]
-address = "monad.testnet.swissstarnode.tech:8000"
+# monad.testnet.swissstarnode.tech:8000
+address = "149.50.127.4:8000"
+record_seq_num = 0
+name_record_sig = "6706771542cd24c85386083dd35f77fda770253891e5e03ff982c060cc0d3a623063ac2aa3f31304331aae1fba4b3f9172d5eb624f332aeaf65dcf342fa78fd301"
 secp256k1_pubkey = "029dc4ab4f8de4ca8151c84e8012d6eae3f0bebeb4b3869afa3bd7300169696edb"
 [[bootstrap.peers]]
-address = "monad.testnet.pinestake.com:8000"
-secp256k1_pubkey = "02a598d5964908b4c45a2792ee1c379032f8612d684364e1ee5607dff13961293d"
-[[bootstrap.peers]]
-address = "monad-testnet.denodes.xyz:8000"
+# monad-testnet.denodes.xyz:8000
+address = "51.161.218.61:8000"
+record_seq_num = 0
+name_record_sig = "ff146d826333617f3fc7bdc74246284c7dacbef1643cfa5f2417dd6afec6e55d799a93e5d18a5f16ece890ccd6d00c74a398f967530f7dd854e16f26577481eb01"
 secp256k1_pubkey = "0251d4526ded18dfccce131079fa551482faf0c120c6814cc9b034e9ace29ed384"
 [[bootstrap.peers]]
-address = "testnet.monad.dsrvlabs.dev:8000"
+# testnet.monad.dsrvlabs.dev:8000
+address = "144.76.137.212:8000"
+record_seq_num = 0
+name_record_sig = "2e8bf9a7c615f8063f418f8c849e4d13213b45cafdf2f515d0f6bc6200f6b5332584b5324855543e3265309ae972e1c4c410c47682a22ccc15dde7560e3bfabc01"
 secp256k1_pubkey = "037749c9b7fc78fbfd08dfd7826296cf3b69e22c054eb6551f1e90dad6776d461d"
 [[bootstrap.peers]]
-address = "monad-testnet2.a41.io:8000"
+# monad-testnet2.a41.io:8000
+address = "51.68.103.40:8000"
+record_seq_num = 0
+name_record_sig = "b903780e7d3176626343a817ca4dfacbb069a6c2dd38b1bcf22e820182b549b8480ea8205bf71b07f27424b13411f91d06ddd9153209a1268cd1142015c6091a00"
 secp256k1_pubkey = "037a010ccc1292b12124f4b20e3b4ba8bdffa51a043e01b89e65c7ceb506c61537"
 [[bootstrap.peers]]
-address = "monad-testnet-2.blockpi.me:8000"
+# monad-testnet-2.blockpi.me:8000
+address = "57.128.230.69:8000"
+record_seq_num = 0
+name_record_sig = "970388450e50409dab35cab4fb554cc73afa571e0a67cecf44e152ffaea9bb722839d871e2701eb5187a586ffc910de76bdb0b01f6f0fcb2d69c50ddb1530cd700"
 secp256k1_pubkey = "02bb9f332bf210067c48033ddfe5e5e64770421487bcb4923c9ea9b294e0b0d639"
 [[bootstrap.peers]]
-address = "p2p.monad.testnet.tessellated.io:8000"
+# p2p.monad.testnet.tessellated.io:8000
+address = "64.130.33.165:8000"
+record_seq_num = 0
+name_record_sig = "63a27aa58bbc1ded8ca983317e7144ee6e15d32e63553dc2dd0254d6a6d5d07f1ac18033397a1449391a47fee2fe72d0e2cfaf8f541e19e02102289f958f0cfb00"
 secp256k1_pubkey = "03c6b5554e38aeb913cd11429adaf104381094149a89866c4091eae2e8ff64fe50"
 [[bootstrap.peers]]
-address = "monad.testnet.gdainfra.com:8000"
+# monad.testnet.gdainfra.com:8000
+address = "148.113.220.197:8000"
+record_seq_num = 0
+name_record_sig = "c79ebcc8faca1b5a0927e17b0ca5afbd6b04bc523db900627e69508fef7e73e41c67ed887fcfd0a23d891ace533aed98cb0adde2ffdd561aca52a835afd4c32301"
 secp256k1_pubkey = "03079de92d6b7c4b55d3522dedd7e139c95c336a3f43a426e41d79e5c36bd4a271"
 [[bootstrap.peers]]
-address = "monad-testnet.rpc101.org:8000"
+# monad-testnet.rpc101.org:8000
+address = "38.46.219.251:8000"
+record_seq_num = 0
+name_record_sig = "1561f1c453ed93977a8d46e833e486822a678e61102b54794dbacf4a1dde89633c562d933bc021337ef5eb073511a710d3146bd12dd6b0468da14e8e5d0f034d00"
 secp256k1_pubkey = "035684af634d225233d8d8d0e2729a7639f85242b681a5c415fbcc65e5f247325f"
 [[bootstrap.peers]]
-address = "monad.testnet.coinsummer.io:8000"
+# monad.testnet.coinsummer.io:8000
+address = "78.46.57.105:8000"
+record_seq_num = 0
+name_record_sig = "30f428b12afb8b1dfdc3d58b7863372d64757add6ed51bd30b4d2124e5585bf34101c3d4c50c258ebe938aacfec7a515ddfc609167bf601917cbbbaed789658e01"
 secp256k1_pubkey = "023221403146378110e9665795b59b8a2b4af1d8b0e62096d48e47e606537dcf0d"
 [[bootstrap.peers]]
-address = "fastproof.xyz:8000"
+# fastproof.xyz:8000
+address = "185.189.45.209:8000"
+record_seq_num = 0
+name_record_sig = "0600870c8ad64aa01611f448abdb3d566048b55923ad37098c5225d3d83edf6d0aae40dabfdcd1fca1f611452784a95671e976eab55bec945330fe95336944af01"
 secp256k1_pubkey = "0304ca6d81817c83b36dbd269f02a93622e8b760721471ede5f402e1b109c72cc9"
 [[bootstrap.peers]]
-address = "monad-validator.binary.builders:8000"
+# monad-validator.binary.builders:8000
+address = "23.88.4.141:8000"
+record_seq_num = 0
+name_record_sig = "56860613ef7a5600d6bb91de7388569a6f7a3e150a49acb2447dfed41651bb22624c04ddf4aa61808fde2587ecba0917332a7197e530498a307ebf205b73b3e701"
 secp256k1_pubkey = "025b7968c142f1f6c4adc48a484073bdc25541e4c2c9cd3da5163a8c2e731ed75f"
+# [[bootstrap.peers]]
+# address = "monad.testnet.pacific-meta.co.jp:8000"
+# secp256k1_pubkey = "021ea5834880339fc96383fd49a426643322510792cfc2e89ed73a54efeb6208c5"
 [[bootstrap.peers]]
-address = "monad.testnet.pacific-meta.co.jp:8000"
-secp256k1_pubkey = "021ea5834880339fc96383fd49a426643322510792cfc2e89ed73a54efeb6208c5"
-[[bootstrap.peers]]
-address = "monad-testnet.emberstake.xyz:8000"
+# monad-testnet.emberstake.xyz:8000
+address = "135.181.5.27:8000"
+record_seq_num = 0
+name_record_sig = "0ba329db790cd2ee85f64e4b4631eb6cfd0e464de3a3b4aedceb22c84d64973553736afcf78c021319cd5a3b9cf500b871ab470ac6cc1a3de0d5693bff2ae03d00"
 secp256k1_pubkey = "024e0857371e59ae1a3d445d827e244043be483f6a83dffe147d6651f45f8673fc"
 [[bootstrap.peers]]
-address = "monad.testnet.chainsafe.dev:8000"
+# monad.testnet.chainsafe.dev:8000
+address = "51.161.172.234:8000"
+record_seq_num = 0
+name_record_sig = "e057d3e49b746258873accdd291e224943f36625fa6743e51fd8157cfd1851366293378038ddeee2106ad34349638a6ac870a85fa6ffc23e7f8cae0d05a4a9cb01"
 secp256k1_pubkey = "035743107cc10c432c1c120d56c7e6bef665efeee8543b7397f72b7bbfb4e34ee9"
 [[bootstrap.peers]]
-address = "monad-validator-node.moca-services.xyz:8000"
+# monad-validator-node.moca-services.xyz:8000
+address = "84.32.103.147:8000"
+record_seq_num = 0
+name_record_sig = "4f220c9faf6851e0ff0cb2f78ab85a2f71b38f1cf45ca1680352a2700d70cfc803c9185747ccc14b3f6a37cb7f209101a5b0fb6c5553002a8c49734c97c9429f01"
 secp256k1_pubkey = "03c6ec17bd9c5996a8db2c17f0cf81a335b045d6d8589b7fc5709b94f9b8b9daf8"
+# [[bootstrap.peers]]
+# address = "monad-testnet2-validator-0.infra.quiknode.net:8000"
+# secp256k1_pubkey = "02171634492697b70f5d017f564ceaedc1f3c307605637f8a3b97a5a2ac4895470"
 [[bootstrap.peers]]
-address = "monad-testnet2-validator-0.infra.quiknode.net:8000"
-secp256k1_pubkey = "02171634492697b70f5d017f564ceaedc1f3c307605637f8a3b97a5a2ac4895470"
-[[bootstrap.peers]]
-address = "monad.testnet-2.lgns.xyz:8000"
+# monad.testnet-2.lgns.xyz:8000
+address = "148.113.49.19:8000"
+record_seq_num = 0
+name_record_sig = "aa1885936f8edd2e65f6ad75be155f6218994cd6f18cce291b6f282fd7e1e2894db919782effae677f22b4b4ac548a2f79bcd3a9289a7ee1a69115669699b65801"
 secp256k1_pubkey = "02886a262c73beb705f7347ad56042c98ade99a3c4d8fe04e81f12fe2c8417dc62"
 [[bootstrap.peers]]
-address = "monad.testnet.foreststaking.com:8000"
+# monad.testnet.foreststaking.com:8000
+address = "103.241.50.104:8000"
+record_seq_num = 0
+name_record_sig = "e53f58f935b77e2a2d8b74162ad1fa17cf3c73c43a3cda62e27729b46fc6df1b4d4d9870c7377b012f07289b3471f7c0dacc58f6e09e37b41328c55f9454cdce00"
 secp256k1_pubkey = "030da00fd6ede075ba210e5a775956a7c768d64d538af9c5e7800ae650aeac2bdc"
 [[bootstrap.peers]]
-address = "monad-test.rockrpc.net:8000"
+# monad-test.rockrpc.net:8000
+address = "195.12.228.194:8000"
+record_seq_num = 0
+name_record_sig = "52f624b45edee10defe73312f85b4c66e6867f4b205bdca0065cb5eda3e9c5d62ff27a1e015117a57654172e4096551aaef3326991060e23d3f9835fdc12adb101"
 secp256k1_pubkey = "02b508b11c627e860786f8197fc1dfad1e27029b6cf28f29c31b76d74cbdbbc286"
 [[bootstrap.peers]]
-address = "monad.testnet.synergynodes.com:8000"
+# monad.testnet.synergynodes.com:8000
+address = "194.45.36.110:8000"
+record_seq_num = 0
+name_record_sig = "f2d4b8e770f3628cf5cde3548aaca92ada44f7ac1adcb37d4fefd82ee3a679c56d99f8e6c37d36d8bd749bee637d3d6743b7d27274d2f31ee8b518d8591d290800"
 secp256k1_pubkey = "0287b0d16b6f3336f29785a6f1e2ee1a11faa3759d28e837e9016d0def75a1f3e3"
 [[bootstrap.peers]]
-address = "monad-testnet.brightlystake.com:8000"
+# monad-testnet.brightlystake.com:8000
+address = "23.109.123.27:8000"
+record_seq_num = 0
+name_record_sig = "d051c9b9473484246390b337ecedd070367d8534197b808ab7d7137b9177145d0942646bdcb9f2713536400bcf9e719b13c1c72b4c2c895a2544fa48805ef9ee00"
 secp256k1_pubkey = "028233829058d06bd4004d37b93d5054f9795c1d7b956cf2483b54d6ef997ef0bd"
 [[bootstrap.peers]]
-address = "monad-testnet-2.stakeangle.com:8000"
+# monad-testnet-2.stakeangle.com:8000
+address = "49.12.169.179:8000"
+record_seq_num = 0
+name_record_sig = "605d2c366bf345a7b51e1c3b070f886a6946e7e97070c37c8dcf95c9644d0be61454ad3d3ebf9fa600cf9496b305c5e29242d25a7e80b02666c03e7f14397cee00"
 secp256k1_pubkey = "03c14560d143e6ecc9f0bfd54022e5915fc7a00db205395aae1a047a9444179f33"
 [[bootstrap.peers]]
-address = "validator.monad-testnet-2.ftptech.xyz:8000"
+# validator.monad-testnet-2.ftptech.xyz:8000
+address = "77.244.252.228:8000"
+record_seq_num = 0
+name_record_sig = "7fb37909d8fa809cefed1b733311d1095a598629f31db8966412b51c956cf0e86e6f1ce0f4919eecd349d59a850e2650d851d7c05367ea05e5a2d6364667f05a00"
 secp256k1_pubkey = "0233232ef831508c5dc843c9d2fe9a095315187a92fc78fdeb0aee1b9d29f9197d"
 [[bootstrap.peers]]
-address = "monad-testnet.proofgp.com:8000"
+# monad-testnet.proofgp.com:8000
+address = "51.161.216.159:8000"
+record_seq_num = 0
+name_record_sig = "78419fceb6be54aa21e1eab21dae449c2089c98c6f783871e368f7c1359c4c861f8a5b40698aa928a7ca54e4c9acb53325061796d413e13d42070b32309c70df01"
 secp256k1_pubkey = "021ed41e670f1103b504b07a035cf7b17a814214aa31b47d437c002798832d1e02"
 [[bootstrap.peers]]
-address = "monad-testnet1.redactedcap.xyz:8000"
+# monad-testnet1.redactedcap.xyz:8000
+address = "64.130.33.135:8000"
+record_seq_num = 0
+name_record_sig = "3372cf536fcddc0d40f0c752636d5a0b9d7ccd69eced4ec848b304e1a07ce27d49f84859926439021f5040f9594b813ba462c44250f0b626287564e293bd3aa501"
 secp256k1_pubkey = "02f183837bbce10b699905160ad9e1f9d6a855756d7f2515503093d3ac73227514"
 [[bootstrap.peers]]
-address = "monad.zim.one:8000"
+# monad.zim.one:8000
+address = "149.50.116.10:8000"
+record_seq_num = 0
+name_record_sig = "ff4ef2ffb347342b4b19a554898599fa0d146b586b30516a6467662d058c65954478301db14381087473b07ca52684d0a59cc4a080e1c2b54da2ec9cef09757501"
 secp256k1_pubkey = "024e2b308bb03c44dd6a5b152068b21d599873dca6e32716e8dcd0996d76941c49"
 [[bootstrap.peers]]
-address = "monad.valnet.figment.io:8000"
+# monad.valnet.figment.io:8000
+address = "57.129.97.47:8000"
+record_seq_num = 0
+name_record_sig = "c8ab1863ef4c899d678de67c99b7e3f4023ff12895d801fe11bc37213d6e7a3c6f0e05cb7e94db5449c91cd4f45f1c17ec8c356652b5dec003e6fcdb5c0c491501"
 secp256k1_pubkey = "02fa615abcb937ed0e1f1dcb45dd21550d24bd4e8c84dd9cb01f471112fc80c302"
 [[bootstrap.peers]]
-address = "monad.testnet.quantnode.tech:8000"
+# monad.testnet.quantnode.tech:8000
+address = "185.111.108.47:8000"
+record_seq_num = 0
+name_record_sig = "7b8877c7501608077507912a6e7ac3ab477671a626df26cf76d0c2cf0906267a6dc64bb646a37e706d412bbd44365ecdcf0b4c1646f2fbc20b4905a508998c1e01"
 secp256k1_pubkey = "03d115b861e0675a0f25ca48720d24ad5e6615a3bdfa2ce8c11b26cf22c32286aa"
 [[bootstrap.peers]]
-address = "monad-testnet-30143.als.pub:8000"
+# monad-testnet-30143.als.pub:8000
+address = "72.46.87.125:8000"
+record_seq_num = 0
+name_record_sig = "e56c44a61b8decec8ca7a36555cd1f14e944ab7810ca16b58c3bcc5ce7262d4e3f34237f33a3bb2642b60c9822cd86c1f00094192548855749ef1a2e248a908301"
 secp256k1_pubkey = "02ac115bda7b5ef23e600b96e202d0fa63d3849348aca68bb131875a3021e92736"
 [[bootstrap.peers]]
-address = "ntt-monad.valnet.figment.io:8000"
+# ntt-monad.valnet.figment.io:8000
+address = "51.75.213.150:8000"
+record_seq_num = 0
+name_record_sig = "6821333dc716b1434ce44ee1daa7cc583ac8c5b972998a4f826201f92d2725757e8e3f408b8180008dc3798ef6f22ae6e89c755e9c15bcfbe16ea7ffaf2a760501"
 secp256k1_pubkey = "03a5815dd7d2b31fc96a7bf4903744941cb436420f8647a0d64d0e2324ae75e967"
 [[bootstrap.peers]]
-address = "apr-testnet-val-cs-sto-001.apr.io:8000"
+# apr-testnet-val-cs-sto-001.apr.io:8000
+address = "185.189.45.206:8000"
+record_seq_num = 0
+name_record_sig = "d94596899c08d07afb1f56447a9547578dce81447c07523c014ec96c36c228d8428c98e52f1fd4a26918f85070508641ace141201c086d8abd9b0304c83e27e200"
 secp256k1_pubkey = "0274387058c65eb27d9e28d1df501ccabae92ab4693c47e13b0bb48bfb82b0bef8"
 [[bootstrap.peers]]
-address = "monad.cassini.living:8000"
+# monad.cassini.living:8000
+address = "64.20.46.158:8000"
+record_seq_num = 0
+name_record_sig = "96041239d8eefd3a70a39b106c548d00aa5c3f12723fe4535eb4c572e708d54868d387f51ede481dd00efdc2f229baa73ee45af753ef399c73330470cafd600300"
 secp256k1_pubkey = "03d217bd965c06f2a6d367c19903e1d575f5f251051a57a782a75499160dfeb07d"
 [[bootstrap.peers]]
-address = "validator.testnet2.monad.rpcpool.com:8000"
+# validator.testnet2.monad.rpcpool.com:8000
+address = "134.119.221.161:8000"
+record_seq_num = 0
+name_record_sig = "a076c868fc88253317734c522956d02d7cdd6cffbc2028eddf5881c02489152f64e52a0f7d53f06d432230ef6b885cd00c9a9de26663d40958ce5b80382e383001"
 secp256k1_pubkey = "030d8ea651d26bcb54b7772915ef2680f70c6693d2bcb04302cb072f8f5ac00da4"
 [[bootstrap.peers]]
-address = "validator.monad.testnet.aftermath.finance:8000"
+# validator.monad.testnet.aftermath.finance:8000
+address = "57.128.230.73:8000"
+record_seq_num = 0
+name_record_sig = "a083c19b5832d46824bf5a860bfde8109c75d3b7ea6aa3e3f360bb384069396874f3391d83a41e550ef2578ab02e5f0c8114b384905b0a5ff3b8189dabe6a07201"
 secp256k1_pubkey = "0224bd0871e65dbed3c01289d4f7c473466ddf03fe51247941b343dc56cbb65347"
+# [[bootstrap.peers]]
+# address = "monadtestnet.reverie.ooo:8000"
+# secp256k1_pubkey = "03846a4806365278871e424695963c3ddd2ff7bdec443dc6532f86bfae08bf644a"
 [[bootstrap.peers]]
-address = "monadtestnet.reverie.ooo:8000"
-secp256k1_pubkey = "03846a4806365278871e424695963c3ddd2ff7bdec443dc6532f86bfae08bf644a"
-[[bootstrap.peers]]
-address = "monad_testnet.chainflow.io:8000"
+# monad_testnet.chainflow.io:8000
+address = "202.8.11.183:8000"
+record_seq_num = 0
+name_record_sig = "4a066b7eeecb7d201d96392695b1b1e74ee0cac312cc39d4a7f80173b5df7d9a2f17c320e9c0c8c59ce83123424665ecfa387018e40523ae000d4e774677442c00"
 secp256k1_pubkey = "034c6d2a7a9252b5e58ec35a2e47c713e3572a44824feeecb38e8116ed4428747f"
 [[bootstrap.peers]]
-address = "monad-testnet.starlightnode.com:8000"
+# monad-testnet.starlightnode.com:8000
+address = "84.32.103.152:8000"
+record_seq_num = 0
+name_record_sig = "644abb500e0983995b2f3bc0b3df29b278bf3b7255cc7f37b0f487d8e32a02fa6266b712df195b44c1c3902c2a97fb3422f96ba0400f700d227b5116b061b24c00"
 secp256k1_pubkey = "0396fef6759b35b616fa5a63710d6b2ac3226106e8bf02e8d5ae50d480ab3f74bb"
+# [[bootstrap.peers]]
+# address = "monad.din.dev:8000"
+# secp256k1_pubkey = "03791896d4e2cf5ad01990a7c801ce885c971cb5af05e8f4fa819bbe2e7f24310b"
 [[bootstrap.peers]]
-address = "monad.din.dev:8000"
-secp256k1_pubkey = "03791896d4e2cf5ad01990a7c801ce885c971cb5af05e8f4fa819bbe2e7f24310b"
+# monad.testnet.zan.top:8000
+address = "185.189.45.138:8000"
+record_seq_num = 0
+name_record_sig = "d989848123eccfcdb95a0ad874e184fd39fc3eb052e40329e4e6b968e252dcf444daecff87a500923b6f50c0c0453fc81e065f164b79092abd3175456188f35300"
+secp256k1_pubkey = "0267167f4d02612d481331053db908de222b4e2cff4655017eb873c0948d73c7b0"
+[[bootstrap.peers]]
+# monad.testnet.forthenads.xyz:8000
+address = "45.239.67.215:8000"
+record_seq_num = 0
+name_record_sig = "2613a501dce48a61eedb63bca5b0ea1c0d92056ec8058f43d7b38fb12eb166b8557bc392762d7a5dbcb2554e6f73184e2da5c1f255806dd89898565ab60a54d901"
+secp256k1_pubkey = "02a285496a665f04d8f7e40958c6dc70275131c931f1f50438592e70d9b272340a"
+# [[bootstrap.peers]]
+# address = "monad.testnet.pinestake.com:8000"
+# secp256k1_pubkey = "0364f3b99cbc91bb96e9dad412993d5359865c52285ae212a83eb0a989a20b3fd1"
+[[bootstrap.peers]]
+# monad.ch1.swissborg.io:8000
+address = "77.109.157.251:8000"
+record_seq_num = 0
+name_record_sig = "070e49359fdb5b84d6833002486ffeb5445c2549123670614f3feef1bdf26eeb09df090b013b57dbde83d41e28ba53c2456cf1270e1491682f90950923b958ef01"
+secp256k1_pubkey = "032a2639e9a0f55429e7bbafd41469d12b76da903cc01fd8af732e53815a1a8eab"
+[[bootstrap.peers]]
+# ns31798195.ip-51-68-248.eu:8000
+address = "51.68.248.67:8000"
+record_seq_num = 0
+name_record_sig = "d82e89d918de44a891124ef14713c5f43c00631aa18b0672a1eb7c773ca94e38294647ad5d34683eb01e5ae93e3214a64578dcacfe538990824fed1cf7cd99a901"
+secp256k1_pubkey = "02c2e754c08f59d9ab32e5eceba7a16f951aa5c66a55c4666f8dccf1c80858f54e"
+[[bootstrap.peers]]
+# monad-test-val2.artifact.systems:8000
+address = "206.125.33.18:8000"
+record_seq_num = 0
+name_record_sig = "67f5384e848874275addf2ee2897f8b6c2e216fc5315db5a58fde440a032782d1d6643da93c15b63388ce16cb500a305440886fbec8cad01dd550bb0b8eab55000"
+secp256k1_pubkey = "0310f7409ed9e903fd461099f6dbcfada946457270f6142d06a3b0c149b8557ce9"
+[[bootstrap.peers]]
+# monad.testnet.blackblocks.io:8000
+address = "212.83.33.149:8000"
+record_seq_num = 0
+name_record_sig = "dac6a5504938b66cc13758779e1c12b8ff3d9fd2e820ac03fe0f175cfe01d22e5eb2398e5a8266442d29bd3d7e176b7b47585bfe085e0ab52ffd0bd8a1c4e32000"
+secp256k1_pubkey = "02887740082676012a4d82734599dcb37d5d7bceebda2c0e626750ce77bf6671cf"
+[[bootstrap.peers]]
+# monad.testnet.provalidator.io:8000
+address = "103.66.181.55:8000"
+record_seq_num = 0
+name_record_sig = "f2d88b06d6b29b84f75c63bc9af419918b52012f90646b252b6f99dbe8e7195c46884c4e49128be616e653fa962762918194875bb0984c5aab7baeef69c096b400"
+secp256k1_pubkey = "03461cdc4003c63c6fe0a5cd42a379788d85e2a37a122140babc10cf66e9d876d9"
+[[bootstrap.peers]]
+# mnd-tstnt.d10s.fi:8000
+address = "84.32.103.150:8000"
+record_seq_num = 0
+name_record_sig = "a2de40010ad13647fe719628b215772b50048fbe32d37f7cea7acb68b00e9af12bf6ece925aa7a915a031c2946e9a28a50bfc364acbd5912c4dae68c9378de9000"
+secp256k1_pubkey = "02f59419bfa622ecfd87fe9c699e5624f8dd4ee5540b16d539e8a95fb1cc1af112"
+[[bootstrap.peers]]
+# node.monstaker.xyz:8000
+address = "5.199.165.18:8000"
+record_seq_num = 0
+name_record_sig = "0e206df1ec4c1a31f1d0939d0927ad4c4efdd900aea5ecbe82ed87b5ca5fd842646f965816722c3ae411196fab57e3a56f5ef4c1c3cc966733c8f9a5d2da1ba300"
+secp256k1_pubkey = "02d1afacb9ddebed2725bd7f37eaded44d4a35130952ab6a8d0c5610f3221de032"
+[[bootstrap.peers]]
+# monad-testnet.delightlabs.sh:8000
+address = "67.213.118.145:8000"
+record_seq_num = 0
+name_record_sig = "1636bf910b338730ed2059e02157fd0d67e4d9faaca6fea0a50b05d5cccb68e63f6106b90cf060bc74cd47bee50ceab022bf310a8801634b9c524eecad37ecde00"
+secp256k1_pubkey = "0322b40febf89fa3cf6a05e9bbd8904b1979a0e43814d92de43ecdf81408037423"
+[[bootstrap.peers]]
+# monad.testnet.validators.chainbound.io:8000
+address = "37.27.54.115:8000"
+record_seq_num = 0
+name_record_sig = "a7a1732d44cdbc3be9b137a83f252689ed4418b928e7d8aee64566144afd35620ecfe48049ce65227c8d797a74bcfc29064fba1c867ed52bb342e9bd45231fef00"
+secp256k1_pubkey = "02c3b7cf8f1ba2da3854db229c8cd75586b649ea0a0673d05bcd0c9dbbf08b0771"
+[[bootstrap.peers]]
+# monad.testnet.deadkingsociety.io:8000
+address = "67.213.121.75:8000"
+record_seq_num = 0
+name_record_sig = "3a18996843837a74a3be6cd40a638c7e8dad193f92562e812d4db25aac3df4256fa8a43b165b77dee0d3342be27599517dab273d7be91f9c271fe482ad784eac00"
+secp256k1_pubkey = "02ad0211b406434fb225ad605e16218bf01278189cc52f481b89627a8ecb947e67"
+[[bootstrap.peers]]
+# magenta-ankara-96ae6.monad.bdnodes.net:8000
+address = "64.130.40.76:8000"
+record_seq_num = 0
+name_record_sig = "d205302dd72425bf7cc3aee5ac7160f745157d54e0c40268f60e5426eeefaa271bca30fcb603dbcdd1e6dbee37296e568b25ec0585cceb1dc9c56345ceb63f7600"
+secp256k1_pubkey = "02fd63de1c6271540ae9c6d5fa326de99922cb11117fe8ce77351f80781b879066"
+[[bootstrap.peers]]
+# monad-testnet-validator.unit410.com:8000
+address = "67.213.121.65:8000"
+record_seq_num = 0
+name_record_sig = "55398631d1c83794a8c2fb8a97c9f5a4f71e8d00804801f45e597863024ff4216e26b617a8e1e3b6ae63ec63acc3dabba08bde7dc5acb2cd432d9bfe4149959c00"
+secp256k1_pubkey = "02421fa275c35d885870e31b4c6a71dba694ae7257222fefe1d0b4bb7f43a8860c"
+[[bootstrap.peers]]
+# monad-test2val.silknodes.io:8000
+address = "136.60.129.34:8000"
+record_seq_num = 0
+name_record_sig = "c7f3f79e1465ed2771f84f39da09fb5c0141de0e33839b3f38ad56876d53cbf53f7d1f0c445aaff5c940aa2fbb499bc28fd0e4ed9c28dd8ae04983897736653d00"
+secp256k1_pubkey = "021f0795ac40cb2fe01a90af1f684219948a1414fbf6d38cbd52e73e6c395602a2"
+[[bootstrap.peers]]
+# monad.testnet.thepharus.com:8000
+address = "84.32.103.151:8000"
+record_seq_num = 0
+name_record_sig = "9aed46d60f104a7900c9651e782219b44f092e7d09ba17309d06117a64265a1371019a2d6c594b4ae79b5b54d73592361226964fa092ebbb738e4c1b5b310ae400"
+secp256k1_pubkey = "03621644bce1d1015e9f18d823348133ed613b50b6fa347cccfc5976507db55ffe"
+[[bootstrap.peers]]
+# monad-testnet-2val.r93axnodes.cloud:8000
+address = "104.194.11.36:8000"
+record_seq_num = 0
+name_record_sig = "8e5c129e0e8d305b9c382569f712fd4e27c0e85317127f183f04369f2cdf20c2153f53c620f49ac26113940c87772e384a23dbec5f074397cd796d6ed7241c9200"
+secp256k1_pubkey = "02f575feaf33bd9e0320f807dc6e7a97716822a73636e0530a915e535ca61a2714"
+[[bootstrap.peers]]
+# rskl.xyz:8000
+address = "185.175.46.17:8000"
+record_seq_num = 0
+name_record_sig = "7dd535205d180a33f12a397283a9168cd126baf49310cc159e032563070eeb88114d071d5d83197ebf994579fec2826178b2c322b217bc5bd1d708d71feb788e01"
+secp256k1_pubkey = "03b44097ba0b7a92abf1e319665a160126f0efde20da9d4adcceeb56144da00517"
+# [[bootstrap.peers]]
+# address = "monad.testnet.izumi.finance:8000"
+# secp256k1_pubkey = "028c184548c167ebc4c663e12a9f21dcc3e37d132e7810ca33179729c79f9dfa7f"
+[[bootstrap.peers]]
+# monad-testnet-2.certhum.com:8000
+address = "40.160.31.115:8000"
+record_seq_num = 0
+name_record_sig = "145472266588aa15fe04bd993c6d81f37518226200fc8b9b3a2a97bd40fb260a27c96f1d94899d2575a75c280b73a31c06ac32c16c06b95ea19da9fee94b951501"
+secp256k1_pubkey = "026189a9b02971459c0e6081a27e58c2ff5c9c00447e40866b8191048f3fececed"
