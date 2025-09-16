@@ -1,4 +1,3 @@
-maybe_fork_tip = "0x9c80e57456628d3cc922089ad65464131944cbee40d07815b845b286816f47a0"
 #########################################################
 #                                                       #
 #        WARNING: THIS FILE SHOULD NEVER BE USED        #
@@ -19,7 +18,6 @@ ipc_queued_batches_watermark = 7
 
 statesync_threshold = 1200
 statesync_max_concurrent_requests = 5
-raptor10_validator_redundancy_factor = 3 #Mock peer discovery value
 
 #########################################################
 # Network-wide configuration
@@ -31,25 +29,23 @@ chain_id = 30143
 self_address = "148.113.49.86:8000"
 self_record_seq_num = 0
 self_name_record_sig = "3bb67113503f698a1f43a0d935b0b8507a3ae5973d024934ee01717374afae4223826246e0d50208931958ac62bd15f23b117a045fc275a9806718ef3bcb309201"
-ping_period = 30
 refresh_period = 120
 request_timeout = 5
 unresponsive_prune_threshold = 3
-last_participation_prune_threshold = 2000
+last_participation_prune_threshold = 1000
 min_num_peers = 160
-max_num_peers = 220
+max_num_peers = 250
 
 [fullnode_raptorcast]
 mode = "Publisher"
-raptor10_fullnode_redundancy_factor = 3
-max_group_size = 10
+raptor10_fullnode_redundancy_factor = 3.0
+max_group_size = 50
 round_span = 240
 invite_lookahead = 120
 max_invite_wait = 10
 deadline_round_dist = 10
 init_empty_round_span = 23
-bandwidth_cost_per_group_member = 1000
-bandwidth_capacity = 50000
+max_num_group = 3
 invite_future_dist_min = 1
 invite_future_dist_max = 600
 invite_accept_heartbeat_ms = 10000

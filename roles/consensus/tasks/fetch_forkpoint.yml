@@ -9,6 +9,11 @@
   ansible.builtin.set_fact:
     current_time_est: "{{ current_time_out.stdout }}"
 
+- name: Ensure consensus forkpoint file is absent
+  ansible.builtin.file:
+    path: "{{ consensus_forkpoint_file_path }}"
+    state: absent
+
 - name: Download forkpoint from URL
   ansible.builtin.get_url:
     url: "{{ monad.consensus.forkpoint_url }}/forkpoint_{{ current_time_est }}01.toml"
