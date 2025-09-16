@@ -14,6 +14,10 @@
     directories: "{{ consensus_directories }}"
     log_file_path: "{{ consensus_log_file_path }}"
 
+- name: Include Fetch Forkpoint task
+  ansible.builtin.include_tasks: fetch_forkpoint.yml
+  when: fetch_forkpoint | default(false) | bool
+
 - name: Include Extract Binaries task
   ansible.builtin.include_tasks: extract_binaries.yml
   vars:
@@ -33,10 +37,6 @@
 - name: Include Provision Triedb task
   ansible.builtin.include_tasks: provision_triedb.yml
   when: setup_triedb | default(false) | bool
-
-- name: Include Fetch Forkpoint task
-  ansible.builtin.include_tasks: fetch_forkpoint.yml
-  when: fetch_forkpoint | default(false) | bool
 
 - name: Copy validators configuration files
   ansible.builtin.copy:
