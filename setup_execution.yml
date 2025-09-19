@@ -1,10 +1,11 @@
 ---
-- name: Setup Execution Node
+- name: Setup Monad Execution Node
   hosts: all
   become: true
   gather_facts: true
   vars:
-    allowed_node_types: [execution]
+    allowed_node_types: [validator, fullnode]
+    client: execution
   vars_files:
     - group_vars/all.yml
     - group_vars/vault.yml
