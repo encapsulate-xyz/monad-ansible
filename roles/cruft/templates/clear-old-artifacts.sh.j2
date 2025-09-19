@@ -11,8 +11,8 @@ TARGET_DIR="{{ consensus_home_dir }}/data/"
 NEW_FILES=$(find "$TARGET_DIR" -type f -name "*" -mmin -20)
 if [ -n "$NEW_FILES" ]; then
     find {{ consensus_home_dir }}/config/forkpoint/ -type f -name "forkpoint.toml.*" -mmin +300 -delete 2>/dev/null
-    find {{ consensus_home_dir }}/data/ -type f -name "*.body" -mmin +600 -delete 2>/dev/null
-    find {{ consensus_home_dir }}/data/ -type f -name "*.header" -mmin +600 -delete 2>/dev/null
+    find {{ consensus_home_dir }}/data/headers -type f -mmin +600 -delete 2>/dev/null
+    find {{ consensus_home_dir }}/data/bodies -type f -mmin +600 -delete 2>/dev/null
     find {{ consensus_home_dir }}/ -type f -name "wal_*" -mmin +300 -delete 2>/dev/null
 else
     echo "No new files detected. Skipping deletion of .header files."
