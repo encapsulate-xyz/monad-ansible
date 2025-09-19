@@ -1,13 +1,27 @@
 ---
 consensus_ufw_rules:
-  - port: "{{ monad[type].consensus.ports.p2p_port }}"
-    proto: tcp
-    rule: allow
-    from: any
-    comment: p2p
+  validator:
+    - port: "{{ monad.validator.consensus.ports.p2p_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: p2p
 
-  - port: "{{ monad[type].consensus.ports.p2p_port }}"
-    proto: udp
-    rule: allow
-    from: any
-    comment: p2p
+    - port: "{{ monad.validator.consensus.ports.p2p_port }}"
+      proto: udp
+      rule: allow
+      from: any
+      comment: p2p
+
+  fullnode:
+    - port: "{{ monad.fullnode.consensus.ports.p2p_port }}"
+      proto: tcp
+      rule: allow
+      from: any
+      comment: p2p
+
+    - port: "{{ monad.fullnode.consensus.ports.p2p_port }}"
+      proto: udp
+      rule: allow
+      from: any
+      comment: p2p
