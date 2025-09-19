@@ -19,7 +19,7 @@ ExecStart={{ consensus_bin_dir }}/{{ service_identifier }} \
     --statesync-ipc-path {{ consensus_state_sync_socket_file_path }} \
     --ledger-path {{ consensus_data_dir }} \
     --triedb-path {{ triedb_config.path }} \
-    --otel-endpoint "{{ monad.consensus.otel_endpoint }}" \
+    --otel-endpoint "{{ monad[type].otel_endpoint }}" \
     --statesync-sq-thread-cpu 1 \
     --record-metrics-interval-seconds 1 \
     --validators-path {{ consensus_validators_config_file_path }} \

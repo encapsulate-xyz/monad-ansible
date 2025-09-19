@@ -1,7 +1,7 @@
 ---
 - name: Configure sysctl settings for node
   ansible.builtin.copy:
-    dest: "/etc/sysctl.d/90-{{ service_identifier }}-network-buffer.conf"
+    dest: "/etc/sysctl.d/90-{{ project }}-network-buffer.conf"
     content: |
       # Network buffer settings
       net.core.rmem_default=62500000

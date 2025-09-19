@@ -1,0 +1,13 @@
+---
+# maintains mainnet inventory grouped by project names
+all:
+  vars:
+    env: mainnet
+  children:
+    monad:
+      hosts:
+        fullnode.monad.mainnet.encapsulate.xyz:
+          type: fullnode
+          consensus_home_dir: /opt/monad-fullode-consensus 
+          ledger_dir: /opt/monad-fullode-consensus/data
+          socket_dir: /opt/monad-fullode-consensus/socket

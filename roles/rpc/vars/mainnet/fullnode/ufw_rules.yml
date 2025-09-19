@@ -1,0 +1,7 @@
+---
+rpc_ufw_rules:
+  - port: "{{ monad.fullnode.rpc.ports.rpc_port }}"
+    proto: tcp
+    rule: allow
+    from: amplifier.axelar.mainnet.encapsulate.xyz
+    comment: rpc

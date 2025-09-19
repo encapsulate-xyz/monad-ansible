@@ -8,7 +8,7 @@
 #########################################################
 # Node-specific configuration
 #########################################################
-beneficiary = "0x0000000000000000000000000000000000000000"
+beneficiary = "0xffa5b629cb85011284bb7708a3e4fe3759956021"
 node_name = "{{ org }}" # add your node name here
 network_name = "testnet-2" # DO NOT CHANGE
 ipc_tx_batch_size = 1000
@@ -37,9 +37,9 @@ min_num_peers = 160
 max_num_peers = 250
 
 [fullnode_raptorcast]
-mode = "Publisher"
+mode = "Client"
 raptor10_fullnode_redundancy_factor = 3.0
-max_group_size = 50
+max_group_size = 150
 round_span = 240
 invite_lookahead = 120
 max_invite_wait = 10

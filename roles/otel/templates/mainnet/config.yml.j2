@@ -1,10 +1,10 @@
 receivers:
-  otlp/monad-testnet:
+  otlp/monad-mainnet:
     protocols:
       grpc:
-        endpoint: '0.0.0.0:{{ otel.ports.monad_testnet.grpc_port }}'
+        endpoint: '0.0.0.0:{{ otel.ports.grpc_port }}'
       http:
-        endpoint: '0.0.0.0:{{ otel.ports.monad_testnet.http_port }}'
+        endpoint: '0.0.0.0:{{ otel.ports.http_port }}'
 exporters:
   otlp:
     endpoint: peach10.devcore4.com:4317
@@ -27,20 +27,20 @@ processors:
 
 service:
   pipelines:
-    metrics/monad-testnet:
-      receivers: [otlp/monad-testnet]
+    metrics/monad-mainnet:
+      receivers: [otlp/monad-mainnet]
       processors: [batch]
       exporters: [prometheus/monad]
     metrics:
-      receivers: [otlp/monad-testnet]
+      receivers: [otlp/monad-mainnet]
       exporters: [prometheus/monad,otlp]
       processors: [batch]
     traces:
-      receivers: [otlp/monad-testnet]
+      receivers: [otlp/monad-mainnet]
       processors: [batch]
       exporters: [otlp]
     logs:
-      receivers: [otlp/monad-testnet]
+      receivers: [otlp/monad-mainnet]
       processors: [batch]
       exporters: [otlp]
   telemetry:

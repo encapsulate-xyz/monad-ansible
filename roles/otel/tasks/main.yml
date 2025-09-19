@@ -25,7 +25,7 @@
 
 - name: Copy otel config
   ansible.builtin.template:
-    src: config.yml.j2
+    src: "{{ env }}/config.yml.j2"
     dest: "{{ otel_config_file_path }}"
     owner: "{{ service_identifier }}"
     group: "{{ service_identifier }}"

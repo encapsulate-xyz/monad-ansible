@@ -1,10 +1,11 @@
 ---
-- name: Setup RPC Node
+- name: Setup Monad RPC Node
   hosts: all
   become: true
   gather_facts: true
   vars:
-    allowed_node_types: [rpc]
+    allowed_node_types: [validator, fullnode]
+    client: rpc
   vars_files:
     - group_vars/all.yml
     - group_vars/vault.yml

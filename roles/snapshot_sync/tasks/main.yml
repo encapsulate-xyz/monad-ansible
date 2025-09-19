@@ -1,12 +1,14 @@
 ---
 - name: Stop Monad services
   ansible.builtin.systemd:
-    name: "{{ item }}"
+    name: "monad{{ type_suffix }}-{{ item }}.service"
     state: stopped
   loop:
-    - monad-consensus.service
-    - monad-execution.service
-    - monad-rpc.service
+    - consensus
+    - execution
+    - rpc
+  vars:
+    type_suffix: "{{ '' if type == 'validator' else '-' + type }}"
 
 - name: Delete directories
   ansible.builtin.file:
@@ -55,9 +57,11 @@
 
 - name: Restart Monad services
   ansible.builtin.systemd:
-    name: "{{ item }}"
+    name: "monad{{ type_suffix }}-{{ item }}.service"
     state: restarted
   loop:
-    - monad-consensus.service
-    - monad-execution.service
-    - monad-rpc.service
+    - consensus
+    - execution
+    - rpc
+  vars:
+    type_suffix: "{{ '' if type == 'validator' else '-' + type }}"

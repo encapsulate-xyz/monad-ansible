@@ -1,0 +1,28 @@
+---
+- name: Allocate triedb loop image file
+  ansible.builtin.command:
+    cmd: fallocate -l {{ triedb_loop_config.image_size }} {{ triedb_loop_config.image_file }}
+    creates: "{{ triedb_loop_config.image_file }}"
+
+- name: Check if triedb loop image is already attached
+  ansible.builtin.command:
+    cmd: losetup -j {{ triedb_loop_config.image_file }}
+  register: loop_check
+  changed_when: false
+  failed_when: false
+
+- name: Attach triedb loop image if not already attached
+  ansible.builtin.command:
+    cmd: losetup -f {{ triedb_loop_config.image_file }}
+  when: loop_check.stdout == ""
+
+- name: Find the loop device for triedb loop image
+  ansible.builtin.shell: |
+    losetup -a | grep "{{ triedb_loop_config.image_file }}" | cut -d: -f1
+  register: loop_device
+  changed_when: false
+
+- name: Display the loop device
+  ansible.builtin.debug:
+    msg: "Loop device for {{ triedb_loop_config.image_file }}: {{ loop_device.stdout }}"
+  when: loop_device.stdout != ""

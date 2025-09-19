@@ -12,7 +12,7 @@
   tasks:
     - name: Set service_identifier
       ansible.builtin.set_fact:
-        service_identifier: "{{ project }}-cruft"
+        service_identifier: "{{ project }}{{ '' if type == 'validator' else '-' + type }}-cruft"
 
     - name: Include common handlers
       ansible.builtin.include_role:

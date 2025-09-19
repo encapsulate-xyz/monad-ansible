@@ -12,7 +12,7 @@ AUTH_HEADER="Authorization: Basic {{ vault.default.pushgateway.auth_header }}"
 log "Fetching triedb usage data"
 
 # Run the monad-mpt command
-MPT_OUTPUT=$( /opt/monad-consensus/bin/monad-mpt --storage {{ triedb_config.path }} 2>/dev/null \
+MPT_OUTPUT=$( {{ consensus_home_dir }}/bin/monad-mpt --storage {{ triedb_config.path }} 2>/dev/null \
   | grep -A 1 'Capacity' \
   | tail -n 1 \
   | tr -d '\r' )
@@ -48,7 +48,7 @@ log "Total bytes: $TOTAL_BYTES"
 log "Pushing metrics to Pushgateway"
 # Push to Prometheus Pushgateway
 cat <<EOF | curl --max-time 30 --data-binary @- -H "$AUTH_HEADER" \
-"$PUSHGATEWAY_URL/metrics/job/$JOB_NAME/project/{{ project }}/env/{{ env }}"
+"$PUSHGATEWAY_URL/metrics/job/$JOB_NAME/project/{{ project }}/env/{{ env }}/type/{{ type }}"
 # TYPE monad_mpt_storage_used_bytes gauge
 monad_mpt_storage_used_bytes $USED_BYTES
 # TYPE monad_mpt_storage_total_bytes gauge

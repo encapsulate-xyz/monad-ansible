@@ -7,7 +7,7 @@
 
 - name: Get latest snapshot filename
   ansible.builtin.uri:
-    url: "{{ monad.consensus.snapshot_url }}/latest.txt"
+    url: "{{ monad.snapshot_url }}/latest.txt"
     method: GET
     return_content: true
   register: latest_file_response
@@ -31,7 +31,7 @@
   ansible.builtin.command:
     cmd: >-
       aria2c -x 8 -s 8 --continue=true
-      "{{ monad.consensus.snapshot_url }}/{{ latest_filename }}.{{ item }}"
+      "{{ monad.snapshot_url }}/{{ latest_filename }}.{{ item }}"
     chdir: "{{ tmp_dir }}/{{ project }}"
   loop:
     - tar.zst

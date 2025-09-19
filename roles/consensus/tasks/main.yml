@@ -5,7 +5,7 @@
 
 - name: Apply UFW rules
   ansible.builtin.include_tasks: tasks/apply_ufw_rules.yml
-  loop: "{{ consensus_ufw_rules }}"
+  loop: "{{ consensus_ufw_rules[type] }}"
 
 - name: Include user creation task
   ansible.builtin.include_tasks: tasks/create_user_and_directories.yml
@@ -40,7 +40,7 @@
 
 - name: Copy validators configuration files
   ansible.builtin.copy:
-    src: "{{ env }}/validators.toml"
+    src: "{{ env }}/{{ type }}/validators.toml"
     dest: "{{ consensus_validators_config_file_path }}"
     owner: "{{ service_identifier }}"
     group: "{{ service_identifier }}"
@@ -56,8 +56,8 @@
     group: "{{ service_identifier }}"
     mode: "0644"
   loop:
-    - { src: "{{ env }}/node.toml.j2", dest: "{{ consensus_node_config_file_path }}" }
-    - { src: "{{ env }}/general.env.j2", dest: "{{ consensus_general_environment_file_path }}" }
+    - { src: "{{ env }}/{{ type }}/node.toml.j2", dest: "{{ consensus_node_config_file_path }}" }
+    - { src: "general.env.j2", dest: "{{ consensus_general_environment_file_path }}" }
   notify:
     - Restart service
 
@@ -87,7 +87,7 @@
 
 - name: Copy systemd service file
   ansible.builtin.template:
-    src: "{{ env }}/systemd.service.j2"
+    src: "{{ env }}/{{ type }}/systemd.service.j2"
     dest: "/etc/systemd/system/{{ service_identifier }}.service"
     owner: root
     group: root
