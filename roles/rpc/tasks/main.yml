@@ -1,4 +1,14 @@
 ---
+- name: Include the ufw rules vars file
+  ansible.builtin.include_vars:
+    file: vars/{{ env }}/ufw_rules.yml
+  when: type == "fullnode"
+
+- name: Apply UFW rules
+  ansible.builtin.include_tasks: tasks/apply_ufw_rules.yml
+  loop: "{{ rpc_ufw_rules }}"
+  when: type == "fullnode"
+
 - name: Include user creation task
   ansible.builtin.include_tasks: tasks/create_user_and_directories.yml
   vars:
@@ -22,14 +32,14 @@
     group: "{{ service_identifier }}"
     mode: "0644"
   loop:
-    - { src: "{{ env }}/node.toml.j2", dest: "{{ rpc_node_config_file_path }}" }
-    - { src: "{{ env }}/general.env.j2", dest: "{{ rpc_general_environment_file_path }}" }
+    - { src: "{{ env }}/{{ type }}/node.toml.j2", dest: "{{ rpc_node_config_file_path }}" }
+    - { src: "general.env.j2", dest: "{{ rpc_general_environment_file_path }}" }
   notify:
     - Restart service
 
 - name: Copy systemd service file
   ansible.builtin.template:
-    src: "{{ env }}/systemd.service.j2"
+    src: "{{ env }}/{{ type }}/systemd.service.j2"
     dest: /etc/systemd/system/{{ service_identifier }}.service
     owner: root
     group: root
