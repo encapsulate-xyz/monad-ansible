@@ -1,0 +1,9 @@
+---
+# maintains versions and can overwrite all.yml
+monad:
+  chain_id: monad_mainnet
+  forkpoint_url: "https://bucket.monadinfra.com/forkpoint/mainnet"
+  snapshot_url: ""
+  fullnode:
+    version: 0.10.4
+    otel_endpoint: "http://0.0.0.0:4317"

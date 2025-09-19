@@ -23,19 +23,33 @@ triedb_config:
   partition_name: triedb
   partition_number: 1
 
+triedb_loop_config:
+  image_file: "/monad-triedb.img"
+  image_size: "400G"
+
 monad:
   source_url: https://pkg.category.xyz
-  consensus:
-    ports:
-      p2p_port: 8000
+  validator:
+    consensus:
+      ports:
+        p2p_port: 8000
+    rpc:
+      ports:
+        rpc_port: 8080
+  fullnode:
+    consensus:
+      ports:
+        p2p_port: 8000
+    rpc:
+      ports:
+        rpc_port: 8080
 
 otel:
   service_identifier_suffix: otel
   source_url: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download
   file_extension: tar.gz
   ports:
-    monad_testnet:
-      grpc_port: 4317
-      http_port: 4318
+    grpc_port: 4317
+    http_port: 4318
     prometheus_metrics_exporter_port: 8889
     metrics_port: 8888
