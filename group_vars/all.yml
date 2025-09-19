@@ -42,7 +42,7 @@ monad:
         p2p_port: 8000
     rpc:
       ports:
-        rpc_port: 8080
+        rpc_port: 8090
 
 otel:
   service_identifier_suffix: otel
