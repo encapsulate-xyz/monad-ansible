@@ -1,12 +1,12 @@
 ---
-# maintains testnet inventory grouped by project names
+# maintains mainnet inventory grouped by project names
 all:
   vars:
-    env: testnet
+    env: mainnet
   children:
     monad:
       hosts:
-        validator.monad.testnet.encapsulate.xyz:
-          type: validator
+        fullnode.monad.mainnet.encapsulate.xyz:
+          type: fullnode
           ledger_dir: /opt/monad-consensus/data
           socket_dir: /opt/monad-consensus/socket
