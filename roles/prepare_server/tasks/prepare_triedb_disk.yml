@@ -1,7 +1,15 @@
 ---
+- name: Set a fact in prepare_triedb_loop_disk.yml
+  ansible.builtin.set_fact:
+    triedb_device: "{{ loop_device.stdout | default(triedb_config.drive) }}"
+
+- name: Display the gpt device
+  ansible.builtin.debug:
+    msg: "GPT device: {{ triedb_device }}"
+
 - name: Create single GPT partition
   community.general.parted:
-    device: "{{ triedb_config.drive }}"
+    device: "{{ triedb_device }}"
     label: gpt
     number: "{{ triedb_config.partition_number }}"
     name: "{{ triedb_config.partition_name }}"
@@ -12,7 +20,7 @@
 - name: Get partition UUID
   ansible.builtin.shell: |
     set -o pipefail
-    lsblk -o PARTUUID {{ triedb_config.drive }} | tail -n 1
+    lsblk -o PARTUUID {{ triedb_device }} | tail -n 1
   args:
     executable: /bin/bash
   register: partuuid_result
@@ -44,12 +52,14 @@
 - name: Verify final LBA configuration
   ansible.builtin.shell: |
     set -o pipefail
-    nvme id-ns -H {{ triedb_config.drive }} | grep 'LBA Format' | grep 'in use'
+    nvme id-ns -H {{ triedb_device }} | grep 'LBA Format' | grep 'in use'
   args:
     executable: /bin/bash
   register: final_lba_check
   changed_when: false
+  when: not (setup_triedb_loop | default(false) | bool)
 
 - name: Display final LBA configuration
   ansible.builtin.debug:
     msg: "Final LBA configuration: {{ final_lba_check.stdout }}"
+  when: not (setup_triedb_loop | default(false) | bool)

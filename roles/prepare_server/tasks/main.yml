@@ -7,12 +7,19 @@
     cache_valid_time: 3600
   loop:
     - nvme-cli
-    - libboost-stacktrace-dev
-    - liburing2
-    - libboost-fiber-dev
-    - libtbb12
     - aria2
     - zstd
+    - libboost-context1.83.0
+    - libboost-fiber1.83.0
+    - libboost-stacktrace1.83.0
+    - libtbb12
+    - liburing2
+    - libarchive-dev
+    - libbrotli-dev
+    - whiptail
+    - libhugetlbfs-dev
+    - libhugetlbfs-bin
+    - libcrypto++-dev
 
 - name: Include Configure Sysctl task
   ansible.builtin.import_tasks: configure_sysctl.yml
@@ -22,6 +29,10 @@
 
 - name: Include Set Hugepages task
   ansible.builtin.import_tasks: set_hugepages.yml
+
+- name: Include Prepare Triedb Loop Disk task
+  ansible.builtin.import_tasks: prepare_triedb_loop_disk.yml
+  when: setup_triedb_loop | default(false) | bool
 
 - name: Include Prepare Triedb Disk task
   ansible.builtin.import_tasks: prepare_triedb_disk.yml
