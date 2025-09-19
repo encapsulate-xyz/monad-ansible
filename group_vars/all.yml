@@ -25,7 +25,7 @@ triedb_config:
 
 triedb_loop_config:
   image_file: "/monad-triedb.img"
-  image_size: "400G"
+  image_size: "1T"
 
 monad:
   source_url: https://pkg.category.xyz
