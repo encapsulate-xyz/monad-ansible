@@ -13,3 +13,5 @@ metrics_directories:
 metrics_log_file_path: "{{ metrics_log_dir }}/{{ service_identifier }}.log"
 
 metrics_script_file_path: "{{ metrics_bin_dir }}/{{ metrics_script_file_name }}"
+
+metrics_mpt_binary_dir: "/opt/monad{{ '' if type == 'validator' else '-' + type }}-consensus/bin"
