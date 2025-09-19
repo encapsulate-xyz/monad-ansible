@@ -1,12 +1,12 @@
 ---
 consensus_ufw_rules:
-  - port: "{{ monad.consensus.ports.p2p_port }}"
+  - port: "{{ monad[type].consensus.ports.p2p_port }}"
     proto: tcp
     rule: allow
     from: any
     comment: p2p
 
-  - port: "{{ monad.consensus.ports.p2p_port }}"
+  - port: "{{ monad[type].consensus.ports.p2p_port }}"
     proto: udp
     rule: allow
     from: any

@@ -13,7 +13,7 @@ consensus_secp_identity_key_file_name: id-secp
 # binary names
 consensus_binaries:
   monad_default:
-    default_binary_name: "monad-node"
+    default_binary_name: "{{ 'monad-node' if type == 'validator' else 'monad-full-node' }}"
     dest_binary_name: "{{ service_identifier }}"
   monad_keystore:
     default_binary_name: "monad-keystore"

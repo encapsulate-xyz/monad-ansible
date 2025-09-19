@@ -1,10 +1,11 @@
 ---
-- name: Setup Consensus Node
+- name: Setup Monad Consensus Node
   hosts: all
   become: true
   gather_facts: true
   vars:
-    allowed_node_types: [consensus]
+    allowed_node_types: [validator, fullnode]
+    client: consensus
   vars_files:
     - group_vars/all.yml
     - group_vars/vault.yml
