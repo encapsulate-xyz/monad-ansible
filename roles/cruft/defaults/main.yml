@@ -13,5 +13,3 @@ cruft_directories:
 cruft_log_file_path: "{{ cruft_log_dir }}/{{ service_identifier }}.log"
 
 cruft_script_file_path: "{{ cruft_bin_dir }}/{{ cruft_script_file_name }}"
-
-cruft_consensus_home_dir: "/opt/monad{{ '' if type == 'validator' else '-' + type }}-consensus"

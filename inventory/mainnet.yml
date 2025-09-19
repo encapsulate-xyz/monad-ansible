@@ -8,5 +8,6 @@ all:
       hosts:
         fullnode.monad.mainnet.encapsulate.xyz:
           type: fullnode
-          ledger_dir: /opt/monad-consensus/data
-          socket_dir: /opt/monad-consensus/socket
+          consensus_home_dir: /opt/monad-fullode-consensus 
+          ledger_dir: /opt/monad-fullode-consensus/data
+          socket_dir: /opt/monad-fullode-consensus/socket

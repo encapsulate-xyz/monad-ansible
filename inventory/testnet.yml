@@ -8,5 +8,6 @@ all:
       hosts:
         validator.monad.testnet.encapsulate.xyz:
           type: validator
+          consensus_home_dir: /opt/monad-consensus
           ledger_dir: /opt/monad-consensus/data
           socket_dir: /opt/monad-consensus/socket
