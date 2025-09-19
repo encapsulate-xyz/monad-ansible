@@ -12,7 +12,7 @@ AUTH_HEADER="Authorization: Basic {{ vault.default.pushgateway.auth_header }}"
 log "Fetching triedb usage data"
 
 # Run the monad-mpt command
-MPT_OUTPUT=$( {{ metrics_mpt_binary_dir }}/monad-mpt --storage {{ triedb_config.path }} 2>/dev/null \
+MPT_OUTPUT=$( {{ consensus_home_dir }}/bin/monad-mpt --storage {{ triedb_config.path }} 2>/dev/null \
   | grep -A 1 'Capacity' \
   | tail -n 1 \
   | tr -d '\r' )
