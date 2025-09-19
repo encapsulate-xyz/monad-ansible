@@ -1,0 +1,53 @@
+receivers:
+  otlp/monad-testnet:
+    protocols:
+      grpc:
+        endpoint: '0.0.0.0:{{ otel.ports.grpc_port }}'
+      http:
+        endpoint: '0.0.0.0:{{ otel.ports.http_port }}'
+exporters:
+  otlp:
+    endpoint: peach10.devcore4.com:4317
+    tls:
+      insecure: true
+      insecure_skip_verify: true
+  prometheus/monad:
+    endpoint: '0.0.0.0:{{ otel.ports.prometheus_metrics_exporter_port }}'
+    send_timestamps: true
+    metric_expiration: 10m
+    enable_open_metrics: true
+    resource_to_telemetry_conversion:
+      enabled: true
+processors:
+  batch:
+  memory_limiter:
+    limit_mib: 1500
+    spike_limit_mib: 512
+    check_interval: 5s
+
+service:
+  pipelines:
+    metrics/monad-testnet:
+      receivers: [otlp/monad-testnet]
+      processors: [batch]
+      exporters: [prometheus/monad]
+    metrics:
+      receivers: [otlp/monad-testnet]
+      exporters: [prometheus/monad,otlp]
+      processors: [batch]
+    traces:
+      receivers: [otlp/monad-testnet]
+      processors: [batch]
+      exporters: [otlp]
+    logs:
+      receivers: [otlp/monad-testnet]
+      processors: [batch]
+      exporters: [otlp]
+  telemetry:
+    metrics:
+      readers:
+        - pull:
+            exporter:
+              prometheus:
+                host: '0.0.0.0'
+                port: {{ otel.ports.metrics_port }}
