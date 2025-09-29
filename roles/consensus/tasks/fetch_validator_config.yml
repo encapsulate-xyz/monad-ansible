@@ -1,0 +1,14 @@
+---
+- name: Delete all old validator config files
+  ansible.builtin.shell: rm -rf {{ snapshot_sync_config_dir }}/validators*"
+  changed_when: true
+
+- name: Download validator config from URL
+  ansible.builtin.get_url:
+    url: "{{ monad.validator_config_url }}"
+    dest: "{{ snapshot_sync_validators_config_file_path }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
+  notify:
+    - Restart service
