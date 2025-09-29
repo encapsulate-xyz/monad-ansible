@@ -3,6 +3,8 @@
   hosts: all
   become: true
   gather_facts: true
+  vars:
+    client: consensus
   vars_files:
     - group_vars/all.yml
     - group_vars/vault.yml
