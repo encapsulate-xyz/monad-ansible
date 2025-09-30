@@ -12,3 +12,9 @@ all:
           consensus_home_dir: /opt/monad-fullode-consensus 
           ledger_dir: /opt/monad-fullode-consensus/data
           socket_dir: /opt/monad-fullode-consensus/socket
+        65.109.158.204:
+          type: fullnode
+          consensus_user: monad-fullode-consensus
+          consensus_home_dir: /opt/monad-fullode-consensus 
+          ledger_dir: /opt/monad-fullode-consensus/data
+          socket_dir: /opt/monad-fullode-consensus/socket
