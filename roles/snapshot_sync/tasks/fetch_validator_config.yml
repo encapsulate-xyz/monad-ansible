@@ -1,6 +1,6 @@
 ---
 - name: Delete all old validator config files
-  ansible.builtin.shell: rm -rf {{ snapshot_sync_config_dir }}/validators*"
+  ansible.builtin.shell: rm -rf {{ snapshot_sync_config_dir }}/validators*
   changed_when: true
 
 - name: Download validator config from URL
