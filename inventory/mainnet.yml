@@ -8,13 +8,13 @@ all:
       hosts:
         fullnode.monad.mainnet.encapsulate.xyz:
           type: fullnode
-          consensus_user: monad-fullode-consensus
-          consensus_home_dir: /opt/monad-fullode-consensus 
-          ledger_dir: /opt/monad-fullode-consensus/data
-          socket_dir: /opt/monad-fullode-consensus/socket
+          consensus_user: monad-fullnode-consensus
+          consensus_home_dir: /opt/monad-fullnode-consensus 
+          ledger_dir: /opt/monad-fullnode-consensus/data
+          socket_dir: /opt/monad-fullnode-consensus/socket
         65.109.158.204:
           type: fullnode
-          consensus_user: monad-fullode-consensus
-          consensus_home_dir: /opt/monad-fullode-consensus 
-          ledger_dir: /opt/monad-fullode-consensus/data
-          socket_dir: /opt/monad-fullode-consensus/socket
+          consensus_user: monad-fullnode-consensus
+          consensus_home_dir: /opt/monad-fullnode-consensus 
+          ledger_dir: /opt/monad-fullnode-consensus/data
+          socket_dir: /opt/monad-fullnode-consensus/socket
