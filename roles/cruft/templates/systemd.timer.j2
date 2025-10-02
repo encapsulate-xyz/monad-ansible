@@ -3,7 +3,7 @@ Description=Run Monad cruft service every hour
 
 [Timer]
 OnCalendar=hourly
-Unit=monad-cruft.service
+Unit={{ service_identifier }}.service
 Persistent=true
 
 [Install]
