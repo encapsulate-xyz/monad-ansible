@@ -19,3 +19,4 @@ snapshot_sync_directories:
 
 # config file paths
 snapshot_sync_forkpoint_file_path: "{{ snapshot_sync_forkpoint_dir }}/{{ snapshot_sync_forkpoint_file_name }}"
+snapshot_sync_validators_config_file_path: "{{ snapshot_sync_config_dir }}/{{ snapshot_sync_validators_config_file_name }}"

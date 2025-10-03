@@ -4,6 +4,7 @@ monad:
   chain_id: monad_mainnet
   forkpoint_url: "https://bucket.monadinfra.com/forkpoint/mainnet"
   snapshot_url: ""
+  validator_config_url: "https://bucket.monadinfra.com/validators/mainnet/validators.toml"
   fullnode:
     version: 0.10.4
     otel_endpoint: "http://0.0.0.0:4317"

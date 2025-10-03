@@ -38,15 +38,8 @@
   ansible.builtin.include_tasks: provision_triedb.yml
   when: setup_triedb | default(false) | bool
 
-- name: Copy validators configuration files
-  ansible.builtin.copy:
-    src: "{{ env }}/{{ type }}/validators.toml"
-    dest: "{{ consensus_validators_config_file_path }}"
-    owner: "{{ service_identifier }}"
-    group: "{{ service_identifier }}"
-    mode: "0644"
-  notify:
-    - Restart service
+- name: Include Fetch Validator Config task
+  ansible.builtin.include_tasks: fetch_validator_config.yml
 
 - name: Copy node configuration and general environment files
   ansible.builtin.template:
