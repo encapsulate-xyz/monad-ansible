@@ -12,7 +12,7 @@
 - name: Download forkpoint from URL
   ansible.builtin.get_url:
     url: "{{ monad.forkpoint_url }}/forkpoint_{{ current_time_est }}01.toml"
-    dest: "{{ snapshot_sync_forkpoint_file_path }}"
+    dest: "{{ sync_node_forkpoint_file_path }}"
     owner: "{{ service_identifier }}"
     group: "{{ service_identifier }}"
     mode: "0644"

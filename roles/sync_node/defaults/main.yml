@@ -1,0 +1,24 @@
+---
+# maintains directories and paths
+sync_node_home_dir: "/opt/{{ service_identifier }}"
+
+sync_node_bin_dir: "{{ sync_node_home_dir }}/bin"
+sync_node_config_dir: "{{ sync_node_home_dir }}/config"
+sync_node_data_dir: "{{ sync_node_home_dir }}/data"
+sync_node_lib_dir: "{{ sync_node_home_dir }}/lib"
+sync_node_socket_dir: "{{ sync_node_home_dir }}/socket"
+sync_node_wal_dir: "{{ sync_node_home_dir }}/wal"
+
+sync_node_forkpoint_dir: "{{ sync_node_config_dir }}/forkpoint"
+sync_node_validators_dir: "{{ sync_node_config_dir }}/validators"
+
+sync_node_directories:
+  - "{{ sync_node_data_dir }}"
+  - "{{ sync_node_socket_dir }}"
+  - "{{ sync_node_wal_dir }}"
+  - "{{ sync_node_forkpoint_dir }}"
+  - "{{ sync_node_validators_dir }}"
+
+# config file paths
+sync_node_forkpoint_file_path: "{{ sync_node_forkpoint_dir }}/{{ sync_node_forkpoint_file_name }}"
+sync_node_validators_config_file_path: "{{ sync_node_validators_dir }}/{{ sync_node_validators_config_file_name }}"

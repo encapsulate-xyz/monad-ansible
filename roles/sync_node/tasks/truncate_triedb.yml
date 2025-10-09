@@ -1,14 +1,14 @@
 ---
 - name: Truncate triedb storage partition with monad-mpt
   ansible.builtin.shell: >
-    {{ snapshot_sync_bin_dir }}/monad-mpt --storage {{ triedb_config.path }} --truncate --yes
+    {{ sync_node_bin_dir }}/monad-mpt --storage {{ triedb_config.path }} --truncate --yes
   args:
     executable: /bin/bash
   register: truncate_triedb
   changed_when: truncate_triedb.rc == 0
   failed_when: truncate_triedb.rc != 0
   environment:
-    LD_LIBRARY_PATH: "{{ snapshot_sync_lib_dir }}"
+    LD_LIBRARY_PATH: "{{ sync_node_lib_dir }}"
 
 - name: Display monad-mpt truncate status
   ansible.builtin.debug:

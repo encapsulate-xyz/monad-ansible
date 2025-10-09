@@ -1,5 +1,5 @@
 ---
-- name: Snapshot Sync Node
+- name: Sync Node
   hosts: all
   become: true
   gather_facts: true
@@ -18,6 +18,6 @@
     - name: Include common handlers
       ansible.builtin.include_role:
         name: common
-    - name: Include snapshot_sync role
+    - name: Include sync_node role
       ansible.builtin.include_role:
-        name: snapshot_sync
+        name: sync_node

@@ -1,0 +1,33 @@
+---
+- name: Delete directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ sync_node_directories }}"
+
+- name: Delete all wal_* files
+  ansible.builtin.shell: rm -rf {{ sync_node_home_dir }}/wal_*"
+  changed_when: true
+
+- name: Recreate empty directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ service_identifier }}"
+    group: "{{ project }}"
+    mode: "0755"
+  loop: "{{ sync_node_directories }}"
+
+- name: Include Truncate Triedb task
+  ansible.builtin.include_tasks: truncate_triedb.yml
+
+- name: Include Fetch Snapshot task
+  ansible.builtin.include_tasks: fetch_snapshot.yml
+
+- name: Set ownership of synced files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ project }}"
+    recurse: true
+  loop: "{{ sync_node_directories }}"
