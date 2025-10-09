@@ -1,0 +1,5 @@
+---
+# maintains file name, binary names, and anything which is not a directory or path
+
+sync_node_forkpoint_file_name: forkpoint.toml
+sync_node_validators_config_file_name: validators.toml

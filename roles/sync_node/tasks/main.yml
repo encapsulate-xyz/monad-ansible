@@ -1,0 +1,32 @@
+---
+- name: Stop Monad services
+  ansible.builtin.systemd:
+    name: "monad{{ type_suffix }}-{{ item }}.service"
+    state: stopped
+  loop:
+    - consensus
+    - execution
+    - rpc
+  vars:
+    type_suffix: "{{ '' if type == 'validator' else '-' + type }}"
+
+- name: Include Fetch Forkpoint task
+  ansible.builtin.include_tasks: snapshot_sync.yml
+  when: sync_method == "snapshot_sync"
+
+- name: Include Fetch Forkpoint task
+  ansible.builtin.include_tasks: fetch_forkpoint.yml
+
+- name: Include Fetch Validator Config task
+  ansible.builtin.include_tasks: fetch_validator_config.yml
+
+- name: Restart Monad services
+  ansible.builtin.systemd:
+    name: "monad{{ type_suffix }}-{{ item }}.service"
+    state: restarted
+  loop:
+    - consensus
+    - execution
+    - rpc
+  vars:
+    type_suffix: "{{ '' if type == 'validator' else '-' + type }}"

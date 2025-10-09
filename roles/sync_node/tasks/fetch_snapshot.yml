@@ -50,7 +50,7 @@
 - name: Load binary snapshot with monad-cli
   ansible.builtin.command:
     cmd: >-
-      {{ snapshot_sync_bin_dir }}/monad-cli
+      {{ sync_node_bin_dir }}/monad-cli
       --db {{ triedb_config.path }}
       --load_binary_snapshot {{ tmp_dir }}/{{ project }}
       --version {{ block_id }}
@@ -59,7 +59,7 @@
   failed_when: monad_cli_result.rc != 0
   changed_when: false
   environment:
-    LD_LIBRARY_PATH: "{{ snapshot_sync_lib_dir }}"
+    LD_LIBRARY_PATH: "{{ sync_node_lib_dir }}"
 
 - name: Clean up the temporary repository directory
   ansible.builtin.file:

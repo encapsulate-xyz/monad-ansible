@@ -13,6 +13,7 @@ consensus_wal_dir: "{{ consensus_home_dir }}/wal"
 consensus_log_dir: "{{ consensus_home_dir }}/log"
 
 consensus_forkpoint_dir: "{{ consensus_config_dir }}/forkpoint"
+consensus_validators_dir: "{{ consensus_config_dir }}/validators"
 
 consensus_directories:
   - "{{ consensus_home_dir }}"
@@ -26,12 +27,13 @@ consensus_directories:
   - "{{ consensus_wal_dir }}"
   - "{{ consensus_log_dir }}"
   - "{{ consensus_forkpoint_dir }}"
+  - "{{ consensus_validators_dir }}"
 
 consensus_log_file_path: "{{ consensus_log_dir }}/{{ service_identifier }}.log"
 
 # config file paths
 consensus_node_config_file_path: "{{ consensus_config_dir }}/{{ consensus_node_config_file_name }}"
-consensus_validators_config_file_path: "{{ consensus_config_dir }}/{{ consensus_validators_config_file_name }}"
+consensus_validators_config_file_path: "{{ consensus_validators_dir }}/{{ consensus_validators_config_file_name }}"
 consensus_forkpoint_file_path: "{{ consensus_forkpoint_dir }}/{{ consensus_forkpoint_file_name }}"
 
 # key file paths
