@@ -19,8 +19,8 @@ tmp_dir: /tmp
 
 triedb_config:
   drive: /dev/nvme0n1 # Update with the drive you are using
-  path: /dev/triedb
-  partition_name: triedb
+  path: /dev/triedb-{{ type }}
+  partition_name: triedb-{{ type }}
   partition_number: 1
 
 triedb_loop_config:
