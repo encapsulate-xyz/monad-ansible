@@ -8,3 +8,13 @@ monad:
   validator:
     version: 0.11.3-tn2
     otel_endpoint: "http://0.0.0.0:4317"
+  fullnode:
+    version: 0.11.3-tn2
+    otel_endpoint: "http://0.0.0.0:4317"
+    consensus:
+      ports:
+        p2p_port: 8001
+
+triedb_loop_config:
+  image_file: "/opt/monad-triedb.img"
+  image_size: "1T"
