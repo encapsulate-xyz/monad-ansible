@@ -10,7 +10,7 @@ monad:
     otel_endpoint: "http://0.0.0.0:4317"
   fullnode:
     version: 0.11.3-tn2
-    otel_endpoint: "http://0.0.0.0:4319"
+    otel_endpoint: "http://0.0.0.0:4317"
     consensus:
       ports:
         p2p_port: 8001
