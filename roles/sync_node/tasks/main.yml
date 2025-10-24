@@ -10,9 +10,9 @@
   vars:
     type_suffix: "{{ '' if type == 'validator' else '-' + type }}"
 
-- name: Include Fetch Forkpoint task
+- name: Include Snapshot Sync task
   ansible.builtin.include_tasks: snapshot_sync.yml
-  when: sync_method == "snapshot_sync"
+  when: (sync_method | default('')) == "snapshot_sync"
 
 - name: Include Fetch Forkpoint task
   ansible.builtin.include_tasks: fetch_forkpoint.yml
