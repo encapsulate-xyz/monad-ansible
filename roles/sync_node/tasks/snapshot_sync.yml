@@ -6,7 +6,7 @@
   loop: "{{ sync_node_directories }}"
 
 - name: Delete all wal_* files
-  ansible.builtin.shell: rm -rf {{ sync_node_home_dir }}/wal_*"
+  ansible.builtin.shell: rm -rf {{ sync_node_home_dir }}/wal_*
   changed_when: true
 
 - name: Recreate empty directories
