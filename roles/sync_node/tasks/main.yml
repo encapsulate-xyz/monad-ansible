@@ -12,7 +12,7 @@
 
 - name: Include Snapshot Sync task
   ansible.builtin.include_tasks: snapshot_sync.yml
-  when: (sync_method | default('')) == "snapshot_sync"
+  when: snapshot_sync | default(false) | bool
 
 - name: Include Fetch Forkpoint task
   ansible.builtin.include_tasks: fetch_forkpoint.yml
