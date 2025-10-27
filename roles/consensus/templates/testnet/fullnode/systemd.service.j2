@@ -20,7 +20,7 @@ ExecStart={{ consensus_bin_dir }}/{{ service_identifier }} \
     --ledger-path {{ consensus_data_dir }} \
     --triedb-path {{ triedb_config.path }} \
     --otel-endpoint "{{ monad[type].otel_endpoint }}" \
-    --statesync-sq-thread-cpu 1 \
+    --statesync-sq-thread-cpu 8 \
     --record-metrics-interval-seconds 1 \
     --validators-path {{ consensus_validators_config_file_path }} \
     --keystore-password "${KEYSTORE_PASSWORD}"

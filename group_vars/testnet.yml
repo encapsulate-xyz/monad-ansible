@@ -6,10 +6,10 @@ monad:
   snapshot_url: "https://d1xd6bwr0bhisu.cloudfront.net"
   validator_config_url: "https://bucket.monadinfra.com/validators/testnet-2/validators.toml"
   validator:
-    version: 0.11.3-tn2
+    version: 0.11.4-hotfix-2
     otel_endpoint: "http://0.0.0.0:4317"
   fullnode:
-    version: 0.11.3-tn2
+    version: 0.11.4-hotfix-2
     otel_endpoint: "http://0.0.0.0:4317"
     consensus:
       ports:
