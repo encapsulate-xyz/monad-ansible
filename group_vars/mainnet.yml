@@ -8,3 +8,7 @@ monad:
   fullnode:
     version: 0.11.6-mn
     otel_endpoint: "http://0.0.0.0:4317"
+
+triedb_config:
+  path: /dev/triedb
+  partition_name: triedb
