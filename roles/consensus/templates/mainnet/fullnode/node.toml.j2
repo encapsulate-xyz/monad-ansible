@@ -18,7 +18,6 @@ ipc_queued_batches_watermark = 7
 
 statesync_threshold = 1200
 statesync_max_concurrent_requests = 5
-raptor10_validator_redundancy_factor = 3 #Mock peer discovery value
 
 #########################################################
 # Network-wide configuration
@@ -29,25 +28,24 @@ chain_id = 143
 self_address = "65.109.158.204:8000" # IP and port
 self_record_seq_num = 0 # should be 0 initially
 self_name_record_sig = "7c556e3418091f5161572086dddfea30b94e9546a1ff035a36e8bdff8caf85754e6e0e32de79c4a2dc8d9c7a4a8cd988fba4f136816e7dcd7ab08d50f8028d0301"
-ping_period = 30
 refresh_period = 120
 request_timeout = 5
 unresponsive_prune_threshold = 3
-last_participation_prune_threshold = 2000
+last_participation_prune_threshold = 1000
 min_num_peers = 5
 max_num_peers = 50
 
 [fullnode_raptorcast]
-mode = "Client"
-raptor10_fullnode_redundancy_factor = 3
-max_group_size = 10
+enable_publisher = false
+enable_client = false
+raptor10_fullnode_redundancy_factor = 3.0
+max_group_size = 150
 round_span = 240
 invite_lookahead = 120
 max_invite_wait = 10
 deadline_round_dist = 10
 init_empty_round_span = 23
-bandwidth_cost_per_group_member = 10
-bandwidth_capacity = 50000
+max_num_group = 3
 invite_future_dist_min = 1
 invite_future_dist_max = 600
 invite_accept_heartbeat_ms = 10000
