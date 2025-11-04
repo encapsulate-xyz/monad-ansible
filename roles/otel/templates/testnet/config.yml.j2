@@ -33,7 +33,7 @@ service:
       exporters: [prometheus/monad]
     metrics:
       receivers: [otlp/monad-testnet]
-      exporters: [prometheus/monad,otlp]
+      exporters: [prometheus/monad]
       processors: [batch]
     traces:
       receivers: [otlp/monad-testnet]
