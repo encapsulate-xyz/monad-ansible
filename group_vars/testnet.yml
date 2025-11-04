@@ -6,11 +6,11 @@ monad:
   snapshot_url: "https://bucket.monadinfra.com/snapshots/testnet"
   validator_config_url: "https://bucket.monadinfra.com/validators/testnet/validators.toml"
   validator:
-    version: 0.11.6-tn1
+    version: 0.11.6-tn1-hotfix
     otel_endpoint: "http://0.0.0.0:4317"
     rpc:
       ports:
         rpc_port: 8001
   fullnode:
-    version: 0.11.6-tn1
+    version: 0.11.6-tn1-hotfix
     otel_endpoint: "http://0.0.0.0:4317"
