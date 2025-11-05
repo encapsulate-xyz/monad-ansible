@@ -14,9 +14,9 @@ network_name = "testnet"                             # DO NOT CHANGE
 ipc_tx_batch_size = 1000
 ipc_max_queued_batches = 10
 # must be <= ipc_max_queued_batches
-ipc_queued_batches_watermark = 7
+ipc_queued_batches_watermark = 3
 
-statesync_threshold = 1200
+statesync_threshold = 600
 statesync_max_concurrent_requests = 5
 
 #########################################################
@@ -33,7 +33,7 @@ request_timeout = 5
 unresponsive_prune_threshold = 3
 last_participation_prune_threshold = 1000
 min_num_peers = 90
-max_num_peers = 120
+max_num_peers = 450
 
 [fullnode_raptorcast]
 enable_publisher = true
@@ -95,7 +95,35 @@ secp256k1_pubkey = "02cf1fa720a3887a7a6ba423874058c1e64b9dc54c57e6ee3d604d4563f9
 
 # CL-2
 [[bootstrap.peers]]
-address = "46.166.162.147:8000"
+address = "185.150.190.139:8000"
 record_seq_num = 0
-name_record_sig = "b1cb8e322d4b7877d26a7b227de69f951a48c98a780a7ebfb056eb122084f6fe783cddff23b375e7490591d1fa847a0fd5a4c9e9615b3672135c2e9eb3b4b9ae00"
-secp256k1_pubkey = "0201b52b6c20b9eb3d03743d619d0ceb43ea6cd46412597e0c4c78d4f197ba1fc1"
+name_record_sig = "fb924c12d4c95d9e0ab93d1241eabb834e1a3b4f6fe2c8c9ce31924ee253b9a23b352f8b5cfe4287f13d04f79c2ed2195177f555df1d5583800480df03ce903c01"
+secp256k1_pubkey = "039a9eedcd27e0fcc74f454b346bfaff807ac9ee6f88fc0a5ecf00ecc9eb006431"
+
+# CL-3 
+[[bootstrap.peers]]
+address = "104.238.205.12:8000"
+record_seq_num = 0
+name_record_sig = "95e08914042fe1350f6bdd6d85fc81daac9abf4666c217ea671cdbcf86d4608050ee8a7e0a523326e6c006e7a3aa02e500ea6eb9b98779dc732250cfdc6902a001"
+secp256k1_pubkey = "02d77e90d049f0c50e7af9a575fce19381c622be59746d81dac347f974d16b3742"
+
+# CL-4
+[[bootstrap.peers]]
+address = "15.235.224.20:8000"
+record_seq_num = 0
+name_record_sig = "7f7e2d73b3fcf6f2719bb6655c5f92f9f5a40a243747acf779d3fba9440f5d2e0ade0216461b9327d64c565b7a355beb53342c5b5dcb07e512e73dd18616ebcc01"
+secp256k1_pubkey = "037c86879527168fec416b33bcfbb0cc22fefb9a0ace4add72116b2f94162e2cc6"
+
+# CL-5
+[[bootstrap.peers]]
+address = "185.189.44.226:8000"
+record_seq_num = 0
+name_record_sig = "75cec2929bc9797a52247e4ddd480b5f661b52fb626e6713dfb8973c25c51c486e92adf9d335cef0033acd21915e3c503d50463b53ad4fea40d0eed23254bb6401"
+secp256k1_pubkey = "028df9f3fed153dc195b86c0d5fb0b9ab2560316071a3f6f1c16dce95da7f679d4"
+
+# CL-6
+[[bootstrap.peers]]
+address = "15.204.105.77:8000"
+record_seq_num = 0
+name_record_sig = "7cc89227c5998c555ddadace2dde6c55442081b41dfcf3e8290a36720758e0055e6c9e65ac09d06ed203f176d480a72a99c6d029d010d5ae6f94e5391943646600"
+secp256k1_pubkey = "038ddfe36ca3a992be5838e44db8d5b91a4ab992b9de0bfd2e1f7a1ec9bc6af00d"

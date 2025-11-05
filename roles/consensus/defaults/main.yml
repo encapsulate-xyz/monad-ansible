@@ -15,6 +15,9 @@ consensus_log_dir: "{{ consensus_home_dir }}/log"
 consensus_forkpoint_dir: "{{ consensus_config_dir }}/forkpoint"
 consensus_validators_dir: "{{ consensus_config_dir }}/validators"
 
+consensus_bodies_dir: "{{ consensus_data_dir }}/bodies"
+consensus_headers_dir: "{{ consensus_data_dir }}/headers"
+
 consensus_directories:
   - "{{ consensus_home_dir }}"
   - "{{ consensus_bin_dir }}"
@@ -28,6 +31,8 @@ consensus_directories:
   - "{{ consensus_log_dir }}"
   - "{{ consensus_forkpoint_dir }}"
   - "{{ consensus_validators_dir }}"
+  - "{{ consensus_bodies_dir }}"
+  - "{{ consensus_headers_dir }}"
 
 consensus_log_file_path: "{{ consensus_log_dir }}/{{ service_identifier }}.log"
 
