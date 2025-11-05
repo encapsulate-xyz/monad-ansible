@@ -12,7 +12,12 @@ sync_node_wal_dir: "{{ sync_node_home_dir }}/wal"
 sync_node_forkpoint_dir: "{{ sync_node_config_dir }}/forkpoint"
 sync_node_validators_dir: "{{ sync_node_config_dir }}/validators"
 
+sync_node_bodies_dir: "{{ sync_node_data_dir }}/bodies"
+sync_node_headers_dir: "{{ sync_node_data_dir }}/headers"
+
 sync_node_directories:
+  - "{{ sync_node_bodies_dir }}"
+  - "{{ sync_node_headers_dir }}"
   - "{{ sync_node_data_dir }}"
   - "{{ sync_node_socket_dir }}"
   - "{{ sync_node_wal_dir }}"
