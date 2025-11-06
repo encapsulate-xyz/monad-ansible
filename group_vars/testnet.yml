@@ -3,7 +3,7 @@
 monad:
   chain_id: monad_testnet
   forkpoint_url: "https://bucket.monadinfra.com/forkpoint/testnet"
-  snapshot_url: "https://bucket.monadinfra.com/snapshots/testnet"
+  snapshot_url: "https://d1v5yevi7k4blc.cloudfront.net"
   validator_config_url: "https://bucket.monadinfra.com/validators/testnet/validators.toml"
   validator:
     version: 0.12.0~rc
