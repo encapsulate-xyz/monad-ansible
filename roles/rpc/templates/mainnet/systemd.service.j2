@@ -1,0 +1,32 @@
+[Unit]
+Description={{ service_identifier }}
+
+[Service]
+User={{ service_identifier }}
+Group={{ project }}
+UMask=002
+WorkingDirectory={{ rpc_home_dir }}
+EnvironmentFile={{ rpc_general_environment_file_path }}
+ExecStart={{ rpc_bin_dir }}/{{ service_identifier }} \
+    --ipc-path {{ socket_dir }}/{{ rpc_mempool_socket_file_name }} \
+    --triedb-path {{ triedb_config.path }} \
+    --otel-endpoint "{{ monad[type].otel_endpoint }}" \
+    --allow-unprotected-txs \
+    --rpc-port {{ monad[type].rpc.ports.rpc_port }} \
+    --node-config {{ node_config_file_path }}
+Restart=always
+RestartSec=4
+LimitNOFILE=1048576
+DeviceAllow={{ triedb_config.path }} rw
+# Hugemem configs below
+LimitMEMLOCK=infinity
+MemoryDenyWriteExecute=false
+#SystemCallFilter=~@memlock
+ProtectKernelModules=no
+ProtectKernelLogs=no
+MemoryMax=64G
+StandardOutput=append:{{ rpc_log_file_path }}
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target
