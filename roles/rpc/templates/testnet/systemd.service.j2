@@ -13,7 +13,7 @@ ExecStart={{ rpc_bin_dir }}/{{ service_identifier }} \
     --otel-endpoint "{{ monad[type].otel_endpoint }}" \
     --allow-unprotected-txs \
     --rpc-port {{ monad[type].rpc.ports.rpc_port }} \
-    --node-config {{ rpc_node_config_file_path }}
+    --node-config {{ node_config_file_path }}
 Restart=always
 RestartSec=4
 LimitNOFILE=1048576
