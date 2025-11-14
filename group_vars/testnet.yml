@@ -2,16 +2,12 @@
 # maintains versions and can overwrite all.yml
 monad:
   chain_id: monad_testnet
-  forkpoint_url: "https://bucket.monadinfra.com/forkpoint/testnet"
   snapshot_url: "https://d1v5yevi7k4blc.cloudfront.net"
   validator_config_url: "https://bucket.monadinfra.com/validators/testnet/validators.toml"
   forkpoint_config_url: "https://bucket.monadinfra.com/forkpoint/testnet/forkpoint.toml"
   validator:
     version: 0.12.1~rc
     otel_endpoint: "http://0.0.0.0:4317"
-    rpc:
-      ports:
-        rpc_port: 8001
   fullnode:
     version: 0.12.1~rc
     otel_endpoint: "http://0.0.0.0:4317"
