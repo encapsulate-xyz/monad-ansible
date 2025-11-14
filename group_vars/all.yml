@@ -39,7 +39,7 @@ monad:
   fullnode:
     consensus:
       ports:
-        p2p_port: 8000
+        p2p_port: 8010
     rpc:
       ports:
         rpc_port: 8090
