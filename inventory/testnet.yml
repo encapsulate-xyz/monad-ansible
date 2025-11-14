@@ -12,9 +12,11 @@ all:
           consensus_home_dir: /opt/monad-consensus
           ledger_dir: /opt/monad-consensus/data
           socket_dir: /opt/monad-consensus/socket
+          node_config_file_path: /opt/monad-consensus/config/node.toml
         fullnode.monad.testnet.encapsulate.xyz:
           type: fullnode
           consensus_user: monad-fullnode-consensus
           consensus_home_dir: /opt/monad-fullnode-consensus 
           ledger_dir: /opt/monad-fullnode-consensus/data
           socket_dir: /opt/monad-fullnode-consensus/socket
+          node_config_file_path: /opt/monad-fullnode-consensus/config/node.toml

@@ -1,17 +1,7 @@
 ---
-- name: Get current time minus 2 minutes in America/New_York
-  ansible.builtin.command: >
-    bash -c 'TZ="America/New_York" date -d "-2 minutes" +"%Y%m%d%H%M"'
-  register: current_time_out
-  changed_when: false
-
-- name: Set current_time fact
-  ansible.builtin.set_fact:
-    current_time_est: "{{ current_time_out.stdout }}"
-
 - name: Download forkpoint from URL
   ansible.builtin.get_url:
-    url: "{{ monad.forkpoint_url }}/forkpoint_{{ current_time_est }}01.toml"
+    url: "{{ monad.forkpoint_config_url }}"
     dest: "{{ sync_node_forkpoint_file_path }}"
     owner: "{{ service_identifier }}"
     group: "{{ service_identifier }}"

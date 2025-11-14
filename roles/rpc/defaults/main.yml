@@ -3,7 +3,6 @@
 rpc_home_dir: /opt/{{ service_identifier }}
 
 rpc_bin_dir: "{{ rpc_home_dir }}/bin"
-rpc_config_dir: "{{ rpc_home_dir }}/config"
 rpc_env_dir: "{{ rpc_home_dir }}/environment"
 rpc_lib_dir: "{{ rpc_home_dir }}/lib"
 rpc_log_dir: "{{ rpc_home_dir }}/log"
@@ -11,13 +10,10 @@ rpc_log_dir: "{{ rpc_home_dir }}/log"
 rpc_directories:
   - "{{ rpc_home_dir }}"
   - "{{ rpc_bin_dir }}"
-  - "{{ rpc_config_dir }}"
   - "{{ rpc_env_dir }}"
   - "{{ rpc_lib_dir }}"
   - "{{ rpc_log_dir }}"
 
 rpc_log_file_path: "{{ rpc_log_dir }}/{{ service_identifier }}.log"
-
-rpc_node_config_file_path: "{{ rpc_config_dir }}/{{ rpc_node_config_file_name }}"
 
 rpc_general_environment_file_path: "{{ rpc_env_dir }}/{{ rpc_general_environment_file_name }}"

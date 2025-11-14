@@ -19,8 +19,8 @@ tmp_dir: /tmp
 
 triedb_config:
   drive: /dev/nvme0n1 # Update with the drive you are using
-  path: /dev/triedb-{{ type }}
-  partition_name: triedb-{{ type }}
+  path: /dev/triedb
+  partition_name: triedb
   partition_number: 1
 
 triedb_loop_config:
@@ -39,7 +39,7 @@ monad:
   fullnode:
     consensus:
       ports:
-        p2p_port: 8000
+        p2p_port: 8010
     rpc:
       ports:
         rpc_port: 8090

@@ -2,13 +2,15 @@
 # maintains versions and can overwrite all.yml
 monad:
   chain_id: monad_mainnet
-  forkpoint_url: "https://bucket.monadinfra.com/forkpoint/mainnet"
   snapshot_url: ""
   validator_config_url: "https://bucket.monadinfra.com/validators/mainnet/validators.toml"
+  forkpoint_config_url: "https://bucket.monadinfra.com/forkpoint/mainnet/forkpoint.toml"
   fullnode:
-    version: 0.12.0
+    version: 0.12.1
     otel_endpoint: "http://0.0.0.0:4317"
-
-triedb_config:
-  path: /dev/triedb
-  partition_name: triedb
+  validator:
+    version: 0.12.1
+    otel_endpoint: "http://0.0.0.0:4317"
+    rpc:
+      ports:
+        rpc_port: 8001
