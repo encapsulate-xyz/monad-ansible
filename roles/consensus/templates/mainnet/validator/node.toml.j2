@@ -33,7 +33,7 @@ request_timeout = 5
 unresponsive_prune_threshold = 3
 last_participation_prune_threshold = 1000
 min_num_peers = 150
-max_num_peers = 600
+max_num_peers = 350
 
 [fullnode_raptorcast]
 enable_publisher = true
@@ -71,24 +71,7 @@ peers = []
 
 [statesync]
 expand_to_group = true
-
-[[statesync.init_peers]]
-secp256k1_pubkey = "037d1cbb43ffc35b540f5175cf366f5f5b5ee1c578ce493e5f689856da148f1cba"
-
-[[statesync.init_peers]]
-secp256k1_pubkey = "02b74a25df4a04bf3fda28a8460946e1cc097adfe0f3851a67546ca328a052020e"
-
-[[statesync.init_peers]]
-secp256k1_pubkey = "039bed2d57eb4140967b3a114594f046252fd781dba383d8ebcafac1988b7908f0"
-
-[[statesync.init_peers]]
-secp256k1_pubkey = "02a7dd4717c55010da5b49fde4515dd1932e138c3b34360d34a9e112e5269eefca"
-
-[[statesync.init_peers]]
-secp256k1_pubkey = "0267695371b9a65a2f3ad8324e15f09be7322c1678e5ae36aca277d4eb85a2c5ed"
-
-[[statesync.init_peers]]
-secp256k1_pubkey = "024ed4df9c6b174ec5eaf9b1d937cf9ce69581aacfd0581f54793b3c13db69757d"
+init_peers = []
 
 # mf-mainnet-bootstrap-fn-lsn-fra-006
 [[bootstrap.peers]]
