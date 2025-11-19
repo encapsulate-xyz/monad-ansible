@@ -27,6 +27,9 @@ consensus_binaries:
   monad_debug_node:
     default_binary_name: "monad-debug-node"
     dest_binary_name: "monad-debug-node"
+  monad_sign_name_record:
+    default_binary_name: "monad-sign-name-record"
+    dest_binary_name: "monad-sign-name-record"
 
 # environment file names
 consensus_general_environment_file_name: "{{ service_identifier }}.env"
