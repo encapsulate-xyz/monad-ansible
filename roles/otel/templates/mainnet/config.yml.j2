@@ -7,10 +7,7 @@ receivers:
         endpoint: '0.0.0.0:{{ otel.ports.http_port }}'
 exporters:
   otlp:
-    endpoint: peach10.devcore4.com:4317
-    tls:
-      insecure: true
-      insecure_skip_verify: true
+    endpoint: https://otel-external.monadinfra.com:443
   prometheus/monad:
     endpoint: '0.0.0.0:{{ otel.ports.prometheus_metrics_exporter_port }}'
     send_timestamps: true
@@ -24,6 +21,11 @@ processors:
     limit_mib: 1500
     spike_limit_mib: 512
     check_interval: 5s
+  resource:
+    attributes:
+    - key: secp_key
+      value: "02f9eb1163e3d2ebde9f06fac83d8875e04997ce4711e44e63033fd7ad7a39581b"
+      action: upsert
 
 service:
   pipelines:
