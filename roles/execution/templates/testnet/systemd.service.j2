@@ -12,8 +12,7 @@ ExecStart={{ execution_bin_dir }}/{{ service_identifier }} \
     --db {{ triedb_config.path }} \
     --block_db {{ ledger_dir }} \
     --statesync {{ socket_dir }}/{{ execution_state_sync_socket_file_name }} \
-    --ro_sq_thread_cpu 1 \
-    --sq_thread_cpu 2 \
+    --sq_thread_cpu 1 \
     --log_level INFO
 Restart=always
 RestartSec=4
