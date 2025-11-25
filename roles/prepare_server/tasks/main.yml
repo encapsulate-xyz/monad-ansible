@@ -37,3 +37,15 @@
 - name: Include Prepare Triedb Disk task
   ansible.builtin.import_tasks: prepare_triedb_disk.yml
   when: setup_triedb | default(false) | bool
+
+- name: Insert custom iptables rule into UFW before.rules
+  ansible.builtin.blockinfile:
+    path: /etc/ufw/before.rules
+    marker: "# {mark} ANSIBLE MANAGED: Drop small UDP packets on port 8000"
+    insertbefore: "^COMMIT"
+    block: |
+      -A ufw-before-input -p udp --dport 8000 -m length --length 0:1400 -j DROP
+
+- name: Reload UFW
+  community.general.ufw:
+    state: reloaded
