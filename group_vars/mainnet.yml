@@ -2,7 +2,7 @@
 # maintains versions and can overwrite all.yml
 monad:
   chain_id: monad_mainnet
-  snapshot_url: ""
+  snapshot_url: "https://d3b0ffqjb9bqrg.cloudfront.net"
   validator_config_url: "https://bucket.monadinfra.com/validators/mainnet/validators.toml"
   forkpoint_config_url: "https://bucket.monadinfra.com/forkpoint/mainnet/forkpoint.toml"
   fullnode:
