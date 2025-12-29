@@ -31,7 +31,7 @@ The playbook dynamically retrieves secret environment file from HashiCorp Vault.
 `<environment>/<project>/<organization>/<type>/<file_name>`
 
 For example:
-- [`monad/encapsulate/consensus/monad-consensus.secrets.env`](roles/consensus/templates/testnet/secrets.env.example)
+- [`monad/encapsulate/consensus/monad-consensus.secrets.env`](roles/consensus/templates/secrets.env.example)
 - `monad/encapsulate/consensus/id-secp`
 - `monad/encapsulate/consensus/id-bls`
 
