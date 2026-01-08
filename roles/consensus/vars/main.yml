@@ -5,6 +5,7 @@
 consensus_node_config_file_name: node.toml
 consensus_validators_config_file_name: validators.toml
 consensus_forkpoint_file_name: forkpoint.toml
+consensus_persisted_peers_file_name: peers.toml
 
 # key names
 consensus_bls_identity_key_file_name: id-bls
