@@ -23,6 +23,7 @@ ExecStart={{ consensus_bin_dir }}/{{ service_identifier }} \
     --statesync-sq-thread-cpu 8 \
     --record-metrics-interval-seconds 1 \
     --validators-path {{ consensus_validators_config_file_path }} \
+    --persisted-peers-path {{ consensus_persisted_peers_file_path }} \
     --keystore-password "${KEYSTORE_PASSWORD}"
 Restart=always
 RestartSec=4
