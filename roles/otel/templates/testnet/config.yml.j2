@@ -8,15 +8,22 @@ receivers:
 exporters:
   otlp:
     endpoint: https://otel-external.monadinfra.com:443
+    sending_queue:
+      queue_size: 200000
+    timeout: 30s
+    retry_on_failure:
+      enabled: true
   prometheus/monad:
     endpoint: '0.0.0.0:{{ otel.ports.prometheus_metrics_exporter_port }}'
     send_timestamps: true
-    metric_expiration: 10m
+    metric_expiration: 180m
     enable_open_metrics: true
     resource_to_telemetry_conversion:
       enabled: true
 processors:
   batch:
+    send_batch_size: 10000
+    timeout: 5s
   memory_limiter:
     limit_mib: 1500
     spike_limit_mib: 512
