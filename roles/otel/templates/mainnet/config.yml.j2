@@ -8,11 +8,15 @@ receivers:
 exporters:
   otlp:
     endpoint: https://otel-external.monadinfra.com:443
+    timeout: 15s
     sending_queue:
-      queue_size: 200000
-    timeout: 30s
+      enabled: true
+      queue_size: 5000
     retry_on_failure:
       enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 10m
   prometheus/monad:
     endpoint: '0.0.0.0:{{ otel.ports.prometheus_metrics_exporter_port }}'
     send_timestamps: true
@@ -22,7 +26,8 @@ exporters:
       enabled: true
 processors:
   batch:
-    send_batch_size: 10000
+    send_batch_size: 1024
+    send_batch_max_size: 2048
     timeout: 5s
   memory_limiter:
     limit_mib: 1500
@@ -36,23 +41,10 @@ processors:
 
 service:
   pipelines:
-    metrics/monad-mainnet:
-      receivers: [otlp/monad-mainnet]
-      processors: [batch]
-      exporters: [prometheus/monad]
     metrics:
       receivers: [otlp/monad-mainnet]
-      exporters: [prometheus/monad,otlp]
-      processors: [batch]
-    traces:
-      receivers: [otlp/monad-mainnet]
-      processors: [batch]
-      exporters: [otlp]
-    logs:
-      receivers: [otlp/monad-mainnet]
-      processors: [batch]
-      exporters: [otlp]
-  telemetry:
+      processors: [memory_limiter, resource, batch]
+      exporters: [prometheus/monad, otlp]
     metrics:
       readers:
         - pull:
