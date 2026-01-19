@@ -52,4 +52,3 @@ otel:
     grpc_port: 4317
     http_port: 4318
     prometheus_metrics_exporter_port: 8889
-    metrics_port: 8888
