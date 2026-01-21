@@ -33,9 +33,10 @@ monad:
     consensus:
       ports:
         p2p_port: 8000
+        auth_udp_port: 8001
     rpc:
       ports:
-        rpc_port: 8080
+        rpc_port: 8002
   fullnode:
     consensus:
       ports:
