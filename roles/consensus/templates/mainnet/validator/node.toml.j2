@@ -26,8 +26,9 @@ chain_id = 143
 
 [peer_discovery]
 self_address = "134.119.182.147:8000" # IP and port
-self_record_seq_num = 0 # should be 0 initially
-self_name_record_sig = "5b5c496bf408aac9f7430cc5a9bd7f3c91d8998d577e912e94ec0f773c5705b36126be9ccce64e6dd7716755cb3cfbe1fd7bd40cce00403ab52e566d0714c26501"
+self_record_seq_num = 1 # should be 0 initially
+self_auth_port = 8001
+self_name_record_sig = "f1db41cf2ae6d961e11f1dcc2e64cf6f83cf5d4f1c676f686ed5ac9045c2549f27025df0590fb75427dc509de9370c1df43741be71c7b75bc67d36d961e603f001"
 refresh_period = 20
 request_timeout = 5
 unresponsive_prune_threshold = 3
@@ -54,6 +55,7 @@ invite_accept_heartbeat_ms = 10000
 [network]
 bind_address_host = "0.0.0.0"
 bind_address_port = 8000
+authenticated_bind_address_port = 8001
 max_rtt_ms = 300
 max_mbps = 1000
 
