@@ -18,7 +18,7 @@ default_node_types:
 tmp_dir: /tmp
 
 triedb_config:
-  drive: /dev/nvme0n1 # Update with the drive you are using
+  drive: /dev/nvme1n1 # Update with the drive you are using
   path: /dev/triedb
   partition_name: triedb
   partition_number: 1
