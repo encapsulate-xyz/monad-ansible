@@ -1,13 +1,2 @@
 ---
-rpc_ufw_rules:
-  - port: "{{ monad.validator.rpc.ports.rpc_port }}"
-    proto: tcp
-    rule: allow
-    from: amplifier.axelar.mainnet.encapsulate.xyz
-    comment: rpc
-
-  - port: "{{ monad.validator.rpc.ports.rpc_port }}"
-    proto: tcp
-    rule: allow
-    from: ts.amplifier.axelar.mainnet.encapsulate.xyz
-    comment: rpc
+rpc_ufw_rules: []
