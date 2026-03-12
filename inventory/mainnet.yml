@@ -13,7 +13,7 @@ all:
           ledger_dir: /opt/monad-fullnode-consensus/data
           socket_dir: /opt/monad-fullnode-consensus/socket
           node_config_file_path: /opt/monad-fullnode-consensus/config/node.toml
-        validator.monad.mainnet.encapsulate.xyz:
+        ts.validator.monad.mainnet.encapsulate.xyz:
           type: validator
           consensus_user: monad-consensus
           consensus_home_dir: /opt/monad-consensus 
