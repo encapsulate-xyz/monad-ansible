@@ -6,7 +6,7 @@ all:
   children:
     monad:
       hosts:
-        validator.monad.testnet.encapsulate.xyz:
+        ts.validator.monad.testnet.encapsulate.xyz:
           type: validator
           consensus_user: monad-consensus
           consensus_home_dir: /opt/monad-consensus
