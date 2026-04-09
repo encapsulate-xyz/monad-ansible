@@ -1,0 +1,13 @@
+---
+# maintains directories and paths
+mev_home_dir: /opt/{{ service_identifier }}
+
+mev_bin_dir: "{{ mev_home_dir }}/bin"
+mev_log_dir: "{{ mev_home_dir }}/log"
+
+mev_directories:
+  - "{{ mev_home_dir }}"
+  - "{{ mev_bin_dir }}"
+  - "{{ mev_log_dir }}"
+
+mev_log_file_path: "{{ mev_log_dir }}/{{ service_identifier }}.log"

@@ -1,0 +1,5 @@
+---
+# maintains file name, binary names, and anything which is not a directory or path
+
+# binary names
+mev_service_default_binary_name: "fastlane-sidecar"
