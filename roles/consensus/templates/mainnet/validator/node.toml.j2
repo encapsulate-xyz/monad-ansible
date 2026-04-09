@@ -8,7 +8,7 @@
 #########################################################
 # Node-specific configuration
 #########################################################
-beneficiary = "0x32794222b3b5d48801ac40ecf9b9a2847c713351"
+beneficiary = "0x4BAD4AC6F82caB786a17929f4832D9b9622F8C5c"
 node_name = "{{ org }}" # node name
 network_name = "mainnet" # DO NOT CHANGE
 ipc_tx_batch_size = 1000
@@ -63,8 +63,25 @@ max_mbps = 1000
 # Peers configuration
 #########################################################
 
-[fullnode_dedicated]
-identities = []
+# Fastlane 1
+[[fullnode_dedicated.identities]]
+secp256k1_pubkey = "02cef085ea56fb77e87fa84009c9cf6bfc0801986bffa9d2971fdb03ac6a3acc9d"
+[[bootstrap.peers]]
+address = "67.213.121.73:8000"
+auth_port = 8001
+secp256k1_pubkey = "02cef085ea56fb77e87fa84009c9cf6bfc0801986bffa9d2971fdb03ac6a3acc9d"
+record_seq_num = 1
+name_record_sig = "ee6a116d34fb0bbf7706763b6f0135bce98999978d796a70e20e237bce4ac90172a251bf888475d287737d560a15ec1ad92ea8bc3c23e6085e05b234418098e501"
+
+# Fastlane 2
+[[fullnode_dedicated.identities]]
+secp256k1_pubkey = "0305ccc085611240588d5e68647e04306582babe01aaab5d1c80cc941de28fe7ec"
+[[bootstrap.peers]]
+address = "103.219.171.235:8000"
+auth_port = 8001
+secp256k1_pubkey = "0305ccc085611240588d5e68647e04306582babe01aaab5d1c80cc941de28fe7ec"
+record_seq_num = 1
+name_record_sig = "0cecae04cf1a1a251a14caed4e3217e74b597c825461d07d981f6b8c78989cdb2d3d1147cfa7e7bec88c7e22d0ea5bf6325814c3278d5a0a8efaf750c8c6a62600"
 
 [fullnode_raptorcast.full_nodes_prioritized]
 identities = []

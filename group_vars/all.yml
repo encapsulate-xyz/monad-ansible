@@ -37,6 +37,10 @@ monad:
     rpc:
       ports:
         rpc_port: 8002
+    mev:
+      source_url: https://github.com/FastLane-Labs/fastlane-sidecar/releases/download
+      ports:
+        monitor_port: 8765
   fullnode:
     consensus:
       ports:

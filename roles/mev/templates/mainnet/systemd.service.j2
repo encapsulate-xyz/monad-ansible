@@ -1,0 +1,27 @@
+[Unit]
+Description={{ service_identifier }}
+
+[Service]
+User={{ service_identifier }}
+Group={{ project }}
+UMask=002
+WorkingDirectory={{ mev_home_dir }}
+ExecStart={{ mev_bin_dir }}/{{ service_identifier }} \
+    --log-level info \
+    --home {{ mev_home_dir }} \
+    --txpool-socket {{ txpool_socket }} \
+    --network {{ env }} \
+    --monitoring-port {{ monad[type].mev.ports.monitor_port }}
+Restart=always
+RestartSec=4
+LimitNOFILE=1048576
+LimitMEMLOCK=infinity
+MemoryDenyWriteExecute=false
+ProtectKernelModules=no
+ProtectKernelLogs=no
+MemoryMax=64G
+StandardOutput=append:{{ mev_log_file_path }}
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target
