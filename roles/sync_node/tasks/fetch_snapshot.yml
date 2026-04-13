@@ -54,7 +54,7 @@
       --db {{ triedb_config.path }}
       --load_binary_snapshot {{ tmp_dir }}/{{ project }}
       --version {{ block_id }}
-      --sq_thread_cpu 12
+      --sq_thread_cpu 11
   register: monad_cli_result
   failed_when: monad_cli_result.rc != 0
   changed_when: false
