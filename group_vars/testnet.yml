@@ -8,6 +8,9 @@ monad:
   validator:
     version: 0.14.1
     otel_endpoint: "http://0.0.0.0:4317"
+    rpc:
+      ports:
+        rpc_port: 8003
   fullnode:
     version: 0.14.1
     otel_endpoint: "http://0.0.0.0:4317"
