@@ -13,7 +13,7 @@ all:
           ledger_dir: /opt/monad-consensus/data
           socket_dir: /opt/monad-consensus/socket
           node_config_file_path: /opt/monad-consensus/config/node.toml
-        100.97.221.73:
+        100.91.208.54:
           type: validator
           consensus_user: monad-consensus
           consensus_home_dir: /opt/monad-consensus
