@@ -20,6 +20,7 @@
     - libhugetlbfs-dev
     - libhugetlbfs-bin
     - libcrypto++-dev
+    - libboost-fiber-dev
 
 - name: Include Add Monad APT Repository task
   ansible.builtin.import_tasks: add_monad_apt_repository.yml

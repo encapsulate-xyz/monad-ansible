@@ -13,13 +13,6 @@ all:
           ledger_dir: /opt/monad-consensus/data
           socket_dir: /opt/monad-consensus/socket
           node_config_file_path: /opt/monad-consensus/config/node.toml
-        100.91.208.54:
-          type: validator
-          consensus_user: monad-consensus
-          consensus_home_dir: /opt/monad-consensus
-          ledger_dir: /opt/monad-consensus/data
-          socket_dir: /opt/monad-consensus/socket
-          node_config_file_path: /opt/monad-consensus/config/node.toml
         fullnode.monad.testnet.encapsulate.xyz:
           type: fullnode
           consensus_user: monad-fullnode-consensus
