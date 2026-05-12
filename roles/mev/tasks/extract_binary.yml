@@ -1,43 +1,62 @@
 ---
-- name: Create a tmp directory
-  ansible.builtin.file:
-    path: "{{ tmp_dir }}/{{ service_identifier }}"
-    state: directory
-    owner: root
-    group: root
-    mode: "0755"
+- name: Add Docker repository
+  ansible.builtin.deb822_repository:
+    name: docker
+    types: deb
+    uris: https://download.docker.com/linux/ubuntu
+    suites: "{{ ansible_distribution_release }}"
+    components: stable
+    architectures: amd64
+    signed_by: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+    enabled: true
 
-- name: Download and unarchive the binary
+- name: Install Docker
+  ansible.builtin.apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+    update_cache: true
+
+- name: Create MEV service docker container and copy binary
   vars:
-    suffix_url: "v{{ monad[type].mev.version }}/{{ mev_service_default_binary_name }}_{{ monad[type].mev.version }}_{{ system_architecture }}.deb"
-  ansible.builtin.get_url:
-    url: "{{ monad[type].mev.source_url }}/{{ suffix_url }}"
-    dest: "{{ tmp_dir }}/{{ service_identifier }}"
-    owner: root
-    group: root
-    mode: "0755"
+    container_name: mev_service
+  block:
+    - name: Create temporary container for binary extraction
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ monad.validator.mev.source_url }}:{{ monad.validator.mev.version }}"
+        state: present
+        recreate: true
 
-- name: Extract binary package
-  ansible.builtin.command:
-    cmd: >-
-      dpkg-deb -x
-      "{{ tmp_dir }}/{{ service_identifier }}/{{ mev_service_default_binary_name }}_{{ monad[type].mev.version }}_{{ system_architecture }}.deb"
-      {{ tmp_dir }}/{{ service_identifier }}
-    creates: "{{ tmp_dir }}/{{ service_identifier }}/usr"
+    - name: Copy MEV service binary
+      ansible.builtin.shell: >
+        docker cp {{ container_name }}:/app/app {{ mev_bin_dir }}/{{ service_identifier }}
+      args:
+        executable: /bin/bash
+      register: copy_result
+      changed_when: copy_result.rc == 0
+      failed_when:
+        - copy_result.rc != 0
+        - "'No such container' in copy_result.stderr"
+      notify:
+        - Restart service
 
-- name: Copy the binary file
-  ansible.builtin.copy:
-    src: "{{ tmp_dir }}/{{ service_identifier }}/usr/bin/{{ mev_service_default_binary_name }}"
-    dest: "{{ mev_bin_dir }}/{{ service_identifier }}"
-    remote_src: true
-    owner: root
-    group: root
-    force: true
-    mode: "0755"
-  notify:
-    - Restart service
+    - name: Ensure MEV service binary has the correct permissions
+      ansible.builtin.file:
+        path: "{{ mev_bin_dir }}/{{ service_identifier }}"
+        owner: root
+        group: root
+        mode: "0755"
+      notify:
+        - Restart service
 
-- name: Clean up the temporary directory
-  ansible.builtin.file:
-    path: "{{ tmp_dir }}/{{ service_identifier }}"
-    state: absent
+  always:
+    - name: Remove MEV service container
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        state: absent
