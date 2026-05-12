@@ -8,7 +8,6 @@ UMask=002
 WorkingDirectory={{ mev_home_dir }}
 ExecStart={{ mev_bin_dir }}/{{ service_identifier }} \
     --log-level info \
-    --home {{ mev_home_dir }} \
     --txpool-socket {{ txpool_socket }} \
     --network {{ env }} \
     --monitoring-port {{ monad[type].mev.ports.monitor_port }}
