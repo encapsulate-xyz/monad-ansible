@@ -21,6 +21,7 @@
       - docker-compose-plugin
     state: present
     update_cache: true
+    cache_valid_time: 3600
 
 - name: Create MEV service docker container and copy binary
   vars:
