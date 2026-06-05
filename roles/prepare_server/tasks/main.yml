@@ -1,26 +1,25 @@
 ---
 - name: Install apt packages
   ansible.builtin.apt:
-    name: "{{ item }}"
+    name: 
+      - nvme-cli
+      - aria2
+      - zstd
+      - libboost-context1.83.0
+      - libboost-fiber1.83.0
+      - libboost-stacktrace1.83.0
+      - libtbb12
+      - liburing2
+      - libarchive-dev
+      - libbrotli-dev
+      - whiptail
+      - libhugetlbfs-dev
+      - libhugetlbfs-bin
+      - libcrypto++-dev
+      - libboost-fiber-dev
     state: present
     update_cache: true
     cache_valid_time: 3600
-  loop:
-    - nvme-cli
-    - aria2
-    - zstd
-    - libboost-context1.83.0
-    - libboost-fiber1.83.0
-    - libboost-stacktrace1.83.0
-    - libtbb12
-    - liburing2
-    - libarchive-dev
-    - libbrotli-dev
-    - whiptail
-    - libhugetlbfs-dev
-    - libhugetlbfs-bin
-    - libcrypto++-dev
-    - libboost-fiber-dev
 
 - name: Include Add Monad APT Repository task
   ansible.builtin.import_tasks: add_monad_apt_repository.yml
