@@ -40,6 +40,10 @@
   ansible.builtin.include_tasks: provision_triedb.yml
   when: setup_triedb | default(false) | bool
 
+- name: Include Upgrade Triedb task
+  ansible.builtin.include_tasks: upgrade_triedb.yml
+  when: upgrade_triedb | default(false) | bool
+
 - name: Include Fetch Validator Config task
   ansible.builtin.include_tasks: fetch_validator_config.yml
 

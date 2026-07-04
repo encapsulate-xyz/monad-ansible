@@ -1,0 +1,17 @@
+---
+- name: upgrade triedb partition with monad-mpt
+  ansible.builtin.shell: >
+    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }}
+    --storage {{ triedb_config.path }}
+    --upgrade
+  args:
+    executable: /bin/bash
+  register: mpt_partition_upgrade
+  changed_when: mpt_partition_upgrade.rc == 0
+  failed_when: mpt_partition_upgrade.rc != 0
+  environment:
+    LD_LIBRARY_PATH: "{{ consensus_lib_dir }}"
+
+- name: Display monad-mpt storage status
+  ansible.builtin.debug:
+    msg: "{{ mpt_partition_upgrade.stdout }}"
