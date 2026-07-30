@@ -25,9 +25,9 @@
         - name: Include common handlers
           ansible.builtin.include_role:
             name: common
-        - name: Include prepare_server role
-          ansible.builtin.include_role:
-            name: prepare_server
+        # - name: Include prepare_server role
+        #   ansible.builtin.include_role:
+        #     name: prepare_server
         - name: Include consensus role
           ansible.builtin.include_role:
             name: consensus
