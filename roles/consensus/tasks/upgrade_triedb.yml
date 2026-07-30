@@ -19,10 +19,11 @@
     mode: "0755"
 
 - name: Deactivate secondary triedb partition
-  ansible.builtin.shell: >
-    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }}
-    --storage {{ triedb_config.path }}
-    --deactivate-secondary || true
+  ansible.builtin.shell: |
+    ulimit -n 65536
+    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }} \
+      --storage {{ triedb_config.path }} \
+      --deactivate-secondary || true
   args:
     executable: /bin/bash
   register: mpt_partition_deactivate
@@ -32,53 +33,58 @@
     LD_LIBRARY_PATH: "{{ consensus_lib_dir }}"
 
 - name: Repair triedb partition
-  ansible.builtin.shell: >
-    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }}
-    --storage {{ triedb_config.path }}
-    --repair
+  ansible.builtin.shell: |
+    ulimit -n 65536
+    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }} \
+      --storage {{ triedb_config.path }} \
+      --repair
   args:
     executable: /bin/bash
   environment:
     LD_LIBRARY_PATH: "{{ consensus_lib_dir }}"
 
 - name: Activate secondary triedb partition
-  ansible.builtin.shell: >
-    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }}
-    --storage {{ triedb_config.path }}
-    --activate-secondary
-    --state-machine monad
+  ansible.builtin.shell: |
+    ulimit -n 65536
+    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }} \
+      --storage {{ triedb_config.path }} \
+      --activate-secondary \
+      --state-machine monad
   args:
     executable: /bin/bash
   environment:
     LD_LIBRARY_PATH: "{{ consensus_lib_dir }}"
 
 - name: Dump binary snapshot
-  ansible.builtin.shell: >
-    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_cli.dest_binary_name }}
-    --db {{ triedb_config.path }}
-    --version latest_finalized
-    --dump-binary-snapshot {{ consensus_home_dir }}/page-migration
+  ansible.builtin.shell: |
+    ulimit -n 65536
+    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_cli.dest_binary_name }} \
+      --db {{ triedb_config.path }} \
+      --version latest_finalized \
+      --dump-binary-snapshot {{ consensus_home_dir }}/page-migration
   args:
     executable: /bin/bash
   environment:
     LD_LIBRARY_PATH: "{{ consensus_lib_dir }}"
 
 - name: Load binary snapshot
-  ansible.builtin.shell: >
-    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_cli.dest_binary_name }}
-    --db {{ triedb_config.path }}
-    --version latest_finalized
-    --load-binary-snapshot {{ consensus_home_dir }}/page-migration
-    --secondary
+  ansible.builtin.shell: |
+    ulimit -n 65536
+    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_cli.dest_binary_name }} \
+      --db {{ triedb_config.path }} \
+      --version latest_finalized \
+      --load-binary-snapshot {{ consensus_home_dir }}/page-migration \
+      --secondary
   args:
     executable: /bin/bash
   environment:
     LD_LIBRARY_PATH: "{{ consensus_lib_dir }}"
 
 - name: Check storage status
-  ansible.builtin.shell: >
-    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }}
-    --storage {{ triedb_config.path }}
+  ansible.builtin.shell: |
+    ulimit -n 65536
+    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }} \
+      --storage {{ triedb_config.path }}
   args:
     executable: /bin/bash
   register: mpt_storage_status
