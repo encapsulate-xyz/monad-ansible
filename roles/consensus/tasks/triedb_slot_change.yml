@@ -1,0 +1,61 @@
+---
+- name: Stop Monad services
+  ansible.builtin.systemd:
+    name: "monad{{ type_suffix }}-{{ item }}.service"
+    state: stopped
+  loop:
+    - consensus
+    - execution
+    - rpc
+  vars:
+    type_suffix: "{{ '' if type == 'validator' else '-' + type }}"
+
+- name: Promote secondary to primary triedb partition
+  ansible.builtin.shell: |
+    ulimit -n 65536
+    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }} \
+      --promote-secondary --storage /dev/triedb
+  args:
+    executable: /bin/bash
+  environment:
+    LD_LIBRARY_PATH: "{{ consensus_lib_dir }}"
+
+- name: Deactivate the now-stale slot timeline
+  ansible.builtin.shell: |
+    ulimit -n 65536
+    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }} \
+      --deactivate-secondary --storage /dev/triedb
+  args:
+    executable: /bin/bash
+  environment:
+    LD_LIBRARY_PATH: "{{ consensus_lib_dir }}"
+
+- name: Check storage status
+  ansible.builtin.shell: |
+    ulimit -n 65536
+    {{ consensus_bin_dir }}/{{ consensus_binaries.monad_mpt.dest_binary_name }} \
+      --storage {{ triedb_config.path }}
+  args:
+    executable: /bin/bash
+  register: mpt_storage_status
+  environment:
+    LD_LIBRARY_PATH: "{{ consensus_lib_dir }}"
+
+- name: Display monad-mpt storage status
+  ansible.builtin.debug:
+    msg: "{{ mpt_storage_status.stdout }}"
+
+- name: Confirm page migration details
+  ansible.builtin.pause:
+    seconds: 40
+
+- name: Restart Monad services
+  ansible.builtin.systemd:
+    name: "monad{{ type_suffix }}-{{ item }}.service"
+    state: restarted
+  loop:
+    - consensus
+    - execution
+    - rpc
+  vars:
+    type_suffix: "{{ '' if type == 'validator' else '-' + type }}"
