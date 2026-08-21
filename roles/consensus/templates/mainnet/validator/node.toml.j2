@@ -60,8 +60,7 @@ max_rtt_ms = 300
 max_mbps = 1000
 
 [prometheus]
-enabled = true
-listen_addr = "0.0.0.0:{{ monad.validator.consensus.ports.metrics_port }}"
+addr = "0.0.0.0:{{ monad.validator.consensus.ports.metrics_port }}"
 
 #########################################################
 # Peers configuration
