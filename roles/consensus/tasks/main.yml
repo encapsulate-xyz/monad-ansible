@@ -44,9 +44,9 @@
   ansible.builtin.include_tasks: upgrade_triedb.yml
   when: upgrade_triedb | default(false) | bool
 
-# - name: Include Triedb Slot Change task
-#   ansible.builtin.include_tasks: triedb_slot_change.yml
-#   when: triedb_slot_change | default(false) | bool
+- name: Include Triedb Slot Change task
+  ansible.builtin.include_tasks: triedb_slot_change.yml
+  when: triedb_slot_change | default(false) | bool
 
 # - name: Include Fetch Validator Config task
 #   ansible.builtin.include_tasks: fetch_validator_config.yml
