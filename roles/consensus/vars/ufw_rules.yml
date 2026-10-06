@@ -19,6 +19,18 @@ consensus_ufw_rules:
       from: any
       comment: auth_udp_port
 
+    - port: "{{ monad.validator.consensus.ports.metrics_port }}"
+      proto: tcp
+      rule: allow
+      from: 84.32.32.227
+      comment: metrics_port
+
+    - port: "{{ monad.validator.consensus.ports.metrics_port }}"
+      proto: tcp
+      rule: allow
+      from: "{{ monitor_server_dns }}"
+      comment: metrics_port
+
   fullnode:
     - port: "{{ monad.fullnode.consensus.ports.p2p_port }}"
       proto: tcp
