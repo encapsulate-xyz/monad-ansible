@@ -1,0 +1,18 @@
+# This file contains ignores rule violations for ansible-lint
+inventory/mainnet.yml yaml[trailing-spaces]
+inventory/testnet.yml yaml[trailing-spaces]
+roles/consensus/tasks/extract_binaries.yml yaml[trailing-spaces]
+roles/consensus/tasks/provision_triedb.yml var-naming[no-role-prefix]
+roles/consensus/tasks/triedb_slot_change.yml no-changed-when
+roles/consensus/tasks/triedb_slot_change.yml var-naming[no-role-prefix]
+roles/consensus/tasks/upgrade_triedb.yml no-changed-when
+roles/consensus/tasks/upgrade_triedb.yml var-naming[no-role-prefix]
+roles/mev/tasks/extract_binary.yml var-naming[no-role-prefix]
+roles/prepare_server/tasks/main.yml yaml[trailing-spaces]
+roles/prepare_server/tasks/prepare_triedb_disk.yml var-naming[no-role-prefix]
+roles/prepare_server/tasks/prepare_triedb_loop_disk.yml no-changed-when
+roles/prepare_server/tasks/prepare_triedb_loop_disk.yml risky-shell-pipe
+roles/prepare_server/tasks/prepare_triedb_loop_disk.yml var-naming[no-role-prefix]
+roles/sync_node/tasks/fetch_snapshot.yml no-changed-when
+roles/sync_node/tasks/fetch_snapshot.yml var-naming[no-role-prefix]
+roles/sync_node/tasks/truncate_triedb.yml var-naming[no-role-prefix]
