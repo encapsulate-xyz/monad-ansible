@@ -28,3 +28,13 @@
         - name: Include execution role
           ansible.builtin.include_role:
             name: execution
+            public: true
+
+  post_tasks:
+    - name: Verify execution
+      when: type in allowed_node_types
+      block:
+        - name: Include verify service task
+          ansible.builtin.include_tasks: tasks/verify_service.yml
+          vars:
+            log_file_path: "{{ execution_log_file_path }}"
