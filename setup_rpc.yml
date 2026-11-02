@@ -38,4 +38,4 @@
           ansible.builtin.include_tasks: tasks/verify_service.yml
           vars:
             log_file_path: "{{ rpc_log_file_path }}"
-            version_command: "env LD_LIBRARY_PATH={{ rpc_lib_dir }} {{ rpc_bin_dir }}/{{ service_identifier }} --version"
+            version_command: "{{ rpc_bin_dir }}/{{ service_identifier }} --version"
