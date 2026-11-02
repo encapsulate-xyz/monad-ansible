@@ -31,3 +31,16 @@
         - name: Include consensus role
           ansible.builtin.include_role:
             name: consensus
+            public: true
+
+  post_tasks:
+    - name: Verify Consensus
+      when: type in allowed_node_types
+      block:
+        - name: Include verify service task
+          ansible.builtin.include_tasks: tasks/verify_service.yml
+          vars:
+            log_file_path: "{{ consensus_log_file_path }}"
+            version_command: "env LD_LIBRARY_PATH={{ consensus_lib_dir }} {{ consensus_bin_dir }}/{{ service_identifier }} --version"
+            # fullnode node.toml has no [metrics] section, so monad-node listens on its default port 9143
+            health_url: "http://localhost:{{ monad[type].consensus.ports.metrics_port | default(9143) }}/metrics"
