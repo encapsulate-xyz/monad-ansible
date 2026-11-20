@@ -28,3 +28,14 @@
         - name: Include rpc role
           ansible.builtin.include_role:
             name: rpc
+            public: true
+
+  post_tasks:
+    - name: Verify rpc
+      when: type in allowed_node_types
+      block:
+        - name: Include verify service task
+          ansible.builtin.include_tasks: tasks/verify_service.yml
+          vars:
+            log_file_path: "{{ rpc_log_file_path }}"
+            version_command: "{{ rpc_bin_dir }}/{{ service_identifier }} --version"
